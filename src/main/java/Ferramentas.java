@@ -1,5 +1,3 @@
-package Ferramentas;
-
 import java.util.Scanner;
 
 public class Ferramentas {

@@ -1,7 +1,3 @@
-package Menus;
-
-import Ferramentas.Ferramentas;
-
 import java.util.InputMismatchException;
 
 public class MenuInicial {
