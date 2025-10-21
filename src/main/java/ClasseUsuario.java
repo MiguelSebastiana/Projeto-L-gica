@@ -2,9 +2,7 @@ import java.util.Date;
 
 public class ClasseUsuario {
 
-
-    //Atributos
-
+    // Atributos
     private int id;
     private String nome;
     private String cpf;
@@ -17,19 +15,35 @@ public class ClasseUsuario {
     private String formacao;
     private ClasseSetor setor;
 
-
-    //Construtor
-
-    public ClasseUsuario(int id,String nome,String cpf,int nivelacesso,String telefone,double salario,Date datanasci,String email,int cargahoraria,String formacao,ClasseSetor setor){
+    // Construtor
+    public ClasseUsuario(int id, String nome, String cpf, int nivelacesso, String telefone, double salario,
+                         Date datanasci, String email, int cargahoraria, String formacao, ClasseSetor setor) {
         this.id = id;
-        if (nome.isEmpty()|| nome == null){
+
+        // ---- VALIDAÇÃO DE NOME ---- //
+        if (nome == null || nome.trim().isEmpty()) {
             throw new ValidatorNomeUsuario("ERRO - NOME NÃO PODE SER VAZIO!");
-        }else{
+        } else {
             this.nome = nome;
         }
 
-        this.cpf = cpf;
-        this.nivelacesso = nivelacesso;
+        // ---- VALIDAÇÃO DE CPF ---- //
+        // Remover qualquer formatação antes de validar
+        String cpfNumerico = cpf.replaceAll("[^0-9]", "");
+
+       // ---- VALIDAÇÃO ---- //
+        ValidacaoCPF.validar(cpfNumerico);
+        this.cpf = cpfNumerico;
+
+
+        // ---- VALIDAÇÃO DE NÚMERO ----//
+
+        if (nivelacesso <= 0)
+        {
+            throw new ValidatorValorNegativo("ERRO - NÚMEROS NEGATIVOS OU IGUAIS A ZERO NÃO SÃO ACEITOS");
+        }else{
+            this.nivelacesso = nivelacesso;
+        }
         this.telefone = telefone;
         this.salario = salario;
         this.datanasci = datanasci;
@@ -39,9 +53,7 @@ public class ClasseUsuario {
         this.setor = setor;
     }
 
-
-    //Getter e Setters
-
+    // Getter e Setters
     public int getId() {
         return id;
     }
