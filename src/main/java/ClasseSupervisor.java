@@ -1,0 +1,2 @@
+public class ClasseSupervisor {
+}
