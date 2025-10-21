@@ -22,7 +22,12 @@ public class ClasseUsuario {
 
     public ClasseUsuario(int id,String nome,String cpf,int nivelacesso,String telefone,double salario,Date datanasci,String email,int cargahoraria,String formacao,ClasseSetor setor){
         this.id = id;
-        this.nome = nome;
+        if (nome.isEmpty()|| nome == null){
+            throw new ValidatorNomeUsuario("ERRO - NOME NÃO PODE SER VAZIO!");
+        }else{
+            this.nome = nome;
+        }
+
         this.cpf = cpf;
         this.nivelacesso = nivelacesso;
         this.telefone = telefone;
@@ -33,6 +38,9 @@ public class ClasseUsuario {
         this.formacao = formacao;
         this.setor = setor;
     }
+
+
+    //Getter e Setters
 
     public int getId() {
         return id;
