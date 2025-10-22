@@ -21,11 +21,7 @@ public class ClasseUsuario {
         this.id = id;
 
         // ---- VALIDAÇÃO DE NOME ---- //
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new ValidatorNomeUsuario("ERRO - NOME NÃO PODE SER VAZIO!");
-        } else {
-            this.nome = nome;
-        }
+        this.nome = ValidacoesGerais.ValidarString(nome);
 
         // ---- VALIDAÇÃO DE CPF ---- //
         // Remover qualquer formatação antes de validar
@@ -37,23 +33,34 @@ public class ClasseUsuario {
 
 
         // ---- VALIDAÇÃO DE NÚMERO ----//
+        this.nivelacesso = ValidacoesGerais.ValidarNumeroNegativoInt(nivelacesso);
 
-        if (nivelacesso <= 0)
-        {
-            throw new ValidatorValorNegativo("ERRO - NÚMEROS NEGATIVOS OU IGUAIS A ZERO NÃO SÃO ACEITOS");
-        }else{
-            this.nivelacesso = nivelacesso;
-        }
-        this.telefone = telefone;
-        this.salario = salario;
+        // ---- VALIDAÇÃO DE TELEFONE ----//
+        this.telefone = ValidacoesGerais.ValidarTelefone(telefone);
+
+        // ---- VALIDAÇÃO DE SALARIO ----//
+        this.salario = ValidacoesGerais.ValidarNumeroNegativoDouble(salario);
+
+        // ---- VALIDAÇÃO DE DATA DE NASCIMENTO ---- //
+        this.datanasci = ValidacoesGerais.validarDataNascimento(datanasci);
         this.datanasci = datanasci;
-        this.email = email;
-        this.cargahoraria = cargahoraria;
-        this.formacao = formacao;
+
+        // --- VALIDAÇÃO DE EMAIL ----//
+        this.email = ValidacoesGerais.ValidarEmail(email);
+
+        // ---- VALIDAÇÃO DE CARGA HORARIA --- //
+        this.cargahoraria = ValidacoesGerais.ValidarNumeroNegativoInt(cargahoraria);
+
+        // ---- VALIDAÇÃO DE FORMAÇÃO ---- //
+        this.formacao = ValidacoesGerais.ValidarString(formacao);
+
+        // ---- VALIDAÇÃO DE SETOR ---- //
         this.setor = setor;
     }
 
-    // Getter e Setters
+
+
+    // Getter e Setters //
     public int getId() {
         return id;
     }
