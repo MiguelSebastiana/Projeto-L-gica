@@ -25,19 +25,18 @@ public class MenuTecnico {
 
             switch (escolha) {
                 case 1:{
-                }
 
+                    break;
+                }
+                case 2:{
+
+                    break;
+                }
                 case 3:{
                     MenuInicial.Menu();
+                    break;
                 }
             }
-
         }while (!continuar);
-
-
     }
-
-
-
-
 }
