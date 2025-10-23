@@ -48,4 +48,10 @@ public class Ferramentas {
         }
     }
 
+    public static void limpaTerminalPequeno(){
+        for (int i = 0; i < 3;i++){
+            System.out.println();
+        }
+    }
+
 }

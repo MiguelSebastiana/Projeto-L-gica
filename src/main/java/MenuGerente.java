@@ -4,9 +4,11 @@ public class MenuGerente {
 
     public static void Menu(){
 
-        boolean continuar = true;
+        boolean continuar = false;
 
         do{
+            Ferramentas.limpaTerminal();
+
             System.out.println("      ====================");
             System.out.println("      ==  Menu Gerente  ==");
             System.out.println("      ====================");
@@ -26,19 +28,31 @@ public class MenuGerente {
 
             switch (escolha) {
                 case 1:{
+                    MenuCadastro.Menu();
+                    break;
                 }
-
+                case 2:{
+                    Relatorios();
+                    break;
+                }
+                case 3:{
+                    MenuServicos.Criar();
+                    break;
+                }
                 case 4:{
-                    MenuInicial.Menu();
+                    continuar = true;
+                }
+                default:{
+                    Default.Default();
                 }
             }
 
-        }while (!continuar);
+        }while (continuar);
 
-
+        MenuInicial.Menu();
     }
 
-
-
-
+    public static void Relatorios(){
+        
+    }
 }

@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.IllegalFormatCodePointException;
@@ -75,12 +76,34 @@ public class Validator_Usuario {
         }
 
         int idade = java.time.Period.between(dataLocal, hoje).getYears();
-        if (idade < 16) {
-            throw new IllegalArgumentException("ERRO - O USUÁRIO DEVE TER PELO MENOS 16 ANOS!");
+        if (idade < 18) {
+            throw new IllegalArgumentException("ERRO - O USUÁRIO DEVE TER PELO MENOS 18 ANOS!");
         }
 
         return dataNascimento; // retorna a data válida
     }
+
+    // Valida a data informada (ano, mês, dia)
+    public static LocalDate validarData(int dia, int mes, int ano) {
+        if (ano < 1900 || ano > LocalDate.now().getYear()) {
+            throw new IllegalArgumentException("ERRO - ANO INVÁLIDO! O ANO DEVE ESTAR ENTRE 1900 E O ANO ATUAL.");
+        }
+
+        if (mes < 1 || mes > 12) {
+            throw new IllegalArgumentException("ERRO - MÊS INVÁLIDO! O MÊS DEVE ESTAR ENTRE 1 E 12.");
+        }
+
+        YearMonth anoMes = YearMonth.of(ano, mes);
+        int diasNoMes = anoMes.lengthOfMonth();
+
+        if (dia < 1 || dia > diasNoMes) {
+            throw new IllegalArgumentException("ERRO - DIA INVÁLIDO! O DIA DEVE ESTAR ENTRE 1 E " + diasNoMes + " PARA O MÊS " + mes + ".");
+        }
+
+        return LocalDate.of(ano, mes, dia);
+    }
+
+
 
     public static String ValidarEmail(String email) {
         // Verifica se o e-mail não é nulo e se contém exatamente um "@" e um "."
@@ -140,7 +163,7 @@ public class Validator_Usuario {
             throw new IllegalArgumentException("ERRO - SETOR NÃO PODE SER NULO!");
         }
 
-        if (setor.getNome() == null || setor.getNome().trim().isEmpty()){
+        if (setor.getNomeSetor() == null || setor.getNomeSetor().trim().isEmpty()){
             throw new IllegalArgumentException("ERRO - NOME DO SETOR NÃO PODE SER VAZIO!");
         }
 

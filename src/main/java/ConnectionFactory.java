@@ -1,10 +1,8 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class conexao
+public class ConnectionFactory
 {
-    private static final String url = "jdbc:mysql//sa-diego2-80f1.d.aivencloud.com:12675/SA_PROJETO";
+    private static final String url = "jdbc:mysql://sa-diego2-80f1.d.aivencloud.com:12675/SA_PROJETO";
     private static final String user = "avnadmin";
     private static final String password = "AVNS_B-s0a1jGg_ik3viwPtJ";
 
@@ -26,5 +24,10 @@ public class conexao
             e.printStackTrace();
             return null;
         }
+    }
+
+    public ConnectionFactory() throws SQLException
+    {
+        conn = DriverManager.getConnection(url,user,password);
     }
 }

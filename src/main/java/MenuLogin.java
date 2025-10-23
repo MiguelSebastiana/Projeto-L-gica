@@ -23,6 +23,8 @@ public class MenuLogin {
             String senha = Ferramentas.lString();
             System.out.println("------------------");
 
+            //boolean login = SERVICE_Usuario.
+
             Ferramentas.Delay(500);
 
             System.out.println("\n\n--- Login Realizado com sucesso ---");
