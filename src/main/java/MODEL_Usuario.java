@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class ClasseUsuario {
+public class MODEL_Usuario {
 
     // Atributos
     private int id;
@@ -13,11 +13,11 @@ public class ClasseUsuario {
     private String email;
     private int cargahoraria;
     private String formacao;
-    private ClasseSetor setor;
+    private MODEL_Setor setor;
 
     // Construtor
-    public ClasseUsuario(int id, String nome, String cpf, int nivelacesso, String telefone, double salario,
-                         Date datanasci, String email, int cargahoraria, String formacao, ClasseSetor setor) {
+    public MODEL_Usuario(int id, String nome, String cpf, int nivelacesso, String telefone, double salario,
+                         Date datanasci, String email, int cargahoraria, String formacao, MODEL_Setor setor) {
         this.id = id;
 
         // ---- VALIDAÇÃO DE NOME ---- //
@@ -137,11 +137,11 @@ public class ClasseUsuario {
         this.formacao = formacao;
     }
 
-    public ClasseSetor getSetor() {
+    public MODEL_Setor getSetor() {
         return setor;
     }
 
-    public void setSetor(ClasseSetor setor) {
+    public void setSetor(MODEL_Setor setor) {
         this.setor = setor;
     }
 }

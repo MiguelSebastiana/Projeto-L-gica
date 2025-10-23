@@ -73,7 +73,7 @@ public class ValidacoesGerais
     );
 
     // ---- METODO DE VALIDAÇÃO DE SETOR ---- //
-    public static ClasseSetor ValidarSetor(ClasseSetor setor) {
+    public static MODEL_Setor ValidarSetor(MODEL_Setor setor) {
         // Verifica se o nome do setor está na lista de setores válidos
         if (setor == null || !setoresValidos.contains(setor.getNomeSetor())) {
             throw new IllegalArgumentException("ERRO - Setor inválido!");
