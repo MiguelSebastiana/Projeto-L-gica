@@ -1,18 +1,18 @@
 import java.util.InputMismatchException;
 
-public class MenuTecnico {
+public class MenuSuperVisor {
 
     public static void Menu(){
 
         boolean continuar = true;
 
         do{
-            System.out.println("      ====================");
-            System.out.println("      ==  Menu Tecnico  ==");
-            System.out.println("      ====================");
+            System.out.println("      =====================");
+            System.out.println("      == Menu SuperVisor ==");
+            System.out.println("      =====================");
 
-            System.out.println("1 - Ver as ordens atribuidas");
-            System.out.println("2 - Alterar os Status das ordens");
+            System.out.println("1 - Ver status de todos OS");
+            System.out.println("2 - Criar ordens de serviço");
             System.out.println("3 - Sair");
 
             int escolha = 0;

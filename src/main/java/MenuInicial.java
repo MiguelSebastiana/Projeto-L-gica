@@ -12,9 +12,9 @@ public class MenuInicial {
 
                 Ferramentas.limpaTerminal();
 
-                System.out.println("      =================");
-                System.out.println("      ==    WEG OS   ==");
-                System.out.println("      =================");
+                System.out.println("      ===================");
+                System.out.println("      ====   WEG OS  ====");
+                System.out.println("      ===================");
 
 
                 System.out.println("\n\n\n Este projeto . . .");
