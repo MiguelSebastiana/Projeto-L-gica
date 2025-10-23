@@ -1,19 +1,22 @@
 public class MODEL_Maquina{
 
-        private int id_maquina;
-        private String DescricaoMaquina;
-        private String ModeloMaquina;
-        private String StatusFuncionamentoMaquina;
-        private MODEL_Setor setor;
+    //Atributos maquina
+    private int id_maquina;
+    private String DescricaoMaquina;
+    private String ModeloMaquina;
+    private String StatusFuncionamentoMaquina;
+    private MODEL_Setor setor;
 
-        public MODEL_Maquina(int id_maquina, String DescricaoMaquina, String ModeloMaquina, String StatusFuncionamentoMaquina, MODEL_Setor setor) {
-            this.id_maquina = id_maquina;
-            this.DescricaoMaquina = DescricaoMaquina;
-            this.ModeloMaquina = ModeloMaquina;
-            this.StatusFuncionamentoMaquina = StatusFuncionamentoMaquina;
-            this.setor = setor;
-        }
+    //Construtor Model Maquina
+    public MODEL_Maquina(int id_maquina, String DescricaoMaquina, String ModeloMaquina, String StatusFuncionamentoMaquina, MODEL_Setor setor) {
+        this.id_maquina = id_maquina;
+        this.DescricaoMaquina = DescricaoMaquina;
+        this.ModeloMaquina = ModeloMaquina;
+        this.StatusFuncionamentoMaquina = StatusFuncionamentoMaquina;
+        this.setor = setor;
+    }
 
+    //Getter e Setters maquina
     public int getId_maquina() {
         return id_maquina;
     }
