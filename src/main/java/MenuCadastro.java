@@ -2,11 +2,14 @@ public class MenuCadastro
 {
     public static void Menu(){
 
+
         Ferramentas.limpaTerminal();
 
         System.out.println("      ==================");
         System.out.println("      ==   Cadastro   ==");
         System.out.println("      ==================");
+
+
 
         System.out.println("\n\n\n\n------------------");
         System.out.print("-Digite o seu cpf: ");
@@ -18,7 +21,11 @@ public class MenuCadastro
         String senha = Ferramentas.lString();
         System.out.println("------------------");
 
+
+
     }
 
+
 }
+
 
