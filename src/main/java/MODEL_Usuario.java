@@ -19,42 +19,15 @@ public class MODEL_Usuario {
     public MODEL_Usuario(int id, String nome, String cpf, int nivelacesso, String telefone, double salario,
                          Date datanasci, String email, int cargahoraria, String formacao, MODEL_Setor setor) {
         this.id = id;
-
-        // ---- VALIDAÇÃO DE NOME ---- //
-        this.nome = ValidacoesGerais.ValidarString(nome);
-
-        // ---- VALIDAÇÃO DE CPF ---- //
-        // Remover qualquer formatação antes de validar
-        String cpfNumerico = cpf.replaceAll("[^0-9]", "");
-
-       // ---- VALIDAÇÃO ---- //
-        ValidacaoCPF.validar(cpfNumerico);
-        this.cpf = cpfNumerico;
-
-
-        // ---- VALIDAÇÃO DE NÚMERO ----//
-        this.nivelacesso = ValidacoesGerais.ValidarNumeroNegativoInt(nivelacesso);
-
-        // ---- VALIDAÇÃO DE TELEFONE ----//
-        this.telefone = ValidacoesGerais.ValidarTelefone(telefone);
-
-        // ---- VALIDAÇÃO DE SALARIO ----//
-        this.salario = ValidacoesGerais.ValidarNumeroNegativoDouble(salario);
-
-        // ---- VALIDAÇÃO DE DATA DE NASCIMENTO ---- //
-        this.datanasci = ValidacoesGerais.validarDataNascimento(datanasci);
+        this.nome = nome;
+        this.cpf = cpf;
+        this.nivelacesso = nivelacesso;
+        this.telefone = telefone;
+        this.salario = salario;
         this.datanasci = datanasci;
-
-        // --- VALIDAÇÃO DE EMAIL ----//
-        this.email = ValidacoesGerais.ValidarEmail(email);
-
-        // ---- VALIDAÇÃO DE CARGA HORARIA --- //
-        this.cargahoraria = ValidacoesGerais.ValidarNumeroNegativoInt(cargahoraria);
-
-        // ---- VALIDAÇÃO DE FORMAÇÃO ---- //
-        this.formacao = ValidacoesGerais.ValidarString(formacao);
-
-        // ---- VALIDAÇÃO DE SETOR ---- //
+        this.email = email;
+        this.cargahoraria = cargahoraria;
+        this.formacao = formacao;
         this.setor = setor;
     }
 

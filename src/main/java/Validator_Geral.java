@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class ValidacoesGerais
+public class Validator_Geral
 {
     // ---- VALIDA SE A STRING É VAZIA ----//
     public static String  ValidarString(String texto) {
