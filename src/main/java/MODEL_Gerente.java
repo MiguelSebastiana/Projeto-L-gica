@@ -9,8 +9,6 @@ public class MODEL_Gerente extends MODEL_Usuario {
         this.tempo_na_funcao_anos_gerente = tempo_na_funcao_anos_gerente;
     }
 
-
-
     public int getTempo_na_funcao_anos_gerente() {
         return tempo_na_funcao_anos_gerente;
     }
