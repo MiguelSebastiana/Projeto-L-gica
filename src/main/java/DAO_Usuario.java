@@ -9,15 +9,12 @@ public class DAO_Usuario
         ArrayList<MODEL_Usuario> listaUsuarios = new ArrayList<>();
 
         String querySql = "SELECT * FROM Usuario";
+//
+        //try {
+        //    ConnectionFactory conexao =
+        //}
 
-        try {
-            ConnectionFactory conexao =
-        }
-
-
-
-
+return null;
     }
-
 
 }
