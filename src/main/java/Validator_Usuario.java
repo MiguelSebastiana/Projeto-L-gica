@@ -140,7 +140,7 @@ public class Validator_Usuario {
             throw new IllegalArgumentException("ERRO - SETOR NÃO PODE SER NULO!");
         }
 
-        if (setor.getNome() == null || setor.getNome().trim().isEmpty()){
+        if (setor.getNomeSetor() == null || setor.getNomeSetor().trim().isEmpty()){
             throw new IllegalArgumentException("ERRO - NOME DO SETOR NÃO PODE SER VAZIO!");
         }
 
