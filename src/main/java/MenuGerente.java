@@ -53,6 +53,6 @@ public class MenuGerente {
     }
 
     public static void Relatorios(){
-
+        
     }
 }
