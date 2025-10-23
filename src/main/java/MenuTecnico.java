@@ -8,7 +8,7 @@ public class MenuTecnico {
 
         do{
             System.out.println("      ====================");
-            System.out.println("      ==  Menu Tecnico  ==");
+            System.out.println("      ==  Menu Técnico  ==");
             System.out.println("      ====================");
 
             System.out.println("1 - Ver as ordens atribuidas");
@@ -33,10 +33,15 @@ public class MenuTecnico {
                     break;
                 }
                 case 3:{
-                    MenuInicial.Menu();
+                    continuar = false;
                     break;
                 }
+                default:{
+                    Default.Default();
+                }
             }
-        }while (!continuar);
+        }while (continuar);
+
+        MenuInicial.Menu();
     }
 }

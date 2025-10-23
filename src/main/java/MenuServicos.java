@@ -8,7 +8,6 @@ public class MenuServicos {
         boolean continuar = true;
         int escolha = 0;
 
-
         do {
             Ferramentas.limpaTerminal();
             Ferramentas.limpaTerminal();
@@ -34,10 +33,6 @@ public class MenuServicos {
                     Ferramentas.limpaTerminal();
 
                     System.out.println("");
-
-
-
-
 
                     break;
                 }
