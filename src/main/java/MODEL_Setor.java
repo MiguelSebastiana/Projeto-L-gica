@@ -1,18 +1,18 @@
 public class MODEL_Setor {
 
-    //Atributos Setor
+    // Atributos Setor //
     private int id_setor;
     private String nomeSetor;
     private String descricaoSetor;
 
-    //Construtor Setor
+    // Construtor Setor //
     public MODEL_Setor(int id_setor, String nomeSetor, String descricaoSetor){
         this.id_setor = id_setor;
         this.nomeSetor = nomeSetor;
         this.descricaoSetor = descricaoSetor;
     }
 
-    //Getters e Setters Setor
+    // Getters e Setters Setor //
     public int getId_setor() {
         return id_setor;
     }

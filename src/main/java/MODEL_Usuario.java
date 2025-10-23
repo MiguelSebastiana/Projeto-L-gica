@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class MODEL_Usuario {
 
-    // Atributos
+    // Atributos Usuário //
     private int id;
     private String nome;
     private String cpf;
@@ -15,7 +15,7 @@ public class MODEL_Usuario {
     private String formacao;
     private MODEL_Setor setor;
 
-    // Construtor
+    // Construtor Usuário //
     public MODEL_Usuario(int id, String nome, String cpf, int nivelacesso, String telefone, double salario,
                          Date datanasci, String email, int cargahoraria, String formacao, MODEL_Setor setor) {
         this.id = id;
