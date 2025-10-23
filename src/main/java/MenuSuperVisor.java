@@ -16,38 +16,42 @@ public class MenuSuperVisor {
             System.out.println("2 - Criar ordens de serviço");
             System.out.println("3 - Visualizar todas as ordens de serviço");
             System.out.println("4 - Visualizar todas as maquínas");
-            System.out.println("0 - Sair");
+            System.out.println("5 - Sair");
 
             int escolha = 0;
 
             try {
                 escolha = Ferramentas.lInteiro();
             } catch (InputMismatchException e) {
-                Ferramentas.limpaTerminal();
-                System.err.println("VALOR DIGITADO  INVALIDO!");
-                Ferramentas.Delay(1500);
+                Default.Default();
             }
 
             switch (escolha) {
                 case 1: {
 
+                    break;
                 }
-
                 case 2:{
 
+                    break;
                 }
-
                 case 3:{
-                    MenuInicial.Menu();
+
+                    break;
+                }
+                case 4:{
+
+                    break;
+                }
+                case 5:{
+                    continuar = false;
+                    break;
+                }
+                default:{
+                    Default.Default();
                 }
             }
-
-        }while (!continuar);
-
-
+        }while (continuar);
+        MenuInicial.Menu();
     }
-
-
-
-
 }

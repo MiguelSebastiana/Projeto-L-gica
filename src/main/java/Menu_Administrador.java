@@ -30,11 +30,21 @@ public class Menu_Administrador {
                 case 1:{
                     break;
                 }
+                case 2:{
+
+                    break;
+                }
+                case 3:{
+
+                    break;
+                }
                 case 4:{
                     continuar = true;
+                    break;
                 }
                 default:{
                     Default.Default();
+                    break;
                 }
             }
 

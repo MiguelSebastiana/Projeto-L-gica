@@ -39,6 +39,6 @@ public class MenuInicial {
                     Default.Default();
                 }
 
-            }while (!continuar);
+            }while (continuar);
         }
 }
