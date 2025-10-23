@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class MODEL_Usuario {
+public abstract class MODEL_Usuario {
 
     // Atributos
     private int id;
@@ -30,7 +30,6 @@ public class MODEL_Usuario {
         this.formacao = formacao;
         this.setor = setor;
     }
-
 
 
     // Getter e Setters //
