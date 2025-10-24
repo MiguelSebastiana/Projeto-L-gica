@@ -1,6 +1,6 @@
 package Projeto_Base;
 
-import Views.MenuInicial;
+import Menus.MenuInicial;
 
 public class Main {
     public static void main(String[] args) {

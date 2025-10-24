@@ -1,25 +1,20 @@
-package Views;
+package Menus;
 import Projeto_Base.*;
 import java.util.InputMismatchException;
-
-public class Menu_Administrador {
+public class MenuTecnico {
 
     public static void Menu(){
 
-        boolean continuar = false;
+        boolean continuar = true;
 
         do{
+            System.out.println("      ====================");
+            System.out.println("      ==  Menu Técnico  ==");
+            System.out.println("      ====================");
 
-            Ferramentas.limpaTerminal();
-
-            System.out.println("      ==========================");
-            System.out.println("      ==  Menu Administrador  ==");
-            System.out.println("      ==========================");
-
-            System.out.println("1 - Cadastrar Gerente");
-            System.out.println("2 - Atualizar Gerente");
-            System.out.println("3 - Excluir Gerente");
-            System.out.println("4 - Sair");
+            System.out.println("1 - Ver as ordens atribuidas");
+            System.out.println("2 - Alterar os Status das ordens");
+            System.out.println("3 - Sair");
 
             int escolha = 0;
 
@@ -31,6 +26,7 @@ public class Menu_Administrador {
 
             switch (escolha) {
                 case 1:{
+
                     break;
                 }
                 case 2:{
@@ -38,19 +34,13 @@ public class Menu_Administrador {
                     break;
                 }
                 case 3:{
-
-                    break;
-                }
-                case 4:{
-                    continuar = true;
+                    continuar = false;
                     break;
                 }
                 default:{
                     Default.Default();
-                    break;
                 }
             }
-
         }while (continuar);
 
         MenuInicial.Menu();

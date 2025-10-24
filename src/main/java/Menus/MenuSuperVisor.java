@@ -1,4 +1,4 @@
-package Views;
+package Menus;
 import java.util.InputMismatchException;
 import Projeto_Base.*;
 public class MenuSuperVisor {
