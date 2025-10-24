@@ -6,17 +6,17 @@ public class MODEL_Servico {
         private int ordem_servico;
         private String status_aberto_ordem_servico;
         private String descricao_ordem_servico;
-        private MODEL_Tecnico tecnico;
-        private MODEL_Maquina maquina;
+        private int id_tecnico;
+        private int id_maquina;
 
         //Construtor ordens de Serviço//
-    public MODEL_Servico(int ordem_servico, String status_aberto_ordem_servico, String descricao_ordem_servico, MODEL_Tecnico tecnico, MODEL_Maquina maquina) {
+    public MODEL_Servico(int ordem_servico, String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina) {
 
         this.ordem_servico = ordem_servico;
         this.status_aberto_ordem_servico = status_aberto_ordem_servico;
         this.descricao_ordem_servico = descricao_ordem_servico;
-        this.tecnico = tecnico;
-        this.maquina = maquina;
+        this.id_tecnico = tecnico;
+        this.id_maquina = maquina;
     }
 
     //Getters e Setters//
@@ -44,19 +44,19 @@ public class MODEL_Servico {
         this.descricao_ordem_servico = descricao_ordem_servico;
     }
 
-    public MODEL_Tecnico getTecnico() {
-        return tecnico;
+    public int getTecnico() {
+        return id_tecnico;
     }
 
-    public void setTecnico(MODEL_Tecnico tecnico) {
-        this.tecnico = tecnico;
+    public void setTecnico(int tecnico) {
+        this.id_tecnico = tecnico;
     }
 
-    public MODEL_Maquina getMaquina() {
-        return maquina;
+    public int getMaquina() {
+        return id_maquina;
     }
 
-    public void setMaquina(MODEL_Maquina maquina) {
-        this.maquina = maquina;
+    public void setMaquina(int maquina) {
+        this.id_maquina = maquina;
     }
 }
