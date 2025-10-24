@@ -17,7 +17,7 @@ public class Validator_Geral
 
     // ---- VALIDA SE O NÚMERO É NEGATIVO (int)----//
     public static int ValidarNumeroNegativoInt(int numero){
-        if (numero <= 0){
+        if (numero < 0){
             throw new IllegalArgumentException("ERRO - NÃO SÃO ACEITOS NÚMEROS NEGATIVOS");
         }else{
             return numero;
