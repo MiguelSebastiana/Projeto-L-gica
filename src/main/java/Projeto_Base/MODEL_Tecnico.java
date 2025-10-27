@@ -9,7 +9,7 @@ public class MODEL_Tecnico extends MODEL_Usuario {
     private boolean status_disponibilidade_tecnico;
 
     // Construtor Tecnico //
-    public MODEL_Tecnico(int id, String nome, String cpf, int nivelacesso, String telefone, double salario, Date datanasci, String email, int cargahoraria, String formacao, MODEL_Setor setor, String especialidade_tecnico, boolean status_disponibilidade_tecnico){
+    public MODEL_Tecnico(int id, String nome, String cpf, int nivelacesso, String telefone, double salario, Date datanasci, String email, int cargahoraria, String formacao, int setor, String especialidade_tecnico, boolean status_disponibilidade_tecnico){
         super(id,nome,cpf,nivelacesso,telefone,salario,datanasci,email,cargahoraria,formacao,setor);
         this.especialidade_tecnico = especialidade_tecnico;
         this.status_disponibilidade_tecnico = status_disponibilidade_tecnico;
