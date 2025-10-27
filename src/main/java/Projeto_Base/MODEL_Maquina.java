@@ -1,6 +1,6 @@
 package Projeto_Base;
 
-public class MODEL_Maquina{
+public class  MODEL_Maquina{
 
     // Atributos maquina //
     private int id_maquina;

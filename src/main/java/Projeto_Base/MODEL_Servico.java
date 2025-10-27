@@ -2,12 +2,12 @@ package Projeto_Base;
 
 public class MODEL_Servico {
 
-        //Atributos ordens de Serviço//
-        private int ordem_servico;
-        private String status_aberto_ordem_servico;
-        private String descricao_ordem_servico;
-        private int id_tecnico;
-        private int id_maquina;
+    //Atributos ordens de Serviço//
+    private int ordem_servico;
+    private String status_aberto_ordem_servico;
+    private String descricao_ordem_servico;
+    private int id_tecnico;
+    private int id_maquina;
 
         //Construtor ordens de Serviço//
     public MODEL_Servico(int ordem_servico, String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina) {
