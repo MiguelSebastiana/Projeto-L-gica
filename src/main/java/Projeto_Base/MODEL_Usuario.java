@@ -15,11 +15,11 @@ public abstract class MODEL_Usuario {
     private String email;
     private int cargahoraria;
     private String formacao;
-    private MODEL_Setor setor;
+    private int id_setor;
 
     // Construtor Usuário //
     public MODEL_Usuario(int id, String nome, String cpf, int nivelacesso, String telefone, double salario,
-                         Date datanasci, String email, int cargahoraria, String formacao, MODEL_Setor setor) {
+                         Date datanasci, String email, int cargahoraria, String formacao, int id_setor) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -30,7 +30,7 @@ public abstract class MODEL_Usuario {
         this.email = email;
         this.cargahoraria = cargahoraria;
         this.formacao = formacao;
-        this.setor = setor;
+        this.id_setor = id_setor;
     }
 
 
@@ -111,11 +111,11 @@ public abstract class MODEL_Usuario {
         this.formacao = formacao;
     }
 
-    public MODEL_Setor getSetor() {
-        return setor;
+    public int getSetor() {
+        return id_setor;
     }
 
-    public void setSetor(MODEL_Setor setor) {
-        this.setor = setor;
+    public void setSetor(int setor) {
+        this.id_setor = setor;
     }
 }

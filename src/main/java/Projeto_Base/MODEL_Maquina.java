@@ -7,15 +7,15 @@ public class  MODEL_Maquina{
     private String DescricaoMaquina;
     private String ModeloMaquina;
     private String StatusFuncionamentoMaquina;
-    private MODEL_Setor setor;
+    private int id_setor;
 
     // Construtor Model Maquina //
-    public MODEL_Maquina(int id_maquina, String DescricaoMaquina, String ModeloMaquina, String StatusFuncionamentoMaquina, MODEL_Setor setor) {
+    public MODEL_Maquina(int id_maquina, String DescricaoMaquina, String ModeloMaquina, String StatusFuncionamentoMaquina, int id_setor) {
         this.id_maquina = id_maquina;
         this.DescricaoMaquina = DescricaoMaquina;
         this.ModeloMaquina = ModeloMaquina;
         this.StatusFuncionamentoMaquina = StatusFuncionamentoMaquina;
-        this.setor = setor;
+        this.id_setor = id_setor;
     }
 
     // Getter e Setters maquina //
@@ -51,11 +51,11 @@ public class  MODEL_Maquina{
         StatusFuncionamentoMaquina = statusFuncionamentoMaquina;
     }
 
-    public MODEL_Setor getSetor() {
-        return setor;
+    public int getId_Setor() {
+        return id_setor;
     }
 
-    public void setSetor(MODEL_Setor setor) {
-        this.setor = setor;
+    public void setId_Setor(int setor) {
+        this.id_setor = setor;
     }
 }
