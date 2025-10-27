@@ -1,7 +1,6 @@
 package Menus;
-import Projeto_Base.*;
 import java.util.InputMismatchException;
-public class MenuTecnico {
+public class Menu_Tecnico {
 
     public static void Menu(){
 
@@ -38,11 +37,11 @@ public class MenuTecnico {
                     break;
                 }
                 default:{
-                    Default.Default();
+                    Menu_Default.Default();
                 }
             }
         }while (continuar);
 
-        MenuInicial.Menu();
+        Menu_Inicial.Menu();
     }
 }

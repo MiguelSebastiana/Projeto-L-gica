@@ -1,7 +1,7 @@
 package Menus;
 import java.util.InputMismatchException;
-import Projeto_Base.*;
-public class MenuInicial {
+
+public class Menu_Inicial {
 
 
 
@@ -33,11 +33,11 @@ public class MenuInicial {
                 }
 
                 if (escolha == 1){
-                    MenuLogin.Menu();
+                    Menu_Login.Menu();
                 } else if (escolha == 2) {
                     continuar = false;
                 }else {
-                    Default.Default();
+                    Menu_Default.Default();
                 }
 
             }while (continuar);

@@ -1,6 +1,6 @@
 package Menus;
 import Projeto_Base.*;
-public class MenuLogin {
+public class Menu_Login {
 
 
     public static void Menu() {

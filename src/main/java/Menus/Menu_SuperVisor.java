@@ -1,7 +1,7 @@
 package Menus;
 import java.util.InputMismatchException;
-import Projeto_Base.*;
-public class MenuSuperVisor {
+
+public class Menu_SuperVisor {
 
     public static void Menu(){
 
@@ -24,7 +24,7 @@ public class MenuSuperVisor {
             try {
                 escolha = Ferramentas.lInteiro();
             } catch (InputMismatchException e) {
-                Default.Default();
+                Menu_Default.Default();
             }
 
             switch (escolha) {
@@ -49,10 +49,10 @@ public class MenuSuperVisor {
                     break;
                 }
                 default:{
-                    Default.Default();
+                    Menu_Default.Default();
                 }
             }
         }while (continuar);
-        MenuInicial.Menu();
+        Menu_Inicial.Menu();
     }
 }

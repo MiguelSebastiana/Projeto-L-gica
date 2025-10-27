@@ -1,8 +1,7 @@
 package Menus;
-import Projeto_Base.*;
 import java.util.InputMismatchException;
 
-public class MenuGerente {
+public class Menu_Gerente {
 
     public static void Menu(){
 
@@ -30,7 +29,7 @@ public class MenuGerente {
 
             switch (escolha) {
                 case 1:{
-                    MenuCadastro.Menu();
+                    Menu_Cadastro.Menu();
                     break;
                 }
                 case 2:{
@@ -38,20 +37,20 @@ public class MenuGerente {
                     break;
                 }
                 case 3:{
-                    MenuServicos.Criar();
+                    Menu_Servicos.Criar();
                     break;
                 }
                 case 4:{
                     continuar = true;
                 }
                 default:{
-                    Default.Default();
+                    Menu_Default.Default();
                 }
             }
 
         }while (continuar);
 
-        MenuInicial.Menu();
+        Menu_Inicial.Menu();
     }
 
     public static void Relatorios(){
