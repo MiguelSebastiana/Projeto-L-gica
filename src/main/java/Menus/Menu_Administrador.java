@@ -1,5 +1,4 @@
 package Menus;
-import Projeto_Base.*;
 import java.util.InputMismatchException;
 
 public class Menu_Administrador {
@@ -46,13 +45,13 @@ public class Menu_Administrador {
                     break;
                 }
                 default:{
-                    Default.Default();
+                    Menu_Default.Default();
                     break;
                 }
             }
 
         }while (continuar);
 
-        MenuInicial.Menu();
+        Menu_Inicial.Menu();
     }
 }

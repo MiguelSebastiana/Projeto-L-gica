@@ -1,7 +1,6 @@
 package Menus;
-import Projeto_Base.*;
 import java.util.InputMismatchException;
-public class MenuServicos {
+public class Menu_Servicos {
 
 
     public static void Criar() {
@@ -42,7 +41,7 @@ public class MenuServicos {
                     break;
                 }
                 default:{
-                    Default.Default();
+                    Menu_Default.Default();
                     break;
                 }
             }

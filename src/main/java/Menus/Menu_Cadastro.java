@@ -2,7 +2,7 @@ package Menus;
 import Projeto_Base.*;
 import java.util.InputMismatchException;
 
-public class MenuCadastro {
+public class Menu_Cadastro {
 
     public static void Menu() {
 
@@ -76,7 +76,7 @@ public class MenuCadastro {
                 Validator_Usuario.validarCpf(cpf);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -93,7 +93,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(senha);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -110,7 +110,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(nome);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -130,7 +130,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(telefone);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -147,7 +147,7 @@ public class MenuCadastro {
                 Validator_Usuario.validarSalario(salario);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -223,7 +223,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(email);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -258,7 +258,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(formacao);
                 verifica = true;
             } catch (IllegalArgumentException e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -284,11 +284,11 @@ public class MenuCadastro {
                     case 6 -> formacao = "Bobinagem";
                     case 7 -> formacao = "Montagem";
                     case 8 -> formacao = "Controle de Qualidade";
-                    default -> Default.Default();
+                    default -> Menu_Default.Default();
                 }
                 verifica = true;
             } catch (IllegalArgumentException e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -343,7 +343,7 @@ public class MenuCadastro {
                 Validator_Usuario.validarCpf(cpf);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -360,7 +360,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(senha);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -377,7 +377,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(nome);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -397,7 +397,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(telefone);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -414,7 +414,7 @@ public class MenuCadastro {
                 Validator_Usuario.validarSalario(salario);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -490,7 +490,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(email);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -525,7 +525,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(formacao);
                 verifica = true;
             } catch (IllegalArgumentException e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -551,11 +551,11 @@ public class MenuCadastro {
                     case 6 -> formacao = "Bobinagem";
                     case 7 -> formacao = "Montagem";
                     case 8 -> formacao = "Controle de Qualidade";
-                    default -> Default.Default();
+                    default -> Menu_Default.Default();
                 }
                 verifica = true;
             } catch (IllegalArgumentException e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -612,7 +612,7 @@ public class MenuCadastro {
                 Validator_Usuario.validarCpf(cpf);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -629,7 +629,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(senha);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -646,7 +646,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(nome);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -666,7 +666,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(telefone);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -683,7 +683,7 @@ public class MenuCadastro {
                 Validator_Usuario.validarSalario(salario);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -759,7 +759,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(email);
                 verifica = true;
             } catch (Exception e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -794,7 +794,7 @@ public class MenuCadastro {
                 Validator_Geral.ValidarString(formacao);
                 verifica = true;
             } catch (IllegalArgumentException e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");
@@ -820,11 +820,11 @@ public class MenuCadastro {
                     case 6 -> formacao = "Bobinagem";
                     case 7 -> formacao = "Montagem";
                     case 8 -> formacao = "Controle de Qualidade";
-                    default -> Default.Default();
+                    default -> Menu_Default.Default();
                 }
                 verifica = true;
             } catch (IllegalArgumentException e) {
-                Default.Default();
+                Menu_Default.Default();
             }
         } while (verifica);
         System.out.println("-------------------------------------------");

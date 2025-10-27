@@ -1,6 +1,6 @@
-package Projeto_Base;
+package Menus;
 
-public class Default {
+public class Menu_Default {
 
     public static void Default(){
 
