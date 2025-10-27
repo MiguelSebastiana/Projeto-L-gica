@@ -34,12 +34,8 @@ public class DAO_Maquina
                 String modelo_maquina = resultSet.getString("modelo_maquina");
                 String status_funcionamento_maquina = resultSet.getString("status_funcionamento_maquina");
                 int id_setor = resultSet.getInt("id_setor");
-                String nome_setor = resultSet.getString("nome_setor");
-                String descricao_setor = resultSet.getString("descricao_setor");
 
-                MODEL_Setor setor = new MODEL_Setor(id_setor, nome_setor, descricao_setor);
-
-                MODEL_Maquina maquina = new MODEL_Maquina(id_maquina, descricao_maquina, modelo_maquina, status_funcionamento_maquina, setor);
+                MODEL_Maquina maquina = new MODEL_Maquina(id_maquina, descricao_maquina, modelo_maquina, status_funcionamento_maquina, id_setor);
 
 
                 listaMaquinas.add(maquina);
