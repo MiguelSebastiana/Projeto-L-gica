@@ -17,12 +17,13 @@ public class DAO_Gerente {
                                     Date datanasci, String email, int cargahoraria, String formacao, int id_setor, int tempoFuncao){
 
 
+
+
     }
 
     // Read
 
     public ArrayList<MODEL_Gerente> find_All_Gerentes(){
-
 
         ArrayList<MODEL_Gerente> listaGerentes = new ArrayList<>();
 
@@ -36,6 +37,7 @@ public class DAO_Gerente {
              ResultSet resultSet = stmt.executeQuery()) {
 
             while (resultSet.next()) {
+
                 int idUsuario = resultSet.getInt("id_usuario");
                 String nomeUsuario = resultSet.getString("nome_usuario");
                 String cpfUsuario = resultSet.getString("cpf_usuario");
@@ -67,23 +69,99 @@ public class DAO_Gerente {
         return listaGerentes;
     }
 
-    public void find_By_Id(int id){
+    public MODEL_Gerente find_By_Id(int id){
 
+        String idgerente = String.valueOf(id);
+        MODEL_Gerente gerente = null;
 
+        String querySql = "select u.*, g.tempo_na_funcao\n" +
+                "from Usuario u\n" +
+                "inner join Gerente g on u.id_usuario = g.Usuario_id_usuario\n" +
+                "order by u.id_usuario\n" +
+                "where u.id_usuario = ?;";
+
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql)) {
+
+            stmt.setInt(1,id);
+
+            try(ResultSet resultSet = stmt.executeQuery()) {
+
+                while (resultSet.next()) {
+                    int idUsuario = resultSet.getInt("id_usuario");
+                    String nomeUsuario = resultSet.getString("nome_usuario");
+                    String cpfUsuario = resultSet.getString("cpf_usuario");
+                    String senhaUsuario = resultSet.getString("senha_usuario");
+                    int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
+                    String telefoneUsuario = resultSet.getString("telefone_usuario");
+                    Double salarioUsuario = resultSet.getDouble("salario_usuario");
+                    Date dataNascimento = resultSet.getDate("data_nasc_usuario");
+                    String emailUsuario = resultSet.getString("email_usuario");
+                    int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
+                    String formacaoUsuario = resultSet.getString("formacao_usuario");
+                    int idSetor = resultSet.getInt("Setor_id_setor");
+                    int tempoFuncao = resultSet.getInt("tempo_na_funcao");
+
+                    gerente = new MODEL_Gerente(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario, nivelAcesso, telefoneUsuario,
+                            salarioUsuario, dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, tempoFuncao);
+                }
+            }
+        }
+        catch (SQLException e){
+            System.err.println("Não foi possível buscar o Gerente: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
+
+        return gerente;
     }
 
     // Update
 
     public void update_Tempo_Funcao(MODEL_Gerente gerente, int tempo){
 
+        String querySql = "update Usuario as u \n" +
+                "inner join Gerente g on u.id_usuario = g.id_usuarios\n" +
+                "set g.tempo_na_funcao = ?\n" +
+                "where u.id_usuario = ?";
 
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
+            stmt.setInt(1,tempo);
+            stmt.setInt(2,gerente.getId());
+            stmt.executeQuery();
+
+        }
+        catch (SQLException e){
+            System.err.println("Não foi possível alterar o tempo de experiencia do Gerente: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
 
     }
 
     // Delete
 
     public void delete_User_Gerente(MODEL_Gerente gerente){
+
+        String querySql = "\n" +
+                "delete Usuario as u\n" +
+                "inner join Gerente g on u.id_usuario = g.id_usuario\n" +
+                "where u.id_usuario = ?";
+
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql)) {
+
+            stmt.setInt(1,gerente.getId());
+            stmt.executeQuery();
+
+        }
+        catch (SQLException e){
+            System.err.println("Não foi possível excluir o Gerente: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
 
     }
 }
