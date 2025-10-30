@@ -13,34 +13,58 @@ public class DAO_Supervisor {
 
     public void insert_Supervisor(MODEL_Supervisor supervisor){
 
-        String sql = "INSERT INTO SUPER_VISOR (id, nome, cpf, senha, nivelacesso, telefone, salario, datanasci, email, cargahoraria, formacao, id_setor," +
-                " experiencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO SUPER_VISOR (nome_usuario, cpf_usuario, senha_usuario, nivelacesso_usuario, " +
+                "telefone_usuario, salario_usuario, " + "data_nasc_usuario, email_usuario, cargahoraria_minutos, formacao_usuario, Setor_id_setor," +
+                " experiencia_anos_supervisor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(sql);
              ResultSet resultSet = stmt.executeQuery()) {
 
-            stmt.setInt(1, supervisor.getId());
-            stmt.setString(2, supervisor.getNome());
-            stmt.setString(3, supervisor.getCpf());
-            stmt.setString(4, supervisor.getSenha());
-            stmt.setInt(5, supervisor.getNivelacesso());
-            stmt.setString(6, supervisor.getTelefone());
-            stmt.setDouble(7, supervisor.getSalario());
-            stmt.setDate(8, (java.sql.Date) supervisor.getDatanasci());
-            stmt.setString(9, supervisor.getEmail());
-            stmt.setInt(10, supervisor.getCargahoraria());
-            stmt.setString(11, supervisor.getFormacao());
-            stmt.setInt(12, supervisor.getSetor());
-            stmt.setInt(13, supervisor.getExperiencia_anos_supervisor());
+            stmt.setString(1, supervisor.getNome());
+            stmt.setString(2, supervisor.getCpf());
+            stmt.setString(3, supervisor.getSenha());
+            stmt.setInt(4, supervisor.getNivelacesso());
+            stmt.setString(5, supervisor.getTelefone());
+            stmt.setDouble(6, supervisor.getSalario());
+            stmt.setDate(7, (java.sql.Date) supervisor.getDatanasci());
+            stmt.setString(8, supervisor.getEmail());
+            stmt.setInt(9, supervisor.getCargahoraria());
+            stmt.setString(10, supervisor.getFormacao());
+            stmt.setInt(11, supervisor.getSetor());
+            stmt.setInt(12, supervisor.getExperiencia_anos_supervisor());
+            stmt.executeQuery();
 
-        } catch (SQLException e) {
+            String sql2 = "select u.id_usuario\n" +
+                    "from Usuario u\n" +
+                    "inner join Supervisor s on u.id_usuario = s.Usuario_id_usuario\n" +
+                    "where u.cpf_usuario = ?";
+
+            try {
+                    stmt.setString(1, supervisor.getCpf());
+                    stmt.executeQuery();
+
+                    int idUsuario = resultSet.getInt("id_usuario");
+
+                    MODEL_Supervisor supervisor1 = new MODEL_Supervisor(idUsuario,supervisor.getNome(),supervisor.getCpf(),supervisor.getSenha(),
+                            supervisor.getNivelacesso(),supervisor.getTelefone(),supervisor.getSalario(),(java.sql.Date) supervisor.getDatanasci(),
+                            supervisor.getEmail(), supervisor.getCargahoraria(), supervisor.getFormacao(), supervisor.getSetor(),
+                            supervisor.getExperiencia_anos_supervisor());
+
+            } catch (SQLException e) {
+
+                System.err.println("Não foi possível buscar todos os supervisores: " + e.getMessage());
+
+                throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+            }
+        }catch (SQLException e) {
 
         System.err.println("Não foi possível buscar todos os supervisores: " + e.getMessage());
 
         throw new RuntimeException("Erro ao consultar o banco de dados.", e);
-    }
         }
+    }
+
 
     // Read
 
@@ -141,7 +165,7 @@ public class DAO_Supervisor {
 
     public void update_Experiencia(MODEL_Supervisor supervisor, int experiencia){
 
-
+        String Querysql = "";
 
     }
 
