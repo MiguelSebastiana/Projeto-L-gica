@@ -39,7 +39,7 @@ public class DAO_Usuario
                 String cpfUsuario = resultSet.getString("cpf_usuario");
                 int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
                 String telefoneUsuario = resultSet.getString("telefone_usuario");
-                Double salarioUsuario = resultSet.getDouble("salario_usuario");
+                double salarioUsuario = resultSet.getDouble("salario_usuario");
                 Date dataNascimento = resultSet.getDate("data_nasc_usuario");
                 String emailUsuario = resultSet.getString("email_usuario");
                 int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
