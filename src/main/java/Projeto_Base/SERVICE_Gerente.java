@@ -22,6 +22,10 @@ public class SERVICE_Gerente {
 
     }
 
+    public MODEL_Gerente Find_By_Id(){
+
+    }
+
     //Update
 
     public void Update_TempoFuncao(){
