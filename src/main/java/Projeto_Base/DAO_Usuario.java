@@ -17,7 +17,7 @@ public class DAO_Usuario
 
         ArrayList<MODEL_Usuario> listaUsuarios = new ArrayList<>();
 
-        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.nivel_acesso_usuario,\n" +
+        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario,\n" +
                 "u.telefone_usuario, u.salario_usuario,u.data_nasc_usuario,u.email_usuario, \n" +
                 "u.carga_horaria_minutos_usuario,u.formacao_usuario,\n" +
                 " u.Setor_id_setor, g.tempo_na_funcao_anos_gerente,sp.experiencia_anos_supervisor, \n" +
@@ -37,6 +37,7 @@ public class DAO_Usuario
                 int idUsuario = resultSet.getInt("id_usuario");
                 String nomeUsuario = resultSet.getString("nome_usuario");
                 String cpfUsuario = resultSet.getString("cpf_usuario");
+                String senhaUsuario = resultSet.getString("senha_usuario");
                 int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
                 String telefoneUsuario = resultSet.getString("telefone_usuario");
                 Double salarioUsuario = resultSet.getDouble("salario_usuario");
@@ -57,21 +58,21 @@ public class DAO_Usuario
                         status = false;
                     }
 
-                    MODEL_Usuario tecnico = new MODEL_Tecnico(idUsuario, nomeUsuario, cpfUsuario, nivelAcesso, telefoneUsuario, salarioUsuario,
+                    MODEL_Usuario tecnico = new MODEL_Tecnico(idUsuario, nomeUsuario, cpfUsuario,senhaUsuario,nivelAcesso, telefoneUsuario, salarioUsuario,
                             dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, especialidadeTecnico, status);
 
                     listaUsuarios.add(tecnico);
                 } else if (nivelAcesso == 2) {
                     int anosSupervisor = resultSet.getInt("experiencia_anos_supervisor");
 
-                    MODEL_Usuario supervisor = new MODEL_Supervisor(idUsuario, nomeUsuario, cpfUsuario, nivelAcesso, telefoneUsuario, salarioUsuario,
+                    MODEL_Usuario supervisor = new MODEL_Supervisor(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario,nivelAcesso, telefoneUsuario, salarioUsuario,
                             dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, anosSupervisor);
 
                     listaUsuarios.add(supervisor);
                 } else if (nivelAcesso == 3) {
                     int anosGerente = resultSet.getInt("tempo_na_funcao_anos_gerente");
 
-                    MODEL_Usuario gerente = new MODEL_Gerente(idUsuario, nomeUsuario, cpfUsuario, nivelAcesso, telefoneUsuario, salarioUsuario,
+                    MODEL_Usuario gerente = new MODEL_Gerente(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario,nivelAcesso, telefoneUsuario, salarioUsuario,
                             dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, anosGerente);
 
                     listaUsuarios.add(gerente);
@@ -116,4 +117,5 @@ public class DAO_Usuario
     public static void verificar_Login(String cpf, String senha){
 
     }
+
 }

@@ -8,6 +8,7 @@ public abstract class MODEL_Usuario {
     private int id;
     private String nome;
     private String cpf;
+    private String senha;
     private int nivelacesso;
     private String telefone;
     private double salario;
@@ -18,11 +19,12 @@ public abstract class MODEL_Usuario {
     private int id_setor;
 
     // Construtor Usuário //
-    public MODEL_Usuario(int id, String nome, String cpf, int nivelacesso, String telefone, double salario,
+    public MODEL_Usuario(int id, String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
                          Date datanasci, String email, int cargahoraria, String formacao, int id_setor) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
+        this.senha = senha;
         this.nivelacesso = nivelacesso;
         this.telefone = telefone;
         this.salario = salario;
@@ -117,5 +119,13 @@ public abstract class MODEL_Usuario {
 
     public void setSetor(int setor) {
         this.id_setor = setor;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getSenha() {
+        return senha;
     }
 }
