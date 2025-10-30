@@ -1,5 +1,6 @@
 package Projeto_Base;
 
+import java.sql.SQLData;
 import java.util.Date;
 
 public abstract class MODEL_Usuario {
@@ -97,11 +98,11 @@ public abstract class MODEL_Usuario {
         this.salario = salario;
     }
 
-    public Date getDatanasci() {
+    public SQLData getDatanasci() {
         return datanasci;
     }
 
-    public void setDatanasci(Date datanasci) {
+    public void setDatanasci(SQLData datanasci) {
         this.datanasci = datanasci;
     }
 
