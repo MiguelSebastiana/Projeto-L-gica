@@ -3,16 +3,25 @@ package Projeto_Base;
 public class MODEL_Servico {
 
     //Atributos ordens de Serviço//
-    private int ordem_servico;
+    private int id_ordem_servico;
     private String status_aberto_ordem_servico;
     private String descricao_ordem_servico;
     private int id_tecnico;
     private int id_maquina;
 
-        //Construtor ordens de Serviço//
-    public MODEL_Servico(int ordem_servico, String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina) {
+    //Construtor ordens de Serviço//
+    public MODEL_Servico(int id_ordem_servico, String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina) {
 
-        this.ordem_servico = ordem_servico;
+        this.id_ordem_servico = id_ordem_servico;
+        this.status_aberto_ordem_servico = status_aberto_ordem_servico;
+        this.descricao_ordem_servico = descricao_ordem_servico;
+        this.id_tecnico = tecnico;
+        this.id_maquina = maquina;
+    }
+
+    // Construtor sem Id //
+    public MODEL_Servico(String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina) {
+
         this.status_aberto_ordem_servico = status_aberto_ordem_servico;
         this.descricao_ordem_servico = descricao_ordem_servico;
         this.id_tecnico = tecnico;
@@ -21,11 +30,11 @@ public class MODEL_Servico {
 
     //Getters e Setters//
     public int getOrdem_servico() {
-        return ordem_servico;
+        return id_ordem_servico;
     }
 
-    public void setOrdem_servico(int ordem_servico) {
-        this.ordem_servico = ordem_servico;
+    public void setId_ordem_servico(int ordem_servico) {
+        this.id_ordem_servico = ordem_servico;
     }
 
     public String getStatus_aberto_ordem_servico() {

@@ -12,23 +12,69 @@ public class DAO_Supervisor {
 
     // Create
 
-    public void insert_Supervisor(int id, String nome, String cpf, int nivelacesso, String telefone, double salario,
+    public void insert_Supervisor(int id, String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
                                   Date datanasci, String email, int cargahoraria, String formacao, int id_setor,int experiencia){
 
-        String sql = "INSERT INTO SUPER_VISOR (id, nome, cpf, nivelacesso, telefone, salario, datanasci, email, cargahoraria, formacao, id_setor, experiencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        String sql = "INSERT INTO SUPER_VISOR (id, nome, cpf, senha, nivelacesso, telefone, salario, datanasci, email, cargahoraria, formacao, id_setor, experiencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(sql);
+             ResultSet resultSet = stmt.executeQuery()) {
+
+            stmt.setInt(1, id);
+            stmt.setString(2, nome);
+
+
+        } catch (SQLException e) {
+
+        System.err.println("Não foi possível buscar todos os supervisores: " + e.getMessage());
+
+        throw new RuntimeException("Erro ao consultar o banco de dados.", e);
     }
+        }
 
     // Read
 
     public ArrayList<MODEL_Supervisor> find_All_Supervisores(){
         ArrayList<MODEL_Supervisor> listaSuperVisores = new ArrayList<>();
 
+        MODEL_Supervisor supervisor = null;
+
         String querySql = "select u.*,s.experiencia_anos_superVisor\n" +
                 "from Usuario u \n" +
                 "inner join Supervisor s on u.id_usuario = s.id_supervisor\n" +
                 "order by u.id_usuario;";
 
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql);
+             ResultSet resultSet = stmt.executeQuery()) {
+            while (resultSet.next()) {
+                int idSupervisor = resultSet.getInt("id_usuario");
+                String nomeSupervisor = resultSet.getString("nome_usuario");
+                String cpfSupervisor = resultSet.getString("cpf_usuario");
+                String senhaSupervisor = resultSet.getString("senha_usuario");
+                int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
+                String telefoneSupervisor = resultSet.getString("telefone_usuario");
+                Double salarioSupervisor = resultSet.getDouble("salario_usuario");
+                Date dataNascimento = resultSet.getDate("data_nasc_usuario");
+                String emailSupervisor = resultSet.getString("email_usuario");
+                int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
+                String formacaoSupervisor = resultSet.getString("formacao_usuario");
+                int idSetor = resultSet.getInt("Setor_id_setor");
+                int anosExperiencia = resultSet.getInt("experiencia_anos_supervisor");
+
+                supervisor = new MODEL_Supervisor(idSupervisor,nomeSupervisor,cpfSupervisor,senhaSupervisor,nivelAcesso,
+                        telefoneSupervisor,salarioSupervisor,dataNascimento,emailSupervisor,cargaHoraria,formacaoSupervisor,idSetor,anosExperiencia);
+
+                listaSuperVisores.add(supervisor);
+            }
+
+        } catch (SQLException e) {
+
+            System.err.println("Não foi possível buscar todos os supervisores: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
 
 
     }
@@ -59,14 +105,13 @@ public class DAO_Supervisor {
                 int idSetor = resultSet.getInt("Setor_id_setor");
                 int anosExperiencia = resultSet.getInt("experiencia_anos_supervisor");
 
-                supervisor = new MODEL_Supervisor(id,nomeSupervisor,cpfSupervisor,senhaSupervisor,nivelAcesso,
+                supervisor = new MODEL_Supervisor(idSupervisor,nomeSupervisor,cpfSupervisor,senhaSupervisor,nivelAcesso,
                         telefoneSupervisor,salarioSupervisor,dataNascimento,emailSupervisor,cargaHoraria,formacaoSupervisor,idSetor,anosExperiencia);
             }
 
-
         } catch (SQLException e) {
 
-            System.err.println("Não foi possível buscar todos os usuários: " + e.getMessage());
+            System.err.println("Não foi possível buscar o supervisor: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }

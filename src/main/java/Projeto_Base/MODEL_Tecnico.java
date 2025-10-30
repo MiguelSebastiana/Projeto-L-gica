@@ -15,6 +15,13 @@ public class MODEL_Tecnico extends MODEL_Usuario {
         this.status_disponibilidade_tecnico = status_disponibilidade_tecnico;
     }
 
+    // Construtor sem Id //
+    public MODEL_Tecnico(String nome, String cpf,String senha, int nivelacesso, String telefone, double salario, Date datanasci, String email, int cargahoraria, String formacao, int id_setor, String especialidade_tecnico, boolean status_disponibilidade_tecnico){
+        super(nome,cpf,senha,nivelacesso,telefone,salario,datanasci,email,cargahoraria,formacao,id_setor);
+        this.especialidade_tecnico = especialidade_tecnico;
+        this.status_disponibilidade_tecnico = status_disponibilidade_tecnico;
+    }
+
     // Getters e Setters Tecnico //
     public String getEspecialidade_tecnico() {
         return especialidade_tecnico;

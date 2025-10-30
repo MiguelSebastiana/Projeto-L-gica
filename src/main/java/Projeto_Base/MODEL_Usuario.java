@@ -35,6 +35,22 @@ public abstract class MODEL_Usuario {
         this.id_setor = id_setor;
     }
 
+    // Construtor sem Id //
+    public MODEL_Usuario(String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
+                         Date datanasci, String email, int cargahoraria, String formacao, int id_setor) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.nivelacesso = nivelacesso;
+        this.telefone = telefone;
+        this.salario = salario;
+        this.datanasci = datanasci;
+        this.email = email;
+        this.cargahoraria = cargahoraria;
+        this.formacao = formacao;
+        this.id_setor = id_setor;
+    }
+
 
     // Getter e Setters //
     public int getId() {

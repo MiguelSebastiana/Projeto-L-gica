@@ -18,6 +18,14 @@ public class  MODEL_Maquina{
         this.id_setor = id_setor;
     }
 
+    // Construtor sem Id //
+    public MODEL_Maquina(String DescricaoMaquina, String ModeloMaquina, String StatusFuncionamentoMaquina, int id_setor) {
+        this.DescricaoMaquina = DescricaoMaquina;
+        this.ModeloMaquina = ModeloMaquina;
+        this.StatusFuncionamentoMaquina = StatusFuncionamentoMaquina;
+        this.id_setor = id_setor;
+    }
+
     // Getter e Setters maquina //
     public int getId_maquina() {
         return id_maquina;

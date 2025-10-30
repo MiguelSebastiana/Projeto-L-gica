@@ -14,6 +14,12 @@ public class MODEL_Setor {
         this.descricaoSetor = descricaoSetor;
     }
 
+    // Construtor sem Id //
+    public MODEL_Setor(String nomeSetor, String descricaoSetor){
+        this.nomeSetor = nomeSetor;
+        this.descricaoSetor = descricaoSetor;
+    }
+
     // Getters e Setters Setor //
     public int getId_setor() {
         return id_setor;
