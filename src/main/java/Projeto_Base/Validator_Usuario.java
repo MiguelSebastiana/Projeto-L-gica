@@ -1,5 +1,9 @@
 package Projeto_Base;
 
+import Exceptions.CPFException;
+import Exceptions.DATESExceptions;
+import Exceptions.TELEFONEExceptions;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
@@ -12,7 +16,7 @@ public class Validator_Usuario {
     // Metodo para validar cpf
     public static String validarCpf(String cpf) {
         if (cpf == null || cpf.trim().isEmpty()) {
-            throw new IllegalArgumentException("ERRO - CPF NÃO PODE SER VAZIO!");
+            throw CPFException.vazio();
         }
 
         // Remover qualquer formatação do CPF (caso tenha sido passado com pontos ou traços)
@@ -20,7 +24,7 @@ public class Validator_Usuario {
 
         // Verificar se tem exatamente 11 dígitos
         if (cpfNumerico.length() != 11 || cpfNumerico.matches("(\\d)\\1{10}")) {
-            throw new IllegalArgumentException("ERRO - CPF DE TAMANHO INVÁLIDO OU SEQUÊNCIA DE DÍGITOS IGUAIS!");
+            throw CPFException.tamanhoInvalido();
         }
 
         // Calcular os dois dígitos verificadores
@@ -29,7 +33,7 @@ public class Validator_Usuario {
 
         // Verificar se os dígitos verificadores são iguais aos fornecidos
         if (cpfNumerico.charAt(9) != (d1 + '0') || cpfNumerico.charAt(10) != (d2 + '0')) {
-            throw new IllegalArgumentException("ERRO - CPF INVÁLIDO (DÍGITOS VERIFICADORES INCORRETOS)!");
+            throw CPFException.digitoInvalido();
         }
 
         return cpf.replaceAll("[^0-9]", "");
@@ -46,6 +50,8 @@ public class Validator_Usuario {
         return digito < 2 ? 0 : 11 - digito;
     }
 
+    // -- AJUSTADA COM EXCEPTIONS -- //
+
 
     // ---- VALIDA SE O TELEFONE É DO TAMANHO CORRETO OU VAZIO ---- //
     public static String ValidarTelefone(String telefone) {
@@ -53,17 +59,19 @@ public class Validator_Usuario {
         String telefoneNumerico = telefone.replaceAll("[^0-9]", "");
 
         if (telefoneNumerico.length() != 11) {
-            throw new IllegalArgumentException("ERRO - TAMANHO DE TELEFONE INCORRETO!");
+            throw new TELEFONEExceptions();
         } else {
             return telefoneNumerico;
         }
     }
 
+    // -- AJUSTADA COM EXCEPTIONS -- //
+
 
     // ---- VALIDAÇÃO DE DATAS ---- //
     public static Date validarDataNascimento(Date dataNascimento) {
         if (dataNascimento == null) {
-            throw new IllegalArgumentException("ERRO - A DATA DE NASCIMENTO NÃO PODE SER NULA!");
+            throw DATESExceptions.vazio();
         }
 
         LocalDate dataLocal = dataNascimento.toInstant()
@@ -73,12 +81,12 @@ public class Validator_Usuario {
         LocalDate hoje = LocalDate.now();
 
         if (dataLocal.isAfter(hoje)) {
-            throw new IllegalArgumentException("ERRO - A DATA DE NASCIMENTO NÃO PODE SER NO FUTURO!");
+            throw DATESExceptions.futuro();
         }
 
         int idade = java.time.Period.between(dataLocal, hoje).getYears();
         if (idade < 18) {
-            throw new IllegalArgumentException("ERRO - O USUÁRIO DEVE TER PELO MENOS 18 ANOS!");
+            throw DATESExceptions.maiorIdade();
         }
 
         return dataNascimento; // retorna a data válida
@@ -87,11 +95,11 @@ public class Validator_Usuario {
     // Valida a data informada (ano, mês, dia)
     public static LocalDate validarData(int dia, int mes, int ano) {
         if (ano < 1900 || ano > LocalDate.now().getYear()) {
-            throw new IllegalArgumentException("ERRO - ANO INVÁLIDO! O ANO DEVE ESTAR ENTRE 1900 E O ANO ATUAL.");
+            throw DATESExceptions.anoInvalido();
         }
 
         if (mes < 1 || mes > 12) {
-            throw new IllegalArgumentException("ERRO - MÊS INVÁLIDO! O MÊS DEVE ESTAR ENTRE 1 E 12.");
+            throw DATESExceptions.mesInvalido();
         }
 
         YearMonth anoMes = YearMonth.of(ano, mes);

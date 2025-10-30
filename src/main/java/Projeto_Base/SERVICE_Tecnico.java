@@ -22,6 +22,10 @@ public class SERVICE_Tecnico {
 
     }
 
+    public MODEL_Tecnico Find_By_Id(){
+
+    }
+
     //Update
 
     public void Update_Especialidade(){
