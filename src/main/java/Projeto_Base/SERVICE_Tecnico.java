@@ -12,7 +12,7 @@ public class SERVICE_Tecnico {
 
     //Create
 
-    public MODEL_Tecnico Inserir_Tecnico() {
+    public void Inserir_Tecnico() {
 
     }
 

@@ -12,6 +12,10 @@ public class SERVICE_Servico {
 
     //Create
 
+    public void Insert_Servico(){
+
+    }
+
     //Read
 
     public ArrayList<MODEL_Servico> All_Servicos(){
@@ -23,15 +27,11 @@ public class SERVICE_Servico {
 
     }
 
-    public MODEL_Servico Find_by_Pendente(){
+    public ArrayList<MODEL_Servico> Find_by_Pendente(){
 
     }
 
     //Update
-
-    public void Update_Id(){
-
-    }
 
     public void Update_Status(){
 

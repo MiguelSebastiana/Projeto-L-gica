@@ -6,7 +6,9 @@ import java.util.ArrayList;
 public class DAO_Setor
 {
 
-    public ArrayList<MODEL_Setor> findAllSetores()
+    // Read
+
+    public ArrayList<MODEL_Setor> find_All_Setores()
     {
         ArrayList<MODEL_Setor> listaSetores = new ArrayList<>();
         String querySql = "SELECT * FROM Setor;";
@@ -38,5 +40,8 @@ public class DAO_Setor
         return listaSetores;
     }
 
+    public MODEL_Setor find_By_Id(int id){
+
+    }
 
 }

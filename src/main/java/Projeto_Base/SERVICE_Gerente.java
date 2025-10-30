@@ -12,7 +12,7 @@ public class SERVICE_Gerente {
 
     //Create
 
-    public MODEL_Gerente Inserir_Gerente() {
+    public void Inserir_Gerente() {
 
     }
 

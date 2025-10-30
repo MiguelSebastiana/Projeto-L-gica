@@ -6,7 +6,17 @@ import java.util.ArrayList;
 public class DAO_Servico
 {
 
-    public ArrayList<MODEL_Servico> findAllOrdensServico()
+    // Create
+
+    public void insert_Servico(int ordem_servico, String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina){
+
+
+
+    }
+
+    // Read
+
+    public ArrayList<MODEL_Servico> find_All_Ordens_Servico()
     {
         ArrayList<MODEL_Servico> listaOrdens = new ArrayList<>();
 
@@ -103,6 +113,39 @@ public class DAO_Servico
         }
 
         return listaOrdens;
+    }
+
+    public MODEL_Servico find_By_Id(int id){
+
+    }
+
+    public ArrayList<MODEL_Servico> find_By_Pendente(){
+
+
+    }
+
+    // Update
+
+    public void update_Status(MODEL_Servico servico, int status){
+
+    }
+
+    public void update_Descricao(MODEL_Servico servico, String descricao){
+
+    }
+
+    public void update_Id_Tecnico(MODEL_Servico servico, int id){
+
+    }
+
+    public void update_Id_Maquina(MODEL_Servico servico, int id){
+
+    }
+
+    // Delete
+
+    public void delete_Servico(MODEL_Servico servico){
+
     }
 
 }

@@ -18,29 +18,9 @@ public class SERVICE_Usuario {
 
     }
 
-    public MODEL_Usuario Find_by_CPF(){
-
-    }
-
-    public MODEL_Usuario Find_by_Id(){
-
-    }
-
     //Update
 
-    public void Update_CPF(){
-
-    }
-
-    public void Update_NivelAcesso(){
-
-    }
-
     public void Update_Telefone(){
-
-    }
-
-    public void Update_DateNasci(){
 
     }
 
@@ -62,7 +42,7 @@ public class SERVICE_Usuario {
 
     //Outros
 
-    public void VerificarLogin(String cpf,String senha){
+    public void Verificar_Login(String cpf,String senha){
 
     }
 

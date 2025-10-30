@@ -6,7 +6,9 @@ import java.util.ArrayList;
 public class DAO_Maquina
 {
 
-    public ArrayList<MODEL_Maquina> findAllMaquinas()
+    // Read
+
+    public ArrayList<MODEL_Maquina> find_All_Maquinas()
     {
         ArrayList<MODEL_Maquina> listaMaquinas = new ArrayList<>();
         String querySql = "SELECT " +
@@ -49,6 +51,13 @@ public class DAO_Maquina
         }
 
         return listaMaquinas;
+    }
+
+    public MODEL_Maquina find_By_Id(int id){
+
+        MODEL_Maquina maquina = new MODEL_Maquina();
+
+        return maquina;
     }
 
 

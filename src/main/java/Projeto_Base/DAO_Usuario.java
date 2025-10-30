@@ -10,7 +10,9 @@ import java.util.Date;
 public class DAO_Usuario
 {
 
-    public static ArrayList<MODEL_Usuario> findAllUsers()
+    // Read
+
+    public ArrayList<MODEL_Usuario> find_All_Users()
     {
 
         ArrayList<MODEL_Usuario> listaUsuarios = new ArrayList<>();
@@ -74,8 +76,6 @@ public class DAO_Usuario
 
                     listaUsuarios.add(gerente);
                 }
-
-                return listaUsuarios;
             }
         }
         catch (SQLException e)
@@ -86,9 +86,34 @@ public class DAO_Usuario
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
 
+        return listaUsuarios;
     }
 
-    public static void main(String[] args) {
-        System.out.println(findAllUsers());
+    // Update
+
+    public void update_Telefone(MODEL_Usuario usuario, String telefone){
+
+    }
+
+    public void update_Email(MODEL_Usuario usuario, String email){
+
+    }
+
+    public void update_Carga_Horaria(MODEL_Usuario usuario, int carga){
+
+    }
+
+    public void update_Formacao(MODEL_Usuario usuario, String formacao){
+
+    }
+
+    public void update_Setor(MODEL_Usuario usuario, int setor){
+
+    }
+
+    // Outros
+
+    public static void verificar_Login(String cpf, String senha){
+
     }
 }

@@ -12,19 +12,23 @@ public class SERVICE_Supervisor {
 
     //Create
 
-    public MODEL_Supervisor Inserir_Supervisor() {
+    public void Insert_Supervisor() {
 
     }
 
     //Read
 
-    public ArrayList<MODEL_Supervisor> All_Supervisores(){
+    public ArrayList<MODEL_Supervisor> Find_All_Supervisores(){
+
+    }
+
+    public MODEL_Supervisor Find_By_Id(){
 
     }
 
     //Update
 
-    public void Update_Esperiencia(){
+    public void Update_Experiencia(){
 
     }
 
