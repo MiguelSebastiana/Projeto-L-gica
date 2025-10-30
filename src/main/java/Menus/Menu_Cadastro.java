@@ -310,7 +310,6 @@ public class Menu_Cadastro {
 
         verifica = false;
 
-
         //criar
     }
 
