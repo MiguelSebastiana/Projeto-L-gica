@@ -13,6 +13,12 @@ public class MODEL_Supervisor extends MODEL_Usuario {
         this.experiencia_anos_supervisor = experiencia_anos_supervisor;
     }
 
+    // Construtor sem Id //
+    public MODEL_Supervisor(String nome, String cpf,String senha, int nivelacesso, String telefone, double salario, Date datanasci, String email, int cargahoraria, String formacao, int id_setor, int experiencia_anos_supervisor){
+        super(nome,cpf,senha,nivelacesso,telefone,salario,datanasci,email,cargahoraria,formacao,id_setor);
+        this.experiencia_anos_supervisor = experiencia_anos_supervisor;
+    }
+
     // Getters e Setters Super Visor //
     public int getExperiencia_anos_supervisor() {
         return experiencia_anos_supervisor;
