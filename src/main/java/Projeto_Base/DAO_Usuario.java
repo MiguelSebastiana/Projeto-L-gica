@@ -81,7 +81,6 @@ public class DAO_Usuario
         }
         catch (SQLException e)
         {
-
             System.err.println("Não foi possível buscar todos os usuários: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);

@@ -21,10 +21,10 @@ public class DAO_Gerente {
 
     // Read
 
-    public ArrayList<DAO_Gerente> find_All_Gerentes(){
+    public ArrayList<MODEL_Gerente> find_All_Gerentes(){
 
 
-        ArrayList<DAO_Gerente> listaGerentes = new ArrayList<>();
+        ArrayList<MODEL_Gerente> listaGerentes = new ArrayList<>();
 
         String querySql = "select u.*, g.tempo_na_funcao\n" +
                 "from Usuario u\n" +
@@ -33,13 +33,31 @@ public class DAO_Gerente {
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);
-             ResultSet resultSet = stmt.executeQuery())
-        {
+             ResultSet resultSet = stmt.executeQuery()) {
 
-            int idUsuario = resultSet.getInt("id_usuario");
+            while (resultSet.next()) {
+                int idUsuario = resultSet.getInt("id_usuario");
+                String nomeUsuario = resultSet.getString("nome_usuario");
+                String cpfUsuario = resultSet.getString("cpf_usuario");
+                String senhaUsuario = resultSet.getString("senha_usuario");
+                int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
+                String telefoneUsuario = resultSet.getString("telefone_usuario");
+                Double salarioUsuario = resultSet.getDouble("salario_usuario");
+                Date dataNascimento = resultSet.getDate("data_nasc_usuario");
+                String emailUsuario = resultSet.getString("email_usuario");
+                int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
+                String formacaoUsuario = resultSet.getString("formacao_usuario");
+                int idSetor = resultSet.getInt("Setor_id_setor");
+                int tempoFuncao = resultSet.getInt("tempo_na_funcao");
 
+                MODEL_Gerente gerente = new MODEL_Gerente(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario, nivelAcesso, telefoneUsuario,
+                        salarioUsuario, dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, tempoFuncao);
 
-        }catch (SQLException e){
+                listaGerentes.add(gerente);
+
+            }
+        }
+        catch(SQLException e){
 
             System.err.println("Não foi possível buscar todos os Gerentes: " + e.getMessage());
 
@@ -49,9 +67,17 @@ public class DAO_Gerente {
         return listaGerentes;
     }
 
+    public void find_By_Id(int id){
+
+
+    }
+
     // Update
 
     public void update_Tempo_Funcao(MODEL_Gerente gerente, int tempo){
+
+
+
 
     }
 
