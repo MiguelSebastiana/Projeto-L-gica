@@ -1,6 +1,6 @@
 package Projeto_Base;
 
-import Exceptions.NomeVazioException;
+import Exceptions.NomeException;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -14,7 +14,7 @@ public class Validator_Geral
     public static String  nome(String texto) {
         if (texto == null || texto.trim().isEmpty()){
             // -- REFEITO COM A CLASSE PROPRIA -- //
-            throw new NomeVazioException();
+            throw new NomeException();
         }
 
             return texto;

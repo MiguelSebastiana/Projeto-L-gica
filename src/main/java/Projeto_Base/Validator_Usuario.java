@@ -1,8 +1,6 @@
 package Projeto_Base;
 
-import Exceptions.CPFException;
-import Exceptions.DATESExceptions;
-import Exceptions.TELEFONEExceptions;
+import Exceptions.*;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -50,7 +48,6 @@ public class Validator_Usuario {
         return digito < 2 ? 0 : 11 - digito;
     }
 
-    // -- AJUSTADA COM EXCEPTIONS -- //
 
 
     // ---- VALIDA SE O TELEFONE É DO TAMANHO CORRETO OU VAZIO ---- //
@@ -59,19 +56,18 @@ public class Validator_Usuario {
         String telefoneNumerico = telefone.replaceAll("[^0-9]", "");
 
         if (telefoneNumerico.length() != 11) {
-            throw new TELEFONEExceptions();
+            throw new TELEFONEException();
         } else {
             return telefoneNumerico;
         }
     }
 
-    // -- AJUSTADA COM EXCEPTIONS -- //
 
 
     // ---- VALIDAÇÃO DE DATAS ---- //
     public static Date validarDataNascimento(Date dataNascimento) {
         if (dataNascimento == null) {
-            throw DATESExceptions.vazio();
+            throw DATESException.vazio();
         }
 
         LocalDate dataLocal = dataNascimento.toInstant()
@@ -81,12 +77,12 @@ public class Validator_Usuario {
         LocalDate hoje = LocalDate.now();
 
         if (dataLocal.isAfter(hoje)) {
-            throw DATESExceptions.futuro();
+            throw DATESException.futuro();
         }
 
         int idade = java.time.Period.between(dataLocal, hoje).getYears();
         if (idade < 18) {
-            throw DATESExceptions.maiorIdade();
+            throw DATESException.maiorIdade();
         }
 
         return dataNascimento; // retorna a data válida
@@ -95,18 +91,18 @@ public class Validator_Usuario {
     // Valida a data informada (ano, mês, dia)
     public static LocalDate validarData(int dia, int mes, int ano) {
         if (ano < 1900 || ano > LocalDate.now().getYear()) {
-            throw DATESExceptions.anoInvalido();
+            throw DATESException.anoInvalido();
         }
 
         if (mes < 1 || mes > 12) {
-            throw DATESExceptions.mesInvalido();
+            throw DATESException.mesInvalido();
         }
 
         YearMonth anoMes = YearMonth.of(ano, mes);
         int diasNoMes = anoMes.lengthOfMonth();
 
         if (dia < 1 || dia > diasNoMes) {
-            throw new IllegalArgumentException("ERRO - DIA INVÁLIDO! O DIA DEVE ESTAR ENTRE 1 E " + diasNoMes + " PARA O MÊS " + mes + ".");
+            throw DATESException.diaInvalido();
         }
 
         return LocalDate.of(ano, mes, dia);
@@ -117,7 +113,7 @@ public class Validator_Usuario {
     public static String ValidarEmail(String email) {
         // Verifica se o e-mail não é nulo e se contém exatamente um "@" e um "."
         if (email == null || !email.contains("@") || !email.contains(".")) {
-            throw new IllegalArgumentException("ERRO - EMAIL INCORRETO!");
+            throw EMAILException.vazio();
         }
 
         // Verifica se o "@" vem antes de algum "."
@@ -125,12 +121,12 @@ public class Validator_Usuario {
         int dotIndex = email.indexOf(".", atIndex);
 
         if (atIndex == -1 || dotIndex == -1 || dotIndex < atIndex) {
-            throw new IllegalArgumentException("ERRO - EMAIL INCORRETO!");
+            throw EMAILException.caracteres();
         }
 
         // Verifica se há espaços
         if (email.contains(" ")) {
-            throw new IllegalArgumentException("ERRO - EMAIL NÃO PODE CONTER ESPAÇOS!");
+            throw EMAILException.espaco();
         }
 
         return email;
@@ -139,7 +135,7 @@ public class Validator_Usuario {
     // ---- VALIDACÃO DE SALÁRIO ---- //
     public static double validarSalario(double salario) {
         if (salario < 1518) {
-            throw new IllegalArgumentException("ERRO - SALÁRIO NÃO PODE SER INFERIOR A R$1518,00!");
+            throw SALARIOException.inferior();
         }
 
         return salario;
