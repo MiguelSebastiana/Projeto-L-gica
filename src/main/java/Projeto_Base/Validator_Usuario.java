@@ -170,4 +170,16 @@ public class Validator_Usuario {
 
         return setor;
     }
+
+    public static String senha(String senha){
+        if (senha == null || senha.trim().isEmpty()){
+            throw new IllegalArgumentException("ERRO - SENHA NÃO DEVE SER VAZIA!");
+        }
+
+        if (senha.length() < 5){
+            throw new IllegalArgumentException("ERRO - SENHA DEVE TER NO MINIMO 5 DIGITOS!");
+        }
+
+        return senha;
+    }
 }
