@@ -17,6 +17,8 @@ public class DAO_Gerente {
                                     Date datanasci, String email, int cargahoraria, String formacao, int id_setor, int tempoFuncao){
 
 
+
+
     }
 
     // Read
@@ -118,14 +120,48 @@ public class DAO_Gerente {
 
     public void update_Tempo_Funcao(MODEL_Gerente gerente, int tempo){
 
+        String querySql = "update Usuario as u \n" +
+                "inner join Gerente g on u.id_usuario = g.id_usuarios\n" +
+                "set g.tempo_na_funcao = ?\n" +
+                "where u.id_usuario = ?";
 
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
+            stmt.setInt(1,tempo);
+            stmt.setInt(2,gerente.getId());
+            stmt.executeQuery();
+
+        }
+        catch (SQLException e){
+            System.err.println("Não foi possível alterar o tempo de experiencia do Gerente: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
 
     }
 
     // Delete
 
     public void delete_User_Gerente(MODEL_Gerente gerente){
+
+        String querySql = "\n" +
+                "delete Usuario as u\n" +
+                "inner join Gerente g on u.id_usuario = g.id_usuario\n" +
+                "where u.id_usuario = ?";
+
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql)) {
+
+            stmt.setInt(1,gerente.getId());
+            stmt.executeQuery();
+
+        }
+        catch (SQLException e){
+            System.err.println("Não foi possível excluir o Gerente: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
 
     }
 }
