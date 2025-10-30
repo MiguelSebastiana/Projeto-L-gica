@@ -147,7 +147,7 @@ public class Validator_Usuario {
         if(nivel == 1 || nivel == 2 || nivel == 3){
             return nivel;
         }
-        throw new IllegalArgumentException("ERRO - NIVEL NÃO PODE SER DIFERENTE DE 1 , 2 , 3");
+        throw NIVELACESSOException.errado();
     }
 
 
@@ -155,13 +155,14 @@ public class Validator_Usuario {
     public static int validarCargaHoraria(int cargaHoraria){
         int cargaHorariaMinimaMinutos = 13200;
         if (cargaHoraria < cargaHorariaMinimaMinutos){
-            throw new IllegalArgumentException("ERRO - CARGA HORÁRIA MÍNIMA NÃO ATINGIDA!");
+            throw CARGAHORARIAException.inferior();
         }
 
         return cargaHoraria;
     }
 
 
+    // ---- NÃO TEM NECESSIDADE DE CLASSE DE EXCEÇÃO ! -- //
     // ---- VALIDAÇÃO DE SETOR ---- //
     public static MODEL_Setor validarSetor(MODEL_Setor setor){
         if (setor == null){
@@ -174,14 +175,15 @@ public class Validator_Usuario {
 
         return setor;
     }
+    // ------------------------------------------------------------------------------------ //
 
     public static String senha(String senha){
         if (senha == null || senha.trim().isEmpty()){
-            throw new IllegalArgumentException("ERRO - SENHA NÃO DEVE SER VAZIA!");
+            throw SENHA.vazia();
         }
 
         if (senha.length() < 5){
-            throw new IllegalArgumentException("ERRO - SENHA DEVE TER NO MINIMO 5 DIGITOS!");
+            throw SENHA.tamanho();
         }
 
         return senha;
