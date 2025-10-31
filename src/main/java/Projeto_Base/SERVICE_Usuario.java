@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class SERVICE_Usuario {
 
-
+    static DAO_Usuario daoUsuario;
     //--Atributos--//
 
 
@@ -13,15 +13,23 @@ public class SERVICE_Usuario {
 
     //READ
 
-    public ArrayList<MODEL_Usuario> All_Users(){
+    public ArrayList<MODEL_Usuario> All_Users()
+    {
 
-
+        return daoUsuario.find_All_Users();
     }
 
     //Update
 
-    public void Update_Telefone(){
-
+    public void Update_Telefone(String telefone, MODEL_Usuario usuario)
+    {
+        try {
+            Validator_Usuario.ValidarTelefone(telefone);
+            usuario.setTelefone(telefone);
+        }catch(IllegalArgumentException iae)
+        {
+            System.out.println(iae.getMessage());
+        }
     }
 
     public void Update_Email(){

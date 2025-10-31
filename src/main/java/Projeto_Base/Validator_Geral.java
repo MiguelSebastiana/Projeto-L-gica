@@ -30,7 +30,9 @@ public class Validator_Geral
     public static double ValidarNumeroNegativoDouble(double numero){
         if (numero <= 0){
             throw new IllegalArgumentException("ERRO - NÃO SÃO ACEITOS NÚMEROS NEGATIVOS");
-        }else{
+        }
+        else
+        {
             return numero;
         }
     }
