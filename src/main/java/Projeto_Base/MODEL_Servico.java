@@ -28,6 +28,7 @@ public class MODEL_Servico {
         this.id_maquina = maquina;
     }
 
+
     //Getters e Setters//
     public int getOrdem_servico() {
         return id_ordem_servico;

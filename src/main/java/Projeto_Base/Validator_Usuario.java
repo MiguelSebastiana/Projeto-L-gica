@@ -1,5 +1,7 @@
 package Projeto_Base;
 
+import Exceptions.*;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
@@ -12,7 +14,7 @@ public class Validator_Usuario {
     // Metodo para validar cpf
     public static String validarCpf(String cpf) {
         if (cpf == null || cpf.trim().isEmpty()) {
-            throw new IllegalArgumentException("ERRO - CPF NÃO PODE SER VAZIO!");
+            throw CPFException.vazio();
         }
 
         // Remover qualquer formatação do CPF (caso tenha sido passado com pontos ou traços)
@@ -20,7 +22,7 @@ public class Validator_Usuario {
 
         // Verificar se tem exatamente 11 dígitos
         if (cpfNumerico.length() != 11 || cpfNumerico.matches("(\\d)\\1{10}")) {
-            throw new IllegalArgumentException("ERRO - CPF DE TAMANHO INVÁLIDO OU SEQUÊNCIA DE DÍGITOS IGUAIS!");
+            throw CPFException.tamanhoInvalido();
         }
 
         // Calcular os dois dígitos verificadores
@@ -29,7 +31,7 @@ public class Validator_Usuario {
 
         // Verificar se os dígitos verificadores são iguais aos fornecidos
         if (cpfNumerico.charAt(9) != (d1 + '0') || cpfNumerico.charAt(10) != (d2 + '0')) {
-            throw new IllegalArgumentException("ERRO - CPF INVÁLIDO (DÍGITOS VERIFICADORES INCORRETOS)!");
+            throw CPFException.digitoInvalido();
         }
 
         return cpf.replaceAll("[^0-9]", "");
@@ -47,23 +49,25 @@ public class Validator_Usuario {
     }
 
 
+
     // ---- VALIDA SE O TELEFONE É DO TAMANHO CORRETO OU VAZIO ---- //
     public static String ValidarTelefone(String telefone) {
 
         String telefoneNumerico = telefone.replaceAll("[^0-9]", "");
 
         if (telefoneNumerico.length() != 11) {
-            throw new IllegalArgumentException("ERRO - TAMANHO DE TELEFONE INCORRETO!");
+            throw new TELEFONEException();
         } else {
             return telefoneNumerico;
         }
     }
 
 
+
     // ---- VALIDAÇÃO DE DATAS ---- //
     public static Date validarDataNascimento(Date dataNascimento) {
         if (dataNascimento == null) {
-            throw new IllegalArgumentException("ERRO - A DATA DE NASCIMENTO NÃO PODE SER NULA!");
+            throw DATESException.vazio();
         }
 
         LocalDate dataLocal = dataNascimento.toInstant()
@@ -73,12 +77,12 @@ public class Validator_Usuario {
         LocalDate hoje = LocalDate.now();
 
         if (dataLocal.isAfter(hoje)) {
-            throw new IllegalArgumentException("ERRO - A DATA DE NASCIMENTO NÃO PODE SER NO FUTURO!");
+            throw DATESException.futuro();
         }
 
         int idade = java.time.Period.between(dataLocal, hoje).getYears();
         if (idade < 18) {
-            throw new IllegalArgumentException("ERRO - O USUÁRIO DEVE TER PELO MENOS 18 ANOS!");
+            throw DATESException.maiorIdade();
         }
 
         return dataNascimento; // retorna a data válida
@@ -87,18 +91,18 @@ public class Validator_Usuario {
     // Valida a data informada (ano, mês, dia)
     public static LocalDate validarData(int dia, int mes, int ano) {
         if (ano < 1900 || ano > LocalDate.now().getYear()) {
-            throw new IllegalArgumentException("ERRO - ANO INVÁLIDO! O ANO DEVE ESTAR ENTRE 1900 E O ANO ATUAL.");
+            throw DATESException.anoInvalido();
         }
 
         if (mes < 1 || mes > 12) {
-            throw new IllegalArgumentException("ERRO - MÊS INVÁLIDO! O MÊS DEVE ESTAR ENTRE 1 E 12.");
+            throw DATESException.mesInvalido();
         }
 
         YearMonth anoMes = YearMonth.of(ano, mes);
         int diasNoMes = anoMes.lengthOfMonth();
 
         if (dia < 1 || dia > diasNoMes) {
-            throw new IllegalArgumentException("ERRO - DIA INVÁLIDO! O DIA DEVE ESTAR ENTRE 1 E " + diasNoMes + " PARA O MÊS " + mes + ".");
+            throw DATESException.diaInvalido();
         }
 
         return LocalDate.of(ano, mes, dia);
@@ -109,7 +113,7 @@ public class Validator_Usuario {
     public static String ValidarEmail(String email) {
         // Verifica se o e-mail não é nulo e se contém exatamente um "@" e um "."
         if (email == null || !email.contains("@") || !email.contains(".")) {
-            throw new IllegalArgumentException("ERRO - EMAIL INCORRETO!");
+            throw EMAILException.vazio();
         }
 
         // Verifica se o "@" vem antes de algum "."
@@ -117,12 +121,12 @@ public class Validator_Usuario {
         int dotIndex = email.indexOf(".", atIndex);
 
         if (atIndex == -1 || dotIndex == -1 || dotIndex < atIndex) {
-            throw new IllegalArgumentException("ERRO - EMAIL INCORRETO!");
+            throw EMAILException.caracteres();
         }
 
         // Verifica se há espaços
         if (email.contains(" ")) {
-            throw new IllegalArgumentException("ERRO - EMAIL NÃO PODE CONTER ESPAÇOS!");
+            throw EMAILException.espaco();
         }
 
         return email;
@@ -131,7 +135,7 @@ public class Validator_Usuario {
     // ---- VALIDACÃO DE SALÁRIO ---- //
     public static double validarSalario(double salario) {
         if (salario < 1518) {
-            throw new IllegalArgumentException("ERRO - SALÁRIO NÃO PODE SER INFERIOR A R$1518,00!");
+            throw SALARIOException.inferior();
         }
 
         return salario;
@@ -143,7 +147,7 @@ public class Validator_Usuario {
         if(nivel == 1 || nivel == 2 || nivel == 3){
             return nivel;
         }
-        throw new IllegalArgumentException("ERRO - NIVEL NÃO PODE SER DIFERENTE DE 1 , 2 , 3");
+        throw NIVELACESSOException.errado();
     }
 
 
@@ -151,13 +155,14 @@ public class Validator_Usuario {
     public static int validarCargaHoraria(int cargaHoraria){
         int cargaHorariaMinimaMinutos = 13200;
         if (cargaHoraria < cargaHorariaMinimaMinutos){
-            throw new IllegalArgumentException("ERRO - CARGA HORÁRIA MÍNIMA NÃO ATINGIDA!");
+            throw CARGAHORARIAException.inferior();
         }
 
         return cargaHoraria;
     }
 
 
+    // ---- NÃO TEM NECESSIDADE DE CLASSE DE EXCEÇÃO ! -- //
     // ---- VALIDAÇÃO DE SETOR ---- //
     public static MODEL_Setor validarSetor(MODEL_Setor setor){
         if (setor == null){
@@ -170,14 +175,15 @@ public class Validator_Usuario {
 
         return setor;
     }
+    // ------------------------------------------------------------------------------------ //
 
     public static String senha(String senha){
         if (senha == null || senha.trim().isEmpty()){
-            throw new IllegalArgumentException("ERRO - SENHA NÃO DEVE SER VAZIA!");
+            throw SENHA.vazia();
         }
 
         if (senha.length() < 5){
-            throw new IllegalArgumentException("ERRO - SENHA DEVE TER NO MINIMO 5 DIGITOS!");
+            throw SENHA.tamanho();
         }
 
         return senha;

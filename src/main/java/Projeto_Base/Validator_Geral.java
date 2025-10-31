@@ -1,5 +1,7 @@
 package Projeto_Base;
 
+import Exceptions.NOMEException;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
@@ -9,12 +11,14 @@ import java.util.List;
 public class Validator_Geral
 {
     // ---- VALIDA SE A STRING É VAZIA ----//
-    public static String  ValidarString(String texto) {
+    public static String  nome(String texto) {
         if (texto == null || texto.trim().isEmpty()){
-            throw new IllegalArgumentException("ERRO - O TEXTO NÃO PODE SER VAZIO!");
-        }else{
-            return texto;
+            // -- REFEITO COM A CLASSE PROPRIA -- //
+            throw new NOMEException();
         }
+
+            return texto;
+
     }
 
     // ---- VALIDA SE O NÚMERO É NEGATIVO (int)----//
@@ -71,6 +75,7 @@ public class Validator_Geral
         return email;
     }
 
+    // ---- NÃO TEM NECESSIDADE DE CLASSE DE EXCEÇÃO ! -- //
     // Lista de setores válidos
     private static final List<String> setoresValidos = Arrays.asList(
             "Manutenção", "Produção", "Qualidade", "Logística", "Financeiro"
@@ -84,6 +89,7 @@ public class Validator_Geral
         }
         return setor;
     }
+    // ------------------------------------------------------------------------- //
 
     // Dentro da classe ValidacoesGerais
     public static Date validarDataNascimento(Date dataNascimento) {
