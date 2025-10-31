@@ -11,6 +11,7 @@ public class DAO_Supervisor {
 
     // Create
 
+
     public void insert_Supervisor(MODEL_Supervisor supervisor){
 
         String sql = "INSERT INTO SUPER_VISOR (id, nome, cpf, senha, nivelacesso, telefone, salario, datanasci, email, cargahoraria, formacao, id_setor," +
