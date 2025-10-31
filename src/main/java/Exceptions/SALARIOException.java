@@ -5,10 +5,12 @@ public class SALARIOException extends RuntimeException {
         super(message);
     }
 
+    // -- MENSAGEM PADRAO -- //
     public SALARIOException(){
       super("ERRO - SALARIO INCORRETO!");
     }
 
+    // -- SALARIO INFERIOR AO SALARIO MINIMO -- //
     public static SALARIOException inferior(){
       return new SALARIOException("SÁLARIO NÃO PODE SER INFERIOR A R$1518,00!");
     }

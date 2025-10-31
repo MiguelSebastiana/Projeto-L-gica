@@ -13,10 +13,59 @@ public class DAO_Gerente {
 
     // Create
 
-    public void insert_User_Gerente(int id, String nome, String cpf, int nivelacesso, String telefone, double salario,
-                                    Date datanasci, String email, int cargahoraria, String formacao, int id_setor, int tempoFuncao){
+    public void insert_User_Gerente(MODEL_Gerente gerente){
 
+        String querySql = "insert into Gerente(nome_usuario,cpf_usuario,senha_usuario, nivel_acesso_usuario,telefone_usuario,salario_usuario,data_nasc_usuario," +
+                "email_usuario,carga_horaria_minutos_usuario,formacao_usuario,Setor_id_setor,tempo_na_funcao_anos_gerente) " +
+                "values(?,?,?,?,?,?,?,?,?,?,?,?);";
 
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql);
+             ResultSet resultSet = stmt.executeQuery()){
+
+            stmt.setString(1, gerente.getNome());
+            stmt.setString(2, gerente.getCpf());
+            stmt.setString(3, gerente.getSenha());
+            stmt.setInt(4, gerente.getNivelacesso());
+            stmt.setString(5, gerente.getTelefone());
+            stmt.setDouble(6, gerente.getSalario());
+            stmt.setDate(7, (java.sql.Date) gerente.getDatanasci());
+            stmt.setString(8, gerente.getEmail());
+            stmt.setInt(9, gerente.getCargahoraria());
+            stmt.setString(10, gerente.getFormacao());
+            stmt.setInt(11, gerente.getSetor());
+            stmt.setInt(12,gerente.getTempo_na_funcao_anos_gerente());
+            stmt.executeQuery();
+
+            String querySql2 = "select u.id_usuario\n" +
+                    "from Usuario as u\n" +
+                    "inner join Gerente g on u.id_usuario = g.id_usuario\n" +
+                    "where u.cpf_usuario = ?";
+
+            try{
+
+                stmt.setString(1, gerente.getCpf());
+                stmt.executeQuery();
+
+                int idUsuario = resultSet.getInt("id_usuario");
+
+                MODEL_Gerente gerente1 = new MODEL_Gerente(idUsuario,gerente.getNome(), gerente.getCpf(), gerente.getSenha(),
+                        3, gerente.getTelefone(), gerente.getSalario(), (java.sql.Date) gerente.getDatanasci(),
+                        gerente.getEmail(),gerente.getCargahoraria(),gerente.getFormacao(),gerente.getSetor(),gerente.getTempo_na_funcao_anos_gerente());
+
+            }
+            catch (SQLException e){
+                System.err.println("Não foi possível inserir o Gerente: " + e.getMessage());
+
+                throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+            }
+
+        }
+        catch (SQLException e){
+            System.err.println("Não foi possível inserir o Gerente: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
 
 
     }
