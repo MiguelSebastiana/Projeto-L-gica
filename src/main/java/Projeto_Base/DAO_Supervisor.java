@@ -163,10 +163,28 @@ public class DAO_Supervisor {
 
     // Update
 
-    public void update_Experiencia(MODEL_Supervisor supervisor, int experiencia){
+    public void update_Experiencia(MODEL_Supervisor supervisor, int experiencia) {
 
-        String Querysql = "";
 
+        String querySql = "update Usuario as u\n" +
+                "inner join Supervisor s on u.id_usuario = s.Usuario_id_usuario\n" +
+                "set experiencia_anos_supervisor = ?\n" +
+                "where id_usuario = ?";
+
+        try (
+                Connection conexao = ConnectionFactory.getConn();
+                PreparedStatement stmt = conexao.prepareStatement(querySql))
+        {
+            stmt.setInt(1, experiencia);
+            stmt.setInt(2, supervisor.getId());
+            stmt.executeQuery();
+
+        } catch (SQLException e) {
+
+            System.err.println("Não foi possível buscar o supervisor: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
 
     // Delete
