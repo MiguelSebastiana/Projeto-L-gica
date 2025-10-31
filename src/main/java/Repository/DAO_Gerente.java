@@ -197,16 +197,26 @@ public class DAO_Gerente {
 
     public void delete_User_Gerente(MODEL_Gerente gerente){
 
-        String querySql = "\n" +
-                "delete Usuario as u\n" +
-                "inner join Gerente g on u.id_usuario = g.id_usuario\n" +
-                "where u.id_usuario = ?";
+        String querySql = "delete from Usuario as u\n" + "where u.id_usuario = ?";
+
+        String querySql2 = "delete from Gerente as g\n" + "where g.id_usuario = ?";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
             stmt.setInt(1,gerente.getId());
             stmt.executeQuery();
+
+            try(PreparedStatement stmt2 = conexao.prepareStatement(querySql2)){
+
+                stmt2.setInt(2,gerente.getId());
+                stmt2.executeQuery();
+
+            }catch (SQLException e){
+                System.err.println("Não foi possível excluir o Gerente: " + e.getMessage());
+
+                throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+            }
 
         }
         catch (SQLException e){

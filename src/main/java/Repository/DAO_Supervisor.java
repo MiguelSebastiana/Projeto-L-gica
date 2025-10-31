@@ -195,6 +195,34 @@ public class DAO_Supervisor {
 
     public void delete_Supervisor(MODEL_Supervisor supervisor){
 
+        String querySql = "delete from Usuario as u\n" + "where u.id_usuario = ?";
+
+        String querySql2 = "delete from Supervisor as s\n" + "where s.id_usuario = ?";
+
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql)) {
+
+            stmt.setInt(1,supervisor.getId());
+            stmt.executeQuery();
+
+            try(PreparedStatement stmt2 = conexao.prepareStatement(querySql2)){
+
+                stmt2.setInt(2,supervisor.getId());
+                stmt2.executeQuery();
+
+            }catch (SQLException e){
+                System.err.println("Não foi possível excluir o Supervisor: " + e.getMessage());
+
+                throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+            }
+
+        }
+        catch (SQLException e){
+            System.err.println("Não foi possível excluir o Supervisor: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
+
     }
 
 
