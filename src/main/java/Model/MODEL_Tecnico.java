@@ -1,5 +1,7 @@
 package Model;
 
+import Util.Validator_Tecnico;
+
 import java.util.Date;
 
 public class MODEL_Tecnico extends MODEL_Usuario {
@@ -28,8 +30,9 @@ public class MODEL_Tecnico extends MODEL_Usuario {
     }
 
     public void setEspecialidade_tecnico(String especialidade_tecnico) {
-        this.especialidade_tecnico = especialidade_tecnico;
+        this.especialidade_tecnico = Validator_Tecnico.validarEspecialidade(especialidade_tecnico);
     }
+
 
     public boolean isStatus_disponibilidade_tecnico() {
         return status_disponibilidade_tecnico;

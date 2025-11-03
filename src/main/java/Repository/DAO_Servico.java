@@ -154,11 +154,70 @@ public class DAO_Servico
 
     public MODEL_Servico find_By_Id(int id){
 
+        MODEL_Servico servico = null;
+
+        String querySql = "select os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina\n" +
+                "from Ordem_servico os\n" +
+                "where os.id_ordem_servico = ?;";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+        PreparedStatement stmt = conexao.prepareStatement(querySql);
+        ResultSet resultSet = stmt.executeQuery())
+        {
+
+            stmt.setInt(1,id);
+
+            String status = resultSet.getString("status_aberto_ordem_servico");
+            String descricao = resultSet.getString("descricao_ordem_servico");
+            int tecnico_id = resultSet.getInt("Tecnico_id_tecnico");
+            int maquina_id = resultSet.getInt("Maquina_id_maquina");
+
+            MODEL_Servico servico1 = new MODEL_Servico(id,status,descricao,tecnico_id,maquina_id);
+
+        }catch (SQLException e){
+
+            System.err.println("Não foi possível buscar a orden de serviço: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
+
+        return servico;
     }
 
-    public ArrayList<MODEL_Servico> find_By_Pendente(){
+    public ArrayList<MODEL_Servico> find_By_Aberta(){
 
+        ArrayList<MODEL_Servico> servicos = new ArrayList<>();
 
+        String querySql = "select os.id_ordem_servico,os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina\n" +
+                "from Ordem_servico os\n" +
+                "where  os.status_aberto_ordem_servico = 'Aberta';";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+        PreparedStatement stmt = conexao.prepareStatement(querySql);
+        ResultSet resultSet = stmt.executeQuery())
+        {
+
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt("id_ordem_servico");
+                String status = resultSet.getString("status_aberto_ordem_servico");
+                String descricao = resultSet.getString("descricao_ordem_servico");
+                int id_tecnico = resultSet.getInt("Tecnico_id_tecnico");
+                int id_maquina = resultSet.getInt("Maquina_id_maquina");
+
+                MODEL_Servico servico = new MODEL_Servico(id,status,descricao,id_tecnico,id_maquina);
+
+                servicos.add(servico);
+            }
+
+        }catch (SQLException e){
+
+            System.err.println("Não foi possível buscar a orden de serviço: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
+
+        return servicos;
     }
 
     // Update

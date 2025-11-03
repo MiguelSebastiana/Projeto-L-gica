@@ -18,8 +18,11 @@ public class SERVICE_Servico {
 
     //Create
 
-    public void Insert_Servico(){
-
+    public void Insert_Servico(MODEL_Servico servico){
+        if(servico != null)
+        {
+            daoServico.insert_Servico(servico);
+        }
     }
 
     //Read
@@ -36,10 +39,11 @@ public class SERVICE_Servico {
         return daoServico.find_By_Pendente();
     }
 
+
     //Update
-
+    static MODEL_Servico modelServico;
     public void Update_Status(){
-
+    modelServico.setStatus_aberto_ordem_servico(modelServico.getStatus_aberto_ordem_servico());
     }
 
     public void Update_Descricao(){

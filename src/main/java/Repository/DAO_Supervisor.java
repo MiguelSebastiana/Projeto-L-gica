@@ -57,13 +57,13 @@ public class DAO_Supervisor {
 
             } catch (SQLException e) {
 
-                System.err.println("Não foi possível buscar todos os supervisores: " + e.getMessage());
+                System.err.println("Não foi possível criar o Supervisor: " + e.getMessage());
 
                 throw new RuntimeException("Erro ao consultar o banco de dados.", e);
             }
         }catch (SQLException e) {
 
-        System.err.println("Não foi possível buscar todos os supervisores: " + e.getMessage());
+        System.err.println("Não foi possível criar o Supervisor: " + e.getMessage());
 
         throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -181,7 +181,7 @@ public class DAO_Supervisor {
         {
             stmt.setInt(1, experiencia);
             stmt.setInt(2, supervisor.getId());
-            stmt.executeQuery();
+            stmt.executeUpdate();
 
         } catch (SQLException e) {
 
