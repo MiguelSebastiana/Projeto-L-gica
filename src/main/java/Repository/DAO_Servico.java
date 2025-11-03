@@ -301,13 +301,13 @@ public class DAO_Servico
 
     // Delete
 
-    public void delete_Servico(MODEL_Servico servico){
+    public void delete_Servico(int id){
         String querySql = "delete from Ordem_servico as o\n" + "where o.id_ordem_servico = ?";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
-            stmt.setInt(1,servico.getId_Ordem_servico());
+            stmt.setInt(1,id);
             stmt.executeQuery();
 
         }
