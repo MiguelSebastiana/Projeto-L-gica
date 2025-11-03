@@ -1,5 +1,7 @@
 package Model;
 
+import Util.Validator_Geral;
+
 public class  MODEL_Maquina{
 
     // Atributos maquina //
@@ -48,7 +50,7 @@ public class  MODEL_Maquina{
     }
 
     public void setModeloMaquina(String modeloMaquina) {
-        ModeloMaquina = modeloMaquina;
+        ModeloMaquina = Validator_Geral.nome(modeloMaquina);
     }
 
     public String getStatusFuncionamentoMaquina() {
@@ -66,4 +68,5 @@ public class  MODEL_Maquina{
     public void setId_Setor(int setor) {
         this.id_setor = setor;
     }
+
 }
