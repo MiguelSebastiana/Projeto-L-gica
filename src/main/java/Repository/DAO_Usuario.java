@@ -34,7 +34,7 @@ public class DAO_Usuario
                 "left join Gerente g on u.id_usuario = g.Usuario_id_usuario " +
                 "left join Supervisor sp on u.id_usuario = sp.Usuario_id_usuario " +
                 "left join Tecnico t on u.id_usuario = t.Usuario_id_usuario " +
-                "order by u.id_usuario;";
+                "order by u.id_usuario";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);

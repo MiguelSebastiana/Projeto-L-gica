@@ -77,7 +77,7 @@ public class DAO_Tecnico {
 
         String querySql = "SELECT u.*, t.especialidade_tecnico, t.status_disponibilidade_tecnico " +
                 "FROM Usuario u " +
-                "inner JOIN Tecnico t ON u.id_usuario = t.Usuario_id_usuario;";
+                "inner JOIN Tecnico t ON u.id_usuario = t.Usuario_id_usuario";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -123,7 +123,7 @@ public class DAO_Tecnico {
         String querySql = "SELECT u.*, t.especialidade_tecnico, t.status_disponibilidade_tecnico " +
                 "FROM Usuario u " +
                 "INNER JOIN Tecnico t ON u.id_usuario = t.Usuario_id_usuario " +
-                "WHERE t.id_tecnico = ?;";
+                "WHERE t.id_tecnico = ?";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
@@ -196,7 +196,7 @@ public class DAO_Tecnico {
         String querySql = "update Usuario as u " +
                 "          inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario " +
                 "          set status_disponibilidade_tecnico = ? " +
-                "          where id_usuario = ?;";
+                "          where id_usuario = ?";
 
         try (
                 Connection conexao = ConnectionFactory.getConn();

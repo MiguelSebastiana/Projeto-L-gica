@@ -22,7 +22,7 @@ public class DAO_Gerente {
 
         String querySql = "insert into Gerente(nome_usuario,cpf_usuario,senha_usuario, nivel_acesso_usuario,telefone_usuario,salario_usuario,data_nasc_usuario," +
                 "email_usuario,carga_horaria_minutos_usuario,formacao_usuario,Setor_id_setor,tempo_na_funcao_anos_gerente) " +
-                "values(?,?,?,?,?,?,?,?,?,?,?,?);";
+                "values(?,?,?,?,?,?,?,?,?,?,?,?) ";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -136,7 +136,7 @@ public class DAO_Gerente {
                 "from Usuario u " +
                 "inner join Gerente g on u.id_usuario = g.Usuario_id_usuario " +
                 "order by u.id_usuario " +
-                "where u.id_usuario = ?;";
+                "where u.id_usuario = ? ";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
@@ -205,9 +205,9 @@ public class DAO_Gerente {
 
     public void delete_User_Gerente(MODEL_Gerente gerente){
 
-        String querySql = "delete from Usuario as u " + "where u.id_usuario = ?;";
+        String querySql = "delete from Usuario as u " + "where u.id_usuario = ?";
 
-        String querySql2 = "delete from Gerente as g " + "where g.id_usuario = ?;";
+        String querySql2 = "delete from Gerente as g " + "where g.id_usuario = ?";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {

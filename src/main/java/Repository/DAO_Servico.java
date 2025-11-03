@@ -14,7 +14,7 @@ public class DAO_Servico
     public void insert_Servico(MODEL_Servico servico){
 
         String querySql = "insert into Ordem_servico(status_aberto_ordem_servico,descricao_ordem_servico," +
-                "Tecnico_id_tecnico, Maquina_id_maquina) values(?,?,?,?);";
+                "Tecnico_id_tecnico, Maquina_id_maquina) values(?,?,?,?) ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -90,7 +90,7 @@ public class DAO_Servico
                 "    Maquina m ON os.Maquina_id_maquina = m.id_maquina " +
                 "JOIN " +
 
-                "    Usuario u ON t.id_tecnico = u.id_usuario;";
+                "    Usuario u ON t.id_tecnico = u.id_usuario ";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);

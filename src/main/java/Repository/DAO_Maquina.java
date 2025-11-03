@@ -25,7 +25,7 @@ public class DAO_Maquina
                 "FROM " +
                 "    Maquina m " +
                 "JOIN " +
-                "    Setor s ON m.id_setor = s.id_setor;";
+                "    Setor s ON m.id_setor = s.id_setor ";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -63,7 +63,7 @@ public class DAO_Maquina
 
         String querySql = "select m.id_maquina, m.descricao_maquina, m.modelo_maquina, m.status_funcionamento_maquina, m.Setor_id_setor " +
                 "from Maquina m " +
-                "where m.id_maquina = ?;";
+                "where m.id_maquina = ? ";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);

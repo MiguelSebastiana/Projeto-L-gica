@@ -16,7 +16,7 @@ public class DAO_Setor
     public ArrayList<MODEL_Setor> find_All_Setores()
     {
         ArrayList<MODEL_Setor> listaSetores = new ArrayList<>();
-        String querySql = "SELECT * FROM Setor;";
+        String querySql = "SELECT * FROM Setor ";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);
