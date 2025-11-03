@@ -2,6 +2,7 @@ package Repository;
 
 
 import DataBase.ConnectionFactory;
+import Model.MODEL_Supervisor;
 import Model.MODEL_Tecnico;
 
 import java.sql.Connection;
@@ -15,9 +16,57 @@ public class DAO_Tecnico {
 
     // Create
 
-    public void insert_Tecnico(int id, String nome, String cpf, int nivelacesso, String telefone, double salario,
-                               Date datanasci, String email, int cargahoraria, String formacao, int id_setor,String especialidade_tecnico, boolean status_disponibilidade_tecnico){
+    public void insert_Tecnico(MODEL_Tecnico tecnico){
+        String sql = "INSERT INTO TECNICO (nome_usuario, cpf_usuario, senha_usuario, nivelacesso_usuario, " +
+                "telefone_usuario, salario_usuario, " + "data_nasc_usuario, email_usuario, cargahoraria_minutos, formacao_usuario, Setor_id_setor," +
+                " especialidade_tecnico, status_disponibilidade_tecnico ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(sql);
+             ResultSet resultSet = stmt.executeQuery()) {
+
+            stmt.setString(1, tecnico.getNome());
+            stmt.setString(2, tecnico.getCpf());
+            stmt.setString(3, tecnico.getSenha());
+            stmt.setInt(4, tecnico.getNivelacesso());
+            stmt.setString(5, tecnico.getTelefone());
+            stmt.setDouble(6, tecnico.getSalario());
+            stmt.setDate(7, (java.sql.Date) tecnico.getDatanasci());
+            stmt.setString(8, tecnico.getEmail());
+            stmt.setInt(9, tecnico.getCargahoraria());
+            stmt.setString(10, tecnico.getFormacao());
+            stmt.setInt(11, tecnico.getSetor());
+            stmt.setString(12, tecnico.getEspecialidade_tecnico());
+            stmt.setBoolean(13, tecnico.isStatus_disponibilidade_tecnico());
+            stmt.executeQuery();
+
+            String sql2 = "select u.id_usuario\n" +
+                    "from Usuario u\n" +
+                    "inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario\n" +
+                    "where u.cpf_usuario = ?";
+
+            try {
+                stmt.setString(1, tecnico.getCpf());
+                stmt.executeQuery();
+
+                int idUsuario = resultSet.getInt("id_usuario");
+
+                MODEL_Tecnico tecnico1 = new MODEL_Tecnico(idUsuario, tecnico.getNome(), tecnico.getCpf(), tecnico.getSenha(), tecnico.getNivelacesso(),
+                        tecnico.getTelefone(), tecnico.getSalario(),(java.sql.Date) tecnico.getDatanasci(), tecnico.getEmail(), tecnico.getCargahoraria(),
+                        tecnico.getFormacao(), tecnico.getSetor(), tecnico.getEspecialidade_tecnico(), tecnico.isStatus_disponibilidade_tecnico());
+
+            } catch (SQLException e) {
+
+                System.err.println("Não foi possível criar o técnico: " + e.getMessage());
+
+                throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+            }
+        }catch (SQLException e) {
+
+            System.err.println("Não foi possível criar o técnico: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
 
     // Read
@@ -116,17 +165,87 @@ public class DAO_Tecnico {
     // Update
 
     public void update_Especialidade(MODEL_Tecnico tecnico, String especialidade){
+        String querySql = "update Usuario as u\n" +
+                "inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario\n" +
+                "set especialidade_tecnico = ?\n" +
+                "where id_usuario = ?";
+        try (
+                Connection conexao = ConnectionFactory.getConn();
+                PreparedStatement stmt = conexao.prepareStatement(querySql))
+        {
+            stmt.setString(1, especialidade);
+            stmt.setInt(2, tecnico.getId());
+            stmt.executeUpdate();
 
+        } catch (SQLException e) {
+
+            System.err.println("Não foi possível fazer o update de especialidade: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
 
-    public void update_Disponibilidade(MODEL_Tecnico tecnico, boolean disponibilidade){
+    public void update_Disponibilidade(MODEL_Tecnico tecnico, boolean disponibilidade) {
+        String status;
 
+        String querySql = "update Usuario as u\n" +
+                "          inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario\\n\" +\n" +
+                "          set status_disponibilidade_tecnico = ?\n" +
+                "          where id_usuario = ?;";
+
+        try (
+                Connection conexao = ConnectionFactory.getConn();
+                PreparedStatement stmt = conexao.prepareStatement(querySql)) {
+            if (disponibilidade == false) {
+                status = "Em atendimento";
+            } else {
+                status = "Diponivel";
+            }
+
+            stmt.setString(1, status);
+            stmt.setInt(2, tecnico.getId());
+            stmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+
+            System.err.println("Não foi possível realizar o update de disponibilidade: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
+
 
     // Delete
 
     public void delete_Tecnico(MODEL_Tecnico tecnico){
+        String querySql = "delete from Usuario as u\n" + "where u.id_usuario = ?";
 
+        String querySql2 = "delete from Tecnico as t\n" + "where t.id_usuario = ?";
+
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql)) {
+
+            stmt.setInt(1,tecnico.getId());
+            stmt.executeQuery();
+
+            try(PreparedStatement stmt2 = conexao.prepareStatement(querySql2)){
+
+                stmt2.setInt(2,tecnico.getId());
+                stmt2.executeQuery();
+
+            }catch (SQLException e){
+                System.err.println("Não foi possível excluir o Tecnico: " + e.getMessage());
+
+                throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+            }
+
+        }
+        catch (SQLException e){
+            System.err.println("Não foi possível excluir o Tecnico: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
 
 }
