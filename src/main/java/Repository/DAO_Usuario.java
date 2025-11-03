@@ -135,6 +135,20 @@ public class DAO_Usuario
 
     public void update_Carga_Horaria(MODEL_Usuario usuario, int carga){
 
+        String querySql = "update Usuario set carga_horaria_minutos_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+            stmt.setInt(1,carga);
+            stmt.setInt(2,usuario.getId());
+            stmt.executeUpdate();
+
+            usuario.setCargahoraria(carga);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar a carga horaria "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar a carga horaria no banco de dados. "+e);
+        }
     }
 
     public void update_Formacao(MODEL_Usuario usuario, String formacao){
