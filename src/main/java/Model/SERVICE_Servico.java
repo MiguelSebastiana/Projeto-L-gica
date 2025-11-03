@@ -3,6 +3,7 @@ package Model;
 import Repository.DAO_Servico;
 
 import java.util.ArrayList;
+import Exception.STRINGException;
 
 
 public class SERVICE_Servico {
@@ -36,7 +37,7 @@ public class SERVICE_Servico {
     }
 
     public ArrayList<MODEL_Servico> Find_by_Pendente(){
-        return daoServico.find_By_Pendente();
+        return daoServico.find_By_Aberta();
     }
 
 
@@ -46,22 +47,31 @@ public class SERVICE_Servico {
     modelServico.setStatus_aberto_ordem_servico(modelServico.getStatus_aberto_ordem_servico());
     }
 
-    public void Update_Descricao(){
+    public void Update_Descricao(MODEL_Servico servico, String Descricao, int id)
+    {
+        try
+        {
+            daoServico.update_Descricao(id, modelServico.getDescricao_ordem_servico());
+        }
+        catch (STRINGException se)
+        {
+            System.out.println(se.getMessage());
+        }
 
     }
 
-    public void Update_Id_Tecnico(){
-
+    public void Update_Id_Tecnico(MODEL_Servico servico, int id, int idt){
+        daoServico.update_Id_Tecnico(id, idt);
     }
 
-    public void Update_Id_Maquina(){
-
+    public void Update_Id_Maquina(int id, int idm){
+        daoServico.update_Id_Maquina(id, idm);
     }
 
     //Delete
 
-    public void Delete_Servico(){
-
+    public void Delete_Servico(MODEL_Servico servico){
+        daoServico.delete_Servico(servico);
     }
 
     //Outros
