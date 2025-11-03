@@ -45,7 +45,7 @@ public class DAO_Servico
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível inserir a orden de serviço: " + e.getMessage());
+            System.err.println("Não foi possível inserir a ordem de serviço: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -176,7 +176,7 @@ public class DAO_Servico
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível buscar a orden de serviço: " + e.getMessage());
+            System.err.println("Não foi possível buscar a ordem de serviço: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -212,7 +212,7 @@ public class DAO_Servico
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível buscar a orden de serviço: " + e.getMessage());
+            System.err.println("Não foi possível buscar a ordem de serviço: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -222,12 +222,42 @@ public class DAO_Servico
 
     // Update
 
-    public void update_Status(MODEL_Servico servico, int status){
+    public void update_Status(int id, String status){
 
+        String querySql = "update Ordem_servico os\n" +
+                "set os.status_ordem_servico = " + status +
+                "where os.id_ordem_servico = " + id + ";";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+        PreparedStatement stmt = conexao.prepareStatement(querySql))
+        {
+            stmt.executeQuery();
+
+        }catch (SQLException e){
+
+            System.err.println("Não foi possível modificar a orden de serviço: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
 
-    public void update_Descricao(MODEL_Servico servico, String descricao){
+    public void update_Descricao(int id, String descricao){
 
+        String querySql = "update Ordem_servico os\n" +
+                "set os.descricao_ordem_servico = " + descricao +
+                "where os.id_ordem_servico = " + id + ";";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql))
+        {
+            stmt.executeQuery();
+
+        }catch (SQLException e){
+
+            System.err.println("Não foi possível modificar a orden de serviço: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
 
     public void update_Id_Tecnico(MODEL_Servico servico, int id){
