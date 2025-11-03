@@ -153,6 +153,20 @@ public class DAO_Usuario
 
     public void update_Formacao(MODEL_Usuario usuario, String formacao){
 
+        String querySql = "update Usuario set formacao_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+            stmt.setString(1,formacao);
+            stmt.setInt(2,usuario.getId());
+            stmt.executeUpdate();
+
+            usuario.setFormacao(formacao);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar a formação "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar a formação no banco de dados. "+e);
+        }
     }
 
     public void update_Setor(MODEL_Usuario usuario, int setor){
