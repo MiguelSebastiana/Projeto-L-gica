@@ -30,7 +30,7 @@ public class MODEL_Servico {
 
 
     //Getters e Setters//
-    public int getOrdem_servico() {
+    public int getId_Ordem_servico() {
         return id_ordem_servico;
     }
 

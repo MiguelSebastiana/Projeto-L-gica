@@ -16,7 +16,6 @@ public class SERVICE_Setor {
 
     public ArrayList<MODEL_Setor> All_Setores(){
         return daoSetor.find_All_Setores();
-
     }
 
     public MODEL_Setor Find_by_Id(int id){

@@ -117,24 +117,100 @@ public class DAO_Usuario
 
     public void update_Email(MODEL_Usuario usuario, String email){
 
+        String querySql = "update Usuario set email_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+                stmt.setString(1,email);
+                stmt.setInt(2,usuario.getId());
+                stmt.executeUpdate();
+
+                usuario.setEmail(email);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar o email "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar email no banco de dados. "+e);
+        }
     }
 
     public void update_Carga_Horaria(MODEL_Usuario usuario, int carga){
 
+        String querySql = "update Usuario set carga_horaria_minutos_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+            stmt.setInt(1,carga);
+            stmt.setInt(2,usuario.getId());
+            stmt.executeUpdate();
+
+            usuario.setCargahoraria(carga);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar a carga horaria "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar a carga horaria no banco de dados. "+e);
+        }
     }
 
     public void update_Formacao(MODEL_Usuario usuario, String formacao){
 
+        String querySql = "update Usuario set formacao_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+            stmt.setString(1,formacao);
+            stmt.setInt(2,usuario.getId());
+            stmt.executeUpdate();
+
+            usuario.setFormacao(formacao);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar a formação "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar a formação no banco de dados. "+e);
+        }
     }
 
     public void update_Setor(MODEL_Usuario usuario, int setor){
 
+        String querySql = "update Usuario set Setor_id_setor = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+            stmt.setInt(1,setor);
+            stmt.setInt(2,usuario.getId());
+            stmt.executeUpdate();
+
+            usuario.setSetor(setor);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar o setor "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar o setor no banco de dados. "+e);
+        }
     }
 
     // Outros
 
-    public static void verificar_Login(String cpf, String senha){
+    public boolean verificar_Login(String cpf, String senha) {
+        String querySql = "select u.senha_usuario \n" +
+                "From Usuario u\n" +
+                "where u.cpf_usuario = " + cpf + ";";
 
+
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql);
+             ResultSet resultSet = stmt.executeQuery()) {
+
+            String senhaSql = resultSet.getString("senha_usuario");
+
+            if (senhaSql.equals(senha)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao verificar login: " + e.getMessage());
+            throw new RuntimeException("Erro ao buscar senha no banco de dados. " + e);
+        }
     }
 
 }

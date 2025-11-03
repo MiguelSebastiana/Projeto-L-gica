@@ -1,5 +1,7 @@
 package Model;
 
+import Util.Validator_Setor;
+
 public class MODEL_Setor {
 
     // Atributos Setor //
@@ -26,7 +28,14 @@ public class MODEL_Setor {
     }
 
     public void setId_setor(int id_setor) {
-        this.id_setor = id_setor;
+        if(id_setor > 0 && id_setor < 10)
+        {
+            this.id_setor = id_setor;
+        }
+        else
+        {
+            throw new IllegalArgumentException("ID INVÁLIDO!");
+        }
     }
 
     public String getNomeSetor() {
@@ -34,7 +43,7 @@ public class MODEL_Setor {
     }
 
     public void setNomeSetor(String nomeSetor) {
-        this.nomeSetor = nomeSetor;
+        this.nomeSetor = Validator_Setor.validarSetor(nomeSetor );
     }
 
     public String getDescricaoSetor() {
@@ -44,4 +53,6 @@ public class MODEL_Setor {
     public void setDescricaoSetor(String descricaoSetor) {
         this.descricaoSetor = descricaoSetor;
     }
+
+
 }
