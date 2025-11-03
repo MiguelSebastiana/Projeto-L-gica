@@ -4,6 +4,7 @@ import Exception.*;
 import Model.MODEL_Setor;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.Arrays;
@@ -68,27 +69,28 @@ public class Validator_Usuario {
 
 
     // ---- VALIDAÇÃO DE DATAS ---- //
-    public static Date validarDataNascimento(Date dataNascimento) {
+    public static LocalDate validarDataNascimento(LocalDate dataNascimento) {
         if (dataNascimento == null) {
             throw DATESException.vazio();
         }
 
-        LocalDate dataLocal = dataNascimento.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-
         LocalDate hoje = LocalDate.now();
 
-        if (dataLocal.isAfter(hoje)) {
+        // 1. Verifica se a data é no futuro
+        if (dataNascimento.isAfter(hoje)) {
             throw DATESException.futuro();
         }
 
-        int idade = java.time.Period.between(dataLocal, hoje).getYears();
+        // 2. Calcula a idade
+        int idade = Period.between(dataNascimento, hoje).getYears();
+
+        // 3. Verifica a maioridade
         if (idade < 18) {
             throw DATESException.maiorIdade();
         }
 
-        return dataNascimento; // retorna a data válida
+        // Retorna a própria data, pois ela é válida
+        return dataNascimento;
     }
 
     // Valida a data informada (ano, mês, dia)
