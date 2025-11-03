@@ -1,12 +1,12 @@
 package Exception;
 
-public class NOMEException extends RuntimeException {
+public class STRINGException extends RuntimeException {
     // -- MENSAGEM PADRAO -- //
-    public NOMEException(){
+    public STRINGException(){
         super("ERRO - NOME NÃO PODE SER VAZIO!");
     }
 
-    public NOMEException(String message){
+    public STRINGException(String message){
         super(message);
     }
 }

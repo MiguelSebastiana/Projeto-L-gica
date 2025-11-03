@@ -6,7 +6,9 @@ import Model.MODEL_Setor;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class Validator_Usuario {
 
@@ -163,15 +165,13 @@ public class Validator_Usuario {
     }
 
 
-    // ---- NÃO TEM NECESSIDADE DE CLASSE DE EXCEÇÃO ! -- //
     // ---- VALIDAÇÃO DE SETOR ---- //
-    public static MODEL_Setor validarSetor(MODEL_Setor setor){
-        if (setor == null){
-            throw new IllegalArgumentException("ERRO - SETOR NÃO PODE SER NULO!");
+    public static int validarSetor(int setor){
+        if (setor <= 0){
+            throw SETORException.vazio();
         }
-
-        if (setor.getNomeSetor() == null || setor.getNomeSetor().trim().isEmpty()){
-            throw new IllegalArgumentException("ERRO - NOME DO SETOR NÃO PODE SER VAZIO!");
+        if (setor > 9){
+            throw SETORException.invalido();
         }
 
         return setor;
@@ -180,13 +180,36 @@ public class Validator_Usuario {
 
     public static String senha(String senha){
         if (senha == null || senha.trim().isEmpty()){
-            throw SENHA.vazia();
+            throw SENHAException.vazia();
         }
 
         if (senha.length() < 5){
-            throw SENHA.tamanho();
+            throw SENHAException.tamanho();
         }
 
         return senha;
+    }
+
+    // -- VALIDAÇÃO DE FORMAÇÃO DO USÚARIO -- //
+    public static String formacao(String formacao) {
+        if (formacao == null || formacao.trim().isEmpty()) {
+            throw FORMACAOException.vazio();
+        }
+
+        List<String> formacoesValidas = Arrays.asList(
+                "Ensino Fundamental",
+                "Ensino Médio",
+                "Técnico",
+                "Superior",
+                "Pós-graduação",
+                "Mestrado",
+                "Doutorado"
+        );
+
+        if (!formacoesValidas.contains(formacao)) {
+            throw FORMACAOException.invalida();
+        }
+
+        return formacao;
     }
 }
