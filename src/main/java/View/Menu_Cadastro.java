@@ -1,14 +1,13 @@
 package View;
-import Model.MODEL_Gerente;
-import Model.MODEL_Supervisor;
-import Model.MODEL_Tecnico;
-import Model.MODEL_Usuario;
+import Model.*;
 import Util.*;
 
 import java.sql.Date;
 import java.util.InputMismatchException;
 
 public class Menu_Cadastro {
+
+    static SERVICE_Gerente serviceGerente;
 
     public static void Menu() {
 
@@ -146,7 +145,7 @@ public class Menu_Cadastro {
         }while (verifica);
         System.out.println("-------------------------------------------");
 
-
+        serviceGerente.Inserir_Gerente(gerente);
     }
 
 
@@ -195,7 +194,7 @@ public class Menu_Cadastro {
             try {
 
                 email = Ferramentas.lString();
-                Validator_Geral.ValidarString(email);
+                Validator_Geral.nome(email);
                 verifica = true;
             } catch (Exception e) {
                 Menu_Default.Default();
@@ -212,7 +211,7 @@ public class Menu_Cadastro {
             try {
 
                 senha = Ferramentas.lString();
-                Validator_Geral.ValidarString(senha);
+                Validator_Geral.nome(senha);
                 verifica = true;
             } catch (Exception e) {
                 Menu_Default.Default();

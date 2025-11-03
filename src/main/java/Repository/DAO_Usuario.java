@@ -23,7 +23,7 @@ public class DAO_Usuario
 
         ArrayList<MODEL_Usuario> listaUsuarios = new ArrayList<>();
 
-        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario,\n" +
+        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario,2\n" +
                 "u.telefone_usuario, u.salario_usuario,u.data_nasc_usuario,u.email_usuario, \n" +
                 "u.carga_horaria_minutos_usuario,u.formacao_usuario,\n" +
                 " u.Setor_id_setor, g.tempo_na_funcao_anos_gerente,sp.experiencia_anos_supervisor, \n" +
@@ -117,14 +117,56 @@ public class DAO_Usuario
 
     public void update_Email(MODEL_Usuario usuario, String email){
 
+        String querySql = "update Usuario set email_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+                stmt.setString(1,email);
+                stmt.setInt(2,usuario.getId());
+                stmt.executeUpdate();
+
+                usuario.setEmail(email);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar o email "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar email no banco de dados. "+e);
+        }
     }
 
     public void update_Carga_Horaria(MODEL_Usuario usuario, int carga){
 
+        String querySql = "update Usuario set carga_horaria_minutos_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+            stmt.setInt(1,carga);
+            stmt.setInt(2,usuario.getId());
+            stmt.executeUpdate();
+
+            usuario.setCargahoraria(carga);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar a carga horaria "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar a carga horaria no banco de dados. "+e);
+        }
     }
 
     public void update_Formacao(MODEL_Usuario usuario, String formacao){
 
+        String querySql = "update Usuario set formacao_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+            stmt.setString(1,formacao);
+            stmt.setInt(2,usuario.getId());
+            stmt.executeUpdate();
+
+            usuario.setFormacao(formacao);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar a formação "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar a formação no banco de dados. "+e);
+        }
     }
 
     public void update_Setor(MODEL_Usuario usuario, int setor){
