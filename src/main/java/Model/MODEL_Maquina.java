@@ -50,7 +50,7 @@ public class  MODEL_Maquina{
     }
 
     public void setModeloMaquina(String modeloMaquina) {
-        ModeloMaquina = Validator_Geral.nome(modeloMaquina);
+        ModeloMaquina = Validator_Geral.validarString(modeloMaquina);
     }
 
     public String getStatusFuncionamentoMaquina() {
