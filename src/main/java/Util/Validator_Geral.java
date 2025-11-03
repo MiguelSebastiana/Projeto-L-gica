@@ -12,7 +12,7 @@ import java.util.List;
 public class Validator_Geral
 {
     // ---- VALIDA SE A STRING É VAZIA ----//
-    public static String  nome(String texto) {
+    public static String validarString(String texto) {
         if (texto == null || texto.trim().isEmpty()){
             // -- REFEITO COM A CLASSE PROPRIA -- //
             throw new STRINGException();
