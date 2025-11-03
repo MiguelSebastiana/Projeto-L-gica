@@ -43,9 +43,9 @@ public class DAO_Supervisor {
             stmt.setInt(12, supervisor.getExperiencia_anos_supervisor());
             stmt.executeQuery();
 
-            String sql2 = "select u.id_usuario\n" +
-                    "from Usuario u\n" +
-                    "inner join Supervisor s on u.id_usuario = s.Usuario_id_usuario\n" +
+            String sql2 = "select u.id_usuario " +
+                    "from Usuario u " +
+                    "inner join Supervisor s on u.id_usuario = s.Usuario_id_usuario " +
                     "where u.cpf_usuario = ?";
 
             try {
@@ -81,10 +81,10 @@ public class DAO_Supervisor {
 
         MODEL_Supervisor supervisor = null;
 
-        String querySql = "select u.*,s.experiencia_anos_superVisor\n" +
-                "from Usuario u \n" +
-                "inner join Supervisor s on u.id_usuario = s.id_supervisor\n" +
-                "order by u.id_usuario;";
+        String querySql = "select u.*,s.experiencia_anos_superVisor " +
+                "from Usuario u " +
+                "inner join Supervisor s on u.id_usuario = s.id_supervisor " +
+                "order by u.id_usuario ";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -129,8 +129,8 @@ public class DAO_Supervisor {
         String id_supervisor = String.valueOf(id);
         MODEL_Supervisor supervisor = null;
 
-        String querySql = "select * from Supervisor s\n" +
-                "join Usuario u on s.Usuario_id_usuario = u.id_usuario\n" +
+        String querySql = "select * from Supervisor s " +
+                "join Usuario u on s.Usuario_id_usuario = u.id_usuario " +
                 "where id_usuario = ?";
 
         try (Connection conexao = ConnectionFactory.getConn();
@@ -178,9 +178,9 @@ public class DAO_Supervisor {
     public void update_Experiencia(MODEL_Supervisor supervisor, int experiencia) {
 
 
-        String querySql = "update Usuario as u\n" +
-                "inner join Supervisor s on u.id_usuario = s.Usuario_id_usuario\n" +
-                "set experiencia_anos_supervisor = ?\n" +
+        String querySql = "update Usuario as u " +
+                "inner join Supervisor s on u.id_usuario = s.Usuario_id_usuario " +
+                "set experiencia_anos_supervisor = ? " +
                 "where id_usuario = ?";
 
         try (
@@ -203,9 +203,9 @@ public class DAO_Supervisor {
 
     public void delete_Supervisor(MODEL_Supervisor supervisor){
 
-        String querySql = "delete from Usuario as u\n" + "where u.id_usuario = ?";
+        String querySql = "delete from Usuario as u " + "where u.id_usuario = ?";
 
-        String querySql2 = "delete from Supervisor as s\n" + "where s.id_usuario = ?";
+        String querySql2 = "delete from Supervisor as s " + "where s.id_usuario = ?";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {

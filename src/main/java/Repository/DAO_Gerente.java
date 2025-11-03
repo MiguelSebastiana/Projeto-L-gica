@@ -44,9 +44,9 @@ public class DAO_Gerente {
             stmt.setInt(12,gerente.getTempo_na_funcao_anos_gerente());
             stmt.executeQuery();
 
-            String querySql2 = "select u.id_usuario\n" +
-                    "from Usuario as u\n" +
-                    "inner join Gerente g on u.id_usuario = g.id_usuario\n" +
+            String querySql2 = "select u.id_usuario " +
+                    "from Usuario as u " +
+                    "inner join Gerente g on u.id_usuario = g.id_usuario " +
                     "where u.cpf_usuario = ?";
 
             try{
@@ -83,10 +83,10 @@ public class DAO_Gerente {
 
         ArrayList<MODEL_Gerente> listaGerentes = new ArrayList<>();
 
-        String querySql = "select u.*, g.tempo_na_funcao\n" +
-                "from Usuario u\n" +
-                "inner join Gerente g on u.id_usuario = g.Usuario_id_usuario\n" +
-                "order by u.id_usuario;";
+        String querySql = "select u.*, g.tempo_na_funcao " +
+                "from Usuario u " +
+                "inner join Gerente g on u.id_usuario = g.Usuario_id_usuario " +
+                "order by u.id_usuario ";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -132,10 +132,10 @@ public class DAO_Gerente {
         String idgerente = String.valueOf(id);
         MODEL_Gerente gerente = null;
 
-        String querySql = "select u.*, g.tempo_na_funcao\n" +
-                "from Usuario u\n" +
-                "inner join Gerente g on u.id_usuario = g.Usuario_id_usuario\n" +
-                "order by u.id_usuario\n" +
+        String querySql = "select u.*, g.tempo_na_funcao " +
+                "from Usuario u " +
+                "inner join Gerente g on u.id_usuario = g.Usuario_id_usuario " +
+                "order by u.id_usuario " +
                 "where u.id_usuario = ?;";
 
         try (Connection conexao = ConnectionFactory.getConn();
@@ -180,9 +180,9 @@ public class DAO_Gerente {
 
     public void update_Tempo_Funcao(MODEL_Gerente gerente, int tempo){
 
-        String querySql = "update Usuario as u \n" +
-                "inner join Gerente g on u.id_usuario = g.id_usuarios\n" +
-                "set g.tempo_na_funcao = ?\n" +
+        String querySql = "update Usuario as u " +
+                "inner join Gerente g on u.id_usuario = g.id_usuarios " +
+                "set g.tempo_na_funcao = ? " +
                 "where u.id_usuario = ?";
 
         try (Connection conexao = ConnectionFactory.getConn();
@@ -205,9 +205,9 @@ public class DAO_Gerente {
 
     public void delete_User_Gerente(MODEL_Gerente gerente){
 
-        String querySql = "delete from Usuario as u\n" + "where u.id_usuario = ?;";
+        String querySql = "delete from Usuario as u " + "where u.id_usuario = ?;";
 
-        String querySql2 = "delete from Gerente as g\n" + "where g.id_usuario = ?;";
+        String querySql2 = "delete from Gerente as g " + "where g.id_usuario = ?;";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {

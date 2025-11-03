@@ -49,9 +49,9 @@ public class DAO_Setor
 
         MODEL_Setor setor = null;
 
-        String querySql = "select s.nome_setor, s.descricao_setor\n" +
-                "from Setor s\n" +
-                "where s.id_setor = ?;";
+        String querySql = "select s.nome_setor, s.descricao_setor " +
+                "from Setor s " +
+                "where s.id_setor = ?";
 
         try(Connection conexao = ConnectionFactory.getConn();
         PreparedStatement stmt = conexao.prepareStatement(querySql)){

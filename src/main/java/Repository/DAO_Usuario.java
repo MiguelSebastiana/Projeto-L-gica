@@ -25,15 +25,15 @@ public class DAO_Usuario
 
         ArrayList<MODEL_Usuario> listaUsuarios = new ArrayList<>();
 
-        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario,\n" +
-                "u.telefone_usuario, u.salario_usuario,u.data_nasc_usuario,u.email_usuario, \n" +
-                "u.carga_horaria_minutos_usuario,u.formacao_usuario,\n" +
-                " u.Setor_id_setor, g.tempo_na_funcao_anos_gerente,sp.experiencia_anos_supervisor, \n" +
-                " t.especialidade_tecnico,t.status_disponibilidade_tecnico\n" +
-                "from Usuario u\n" +
-                "left join Gerente g on u.id_usuario = g.Usuario_id_usuario\n" +
-                "left join Supervisor sp on u.id_usuario = sp.Usuario_id_usuario \n" +
-                "left join Tecnico t on u.id_usuario = t.Usuario_id_usuario\n" +
+        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario, " +
+                "u.telefone_usuario, u.salario_usuario,u.data_nasc_usuario,u.email_usuario, " +
+                "u.carga_horaria_minutos_usuario,u.formacao_usuario, " +
+                " u.Setor_id_setor, g.tempo_na_funcao_anos_gerente,sp.experiencia_anos_supervisor, " +
+                " t.especialidade_tecnico,t.status_disponibilidade_tecnico " +
+                "from Usuario u " +
+                "left join Gerente g on u.id_usuario = g.Usuario_id_usuario " +
+                "left join Supervisor sp on u.id_usuario = sp.Usuario_id_usuario " +
+                "left join Tecnico t on u.id_usuario = t.Usuario_id_usuario " +
                 "order by u.id_usuario;";
 
         try (Connection conexao = ConnectionFactory.getConn();
@@ -210,22 +210,29 @@ public class DAO_Usuario
     // Outros
 
     public boolean verificar_Login(String cpf, String senha) {
-        String querySql = "select u.senha_usuario \n" +
-                "From Usuario u\n" +
-                "where u.cpf_usuario = " + cpf + ";";
+        String querySql = "select u.senha_usuario " +
+                "From Usuario u " +
+                "where u.cpf_usuario = ?";
 
 
         try (Connection conexao = ConnectionFactory.getConn();
-             PreparedStatement stmt = conexao.prepareStatement(querySql);
-             ResultSet resultSet = stmt.executeQuery()) {
+             PreparedStatement stmt = conexao.prepareStatement(querySql)){
 
-            String senhaSql = resultSet.getString("senha_usuario");
+             stmt.setString( 1, cpf);
 
-            if (senhaSql.equals(senha)) {
-                return true;
-            } else {
-                return false;
-            }
+             try (ResultSet resultSet = stmt.executeQuery()){
+                if(resultSet.next()) {
+                    String senhaSql = resultSet.getString("senha_usuario");
+
+                    if (senhaSql.equals(senha)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }else {
+                    return false;
+                }
+             }
 
         } catch (SQLException e) {
             System.err.println("Erro ao verificar login: " + e.getMessage());

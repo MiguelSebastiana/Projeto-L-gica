@@ -41,9 +41,9 @@ public class DAO_Tecnico {
             stmt.setBoolean(13, tecnico.isStatus_disponibilidade_tecnico());
             stmt.executeQuery();
 
-            String sql2 = "select u.id_usuario\n" +
-                    "from Usuario u\n" +
-                    "inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario\n" +
+            String sql2 = "select u.id_usuario " +
+                    "from Usuario u " +
+                    "inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario " +
                     "where u.cpf_usuario = ?";
 
             try {
@@ -75,8 +75,8 @@ public class DAO_Tecnico {
     public ArrayList<MODEL_Tecnico> find_All_Tecnico(){
         ArrayList<MODEL_Tecnico> tecnicos = new ArrayList<>();
 
-        String querySql = "SELECT u.*, t.especialidade_tecnico, t.status_disponibilidade_tecnico\n" +
-                "FROM Usuario u\n" +
+        String querySql = "SELECT u.*, t.especialidade_tecnico, t.status_disponibilidade_tecnico " +
+                "FROM Usuario u " +
                 "inner JOIN Tecnico t ON u.id_usuario = t.Usuario_id_usuario;";
 
         try (Connection conexao = ConnectionFactory.getConn();
@@ -170,9 +170,9 @@ public class DAO_Tecnico {
     // Update
 
     public void update_Especialidade(MODEL_Tecnico tecnico, String especialidade){
-        String querySql = "update Usuario as u\n" +
-                "inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario\n" +
-                "set especialidade_tecnico = ?\n" +
+        String querySql = "update Usuario as u " +
+                "inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario " +
+                "set especialidade_tecnico = ? " +
                 "where id_usuario = ?";
         try (
                 Connection conexao = ConnectionFactory.getConn();
@@ -193,9 +193,9 @@ public class DAO_Tecnico {
     public void update_Disponibilidade(MODEL_Tecnico tecnico, boolean disponibilidade) {
         String status;
 
-        String querySql = "update Usuario as u\n" +
-                "          inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario\\n\" +\n" +
-                "          set status_disponibilidade_tecnico = ?\n" +
+        String querySql = "update Usuario as u " +
+                "          inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario " +
+                "          set status_disponibilidade_tecnico = ? " +
                 "          where id_usuario = ?;";
 
         try (
@@ -224,9 +224,9 @@ public class DAO_Tecnico {
     // Delete
 
     public void delete_Tecnico(MODEL_Tecnico tecnico){
-        String querySql = "delete from Usuario as u\n" + "where u.id_usuario = ?";
+        String querySql = "delete from Usuario as u " + "where u.id_usuario = ?";
 
-        String querySql2 = "delete from Tecnico as t\n" + "where t.id_usuario = ?";
+        String querySql2 = "delete from Tecnico as t " + "where t.id_usuario = ?";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {

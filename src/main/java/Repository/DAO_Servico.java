@@ -156,9 +156,9 @@ public class DAO_Servico
 
         MODEL_Servico servico = null;
 
-        String querySql = "select os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina\n" +
-                "from Ordem_servico os\n" +
-                "where os.id_ordem_servico = ?;";
+        String querySql = "select os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina " +
+                "from Ordem_servico os " +
+                "where os.id_ordem_servico = ? ";
 
         try(Connection conexao = ConnectionFactory.getConn();
         PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -188,9 +188,9 @@ public class DAO_Servico
 
         ArrayList<MODEL_Servico> servicos = new ArrayList<>();
 
-        String querySql = "select os.id_ordem_servico,os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina\n" +
-                "from Ordem_servico os\n" +
-                "where  os.status_aberto_ordem_servico = 'Aberta';";
+        String querySql = "select os.id_ordem_servico,os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina " +
+                "from Ordem_servico os " +
+                "where  os.status_aberto_ordem_servico = 'Aberta' ";
 
         try(Connection conexao = ConnectionFactory.getConn();
         PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -224,13 +224,15 @@ public class DAO_Servico
 
     public void update_Status(int id, String status){
 
-        String querySql = "update Ordem_servico os\n" +
-                "set os.status_ordem_servico = " + status +
-                "where os.id_ordem_servico = " + id + ";";
+        String querySql = "update Ordem_servico os " +
+                "set os.status_ordem_servico = ? " +
+                "where os.id_ordem_servico = ?";
 
         try(Connection conexao = ConnectionFactory.getConn();
         PreparedStatement stmt = conexao.prepareStatement(querySql))
         {
+            stmt.setString(1, status);
+            stmt.setInt(2, id);
             stmt.executeQuery();
 
         }catch (SQLException e){
@@ -243,13 +245,15 @@ public class DAO_Servico
 
     public void update_Descricao(int id, String descricao){
 
-        String querySql = "update Ordem_servico os\n" +
-                "set os.descricao_ordem_servico = " + descricao +
-                "where os.id_ordem_servico = " + id + ";";
+        String querySql = "update Ordem_servico os " +
+                "set os.descricao_ordem_servico = ?" +
+                "where os.id_ordem_servico = ? ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql))
         {
+            stmt.setString(1, descricao);
+            stmt.setInt(2, id);
             stmt.executeQuery();
 
         }catch (SQLException e){
@@ -263,13 +267,15 @@ public class DAO_Servico
 
     public void update_Id_Tecnico(int id, int idT){
 
-        String querySql = "update Ordem_servico os\n" +
-                "set os.descricao_ordem_servico = " + id +
-                "where os.Tecnico_id_tecnico = " + idT + ";";
+        String querySql = "update Ordem_servico os " +
+                "set os.descricao_ordem_servico = ? " +
+                "where os.Tecnico_id_tecnico = ? ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql))
         {
+            stmt.setInt(1, idT);
+            stmt.setInt(2, id);
             stmt.executeQuery();
 
         }catch (SQLException e){
@@ -282,13 +288,15 @@ public class DAO_Servico
 
     public void update_Id_Maquina(int id, int idM){
 
-        String querySql = "update Ordem_servico os\n" +
-                "set os.descricao_ordem_servico = " + id +
-                "where os.Maquina_id_maquina = " + idM + ";";
+        String querySql = "update Ordem_servico os " +
+                "set os.descricao_ordem_servico = ? " +
+                "where os.Maquina_id_maquina = ? ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql))
         {
+            stmt.setInt(1, idM);
+            stmt.setInt(2, id);
             stmt.executeQuery();
 
         }catch (SQLException e){
@@ -302,7 +310,7 @@ public class DAO_Servico
     // Delete
 
     public void delete_Servico(int id){
-        String querySql = "delete from Ordem_servico as o\n" + "where o.id_ordem_servico = ?";
+        String querySql = "delete from Ordem_servico as o " + "where o.id_ordem_servico = ?";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
