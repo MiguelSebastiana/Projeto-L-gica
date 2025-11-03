@@ -1,6 +1,7 @@
 package Model;
 
 import Repository.DAO_Gerente;
+import Util.Validator_Gerente;
 
 import java.util.ArrayList;
 
@@ -15,10 +16,18 @@ public class SERVICE_Gerente {
 
     //Create
 
-    public void Inserir_Gerente() {
+    public void Inserir_Gerente(MODEL_Gerente gerente)
+    {
+        try {
+            if (gerente != null) {
+                daoGerente.insert_User_Gerente(gerente);
+            }
+        }catch(RuntimeException re)
+        {
+            System.out.println(re.getMessage());
+        }
 
     }
-
     //Read
 
     public ArrayList<MODEL_Gerente> All_Gerentes(){
@@ -31,14 +40,25 @@ public class SERVICE_Gerente {
 
     //Update
 
-    public void Update_TempoFuncao(){
-
+    public void Update_TempoFuncao(MODEL_Gerente gerente, int tempoFuncao) {
+        if (gerente != null)
+        {
+            daoGerente.update_Tempo_Funcao(gerente, Validator_Gerente.validarTempoFuncao(tempoFuncao));
+        }
     }
 
     //Delete
 
-    public void Delete_Gerente(){
-
+    public void Delete_Gerente(MODEL_Gerente gerente )
+    {
+        try {
+            if (gerente != null) {
+                daoGerente.delete_User_Gerente(gerente);
+            }
+        }catch(RuntimeException re)
+        {
+            System.out.println(re.getMessage());
+        }
     }
 
     //Outros

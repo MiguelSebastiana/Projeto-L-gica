@@ -23,7 +23,7 @@ public class DAO_Usuario
 
         ArrayList<MODEL_Usuario> listaUsuarios = new ArrayList<>();
 
-        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario,\n" +
+        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario,2\n" +
                 "u.telefone_usuario, u.salario_usuario,u.data_nasc_usuario,u.email_usuario, \n" +
                 "u.carga_horaria_minutos_usuario,u.formacao_usuario,\n" +
                 " u.Setor_id_setor, g.tempo_na_funcao_anos_gerente,sp.experiencia_anos_supervisor, \n" +
