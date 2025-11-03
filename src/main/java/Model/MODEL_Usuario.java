@@ -1,6 +1,8 @@
 package Model;
 
-import java.sql.SQLData;
+import Util.Validator_Geral;
+import Util.Validator_Usuario;
+
 import java.util.Date;
 
 public abstract class MODEL_Usuario {
@@ -13,47 +15,46 @@ public abstract class MODEL_Usuario {
     private int nivelacesso;
     private String telefone;
     private double salario;
-    private SQLData datanasci;
+    private Date datanasci;
     private String email;
     private int cargahoraria;
     private String formacao;
     private int id_setor;
 
-    // Construtor Usuário //
+    // Construtor com Id (para objetos já existentes no DB)
     public MODEL_Usuario(int id, String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
-                         SQLData datanasci, String email, int cargahoraria, String formacao, int id_setor) {
+                         Date datanasci, String email, int cargahoraria, String formacao, int id_setor) {
         this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.senha = senha;
-        this.nivelacesso = nivelacesso;
-        this.telefone = telefone;
-        this.salario = salario;
-        this.datanasci = datanasci;
-        this.email = email;
-        this.cargahoraria = cargahoraria;
-        this.formacao = formacao;
-        this.id_setor = id_setor;
+        setNome(nome);
+        setCpf(cpf);
+        setSenha(senha);
+        setNivelacesso(nivelacesso);
+        setTelefone(telefone);
+        setSalario(salario);
+        setDatanasci(datanasci);
+        setEmail(email);
+        setCargahoraria(cargahoraria);
+        setFormacao(formacao);
+        setSetor(id_setor);
     }
 
-    // Construtor sem Id //
+    // Construtor sem Id (para novos objetos que serão inseridos no DB)
     public MODEL_Usuario(String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
-                         SQLData datanasci, String email, int cargahoraria, String formacao, int id_setor) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.senha = senha;
-        this.nivelacesso = nivelacesso;
-        this.telefone = telefone;
-        this.salario = salario;
-        this.datanasci = datanasci;
-        this.email = email;
-        this.cargahoraria = cargahoraria;
-        this.formacao = formacao;
-        this.id_setor = id_setor;
+                         Date datanasci, String email, int cargahoraria, String formacao, int id_setor) {
+        setNome(nome);
+        setCpf(cpf);
+        setSenha(senha);
+        setNivelacesso(nivelacesso);
+        setTelefone(telefone);
+        setSalario(salario);
+        setDatanasci(datanasci);
+        setEmail(email);
+        setCargahoraria(cargahoraria);
+        setFormacao(formacao);
+        setSetor(id_setor);
     }
 
-
-    // Getter e Setters //
+    // Getters e Setters //
     public int getId() {
         return id;
     }
@@ -63,7 +64,7 @@ public abstract class MODEL_Usuario {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = Validator_Geral.validarString(nome);
     }
 
     public String getCpf() {
@@ -71,7 +72,15 @@ public abstract class MODEL_Usuario {
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        this.cpf = Validator_Usuario.validarCpf(cpf);
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = Validator_Usuario.senha(senha);
     }
 
     public int getNivelacesso() {
@@ -79,7 +88,7 @@ public abstract class MODEL_Usuario {
     }
 
     public void setNivelacesso(int nivelacesso) {
-        this.nivelacesso = nivelacesso;
+        this.nivelacesso = Validator_Usuario.validarNivelAcesso(nivelacesso);
     }
 
     public String getTelefone() {
@@ -87,7 +96,7 @@ public abstract class MODEL_Usuario {
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        this.telefone = Validator_Usuario.ValidarTelefone(telefone);
     }
 
     public double getSalario() {
@@ -95,15 +104,15 @@ public abstract class MODEL_Usuario {
     }
 
     public void setSalario(double salario) {
-        this.salario = salario;
+        this.salario = Validator_Usuario.validarSalario(salario);
     }
 
-    public SQLData getDatanasci() {
+    public Date getDatanasci() {
         return datanasci;
     }
 
-    public void setDatanasci(SQLData datanasci) {
-        this.datanasci = datanasci;
+    public void setDatanasci(Date datanasci) {
+        this.datanasci = Validator_Usuario.validarDataNascimento(datanasci);
     }
 
     public String getEmail() {
@@ -111,7 +120,7 @@ public abstract class MODEL_Usuario {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = Validator_Usuario.ValidarEmail(email);
     }
 
     public int getCargahoraria() {
@@ -119,7 +128,7 @@ public abstract class MODEL_Usuario {
     }
 
     public void setCargahoraria(int cargahoraria) {
-        this.cargahoraria = cargahoraria;
+        this.cargahoraria = Validator_Usuario.validarCargaHoraria(cargahoraria);
     }
 
     public String getFormacao() {
@@ -127,7 +136,7 @@ public abstract class MODEL_Usuario {
     }
 
     public void setFormacao(String formacao) {
-        this.formacao = formacao;
+        this.formacao = Validator_Usuario.formacao(formacao);
     }
 
     public int getSetor() {
@@ -135,14 +144,6 @@ public abstract class MODEL_Usuario {
     }
 
     public void setSetor(int setor) {
-        this.id_setor = setor;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getSenha() {
-        return senha;
+        this.id_setor = Validator_Usuario.validarSetor(setor);
     }
 }
