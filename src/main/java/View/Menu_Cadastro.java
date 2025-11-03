@@ -65,7 +65,7 @@ public class Menu_Cadastro {
 
         do {
             System.out.println("-------------------------------------------");
-            System.out.println("Digite os anos de experiência do supervisor: ");
+            System.out.print("Digite os anos de experiência do supervisor: ");
             try {
                 experiencia = Ferramentas.lInteiro();
                 Validator_Supervisor.validarAnosExperiencia(experiencia);
@@ -96,7 +96,7 @@ public class Menu_Cadastro {
 
         do {
             System.out.println("-------------------------------------------");
-            System.out.println("Digite a especialidade do técnico: ");
+            System.out.print("Digite a especialidade do técnico: ");
             try {
                 especialidade = Ferramentas.lString();
                 Validator_Tecnico.validarEspecialidade(especialidade);
@@ -129,7 +129,7 @@ public class Menu_Cadastro {
 
         do {
             System.out.println("-------------------------------------------");
-            System.out.println("Digite os anos na função: ");
+            System.out.print("Digite os anos na função: ");
             try {
                 anosFuncao = Ferramentas.lInteiro();
                 Validator_Gerente.validarTempoFuncao(anosFuncao);
@@ -376,7 +376,7 @@ public class Menu_Cadastro {
             System.out.println("\n\n             SETOR  ");
             System.out.println("1- P&D(Pesquisa e desenvolvimento)  2-Motores Elétricos   3-Tintas e vernizes   4-Geração solar");
             System.out.println("5-Automação Industrial  6-Qualidade  7-Fundição   8-Manutenção 9-Administração");
-            System.out.println("Digite o setor: ");
+            System.out.print("Digite o setor: ");
             try {
                  setor = Ferramentas.lInteiro();
                 verifica = true;
