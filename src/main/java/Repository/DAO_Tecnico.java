@@ -1,6 +1,5 @@
 package Repository;
 
-
 import DataBase.ConnectionFactory;
 import Model.MODEL_Supervisor;
 import Model.MODEL_Tecnico;
