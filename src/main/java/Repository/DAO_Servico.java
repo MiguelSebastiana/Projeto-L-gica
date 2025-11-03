@@ -235,7 +235,7 @@ public class DAO_Servico
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível modificar a orden de serviço: " + e.getMessage());
+            System.err.println("Não foi possível modificar a ordem de serviço: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -254,19 +254,49 @@ public class DAO_Servico
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível modificar a orden de serviço: " + e.getMessage());
+            System.err.println("Não foi possível modificar a ordem de serviço: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
 
     }
 
-    public void update_Id_Tecnico(MODEL_Servico servico, int id){
+    public void update_Id_Tecnico(int id, int idT){
 
+        String querySql = "update Ordem_servico os\n" +
+                "set os.descricao_ordem_servico = " + id +
+                "where os.Tecnico_id_tecnico = " + idT + ";";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql))
+        {
+            stmt.executeQuery();
+
+        }catch (SQLException e){
+
+            System.err.println("Não foi possível modificar a ordem de serviço: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
 
-    public void update_Id_Maquina(MODEL_Servico servico, int id){
+    public void update_Id_Maquina(int id, int idM){
 
+        String querySql = "update Ordem_servico os\n" +
+                "set os.descricao_ordem_servico = " + id +
+                "where os.Maquina_id_maquina = " + idM + ";";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql))
+        {
+            stmt.executeQuery();
+
+        }catch (SQLException e){
+
+            System.err.println("Não foi possível modificar a ordem de serviço: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
 
     // Delete
