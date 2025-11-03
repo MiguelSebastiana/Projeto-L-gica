@@ -99,6 +99,20 @@ public class DAO_Usuario
 
     public void update_Telefone(MODEL_Usuario usuario, String telefone){
 
+        String querySql = "update Usuario set telefone_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+        PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+            stmt.setString(1,telefone);
+            stmt.setInt(2,usuario.getId());
+            stmt.executeUpdate();
+
+            usuario.setTelefone(telefone);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar o telefone "+ e.getMessage());
+            throw new RuntimeException("Erro ao atualizar telefone no banco de dados. "+e);
+        }
     }
 
     public void update_Email(MODEL_Usuario usuario, String email){
