@@ -70,8 +70,8 @@ public class SERVICE_Servico {
 
     //Delete
 
-    public void Delete_Servico(MODEL_Servico servico){
-        daoServico.delete_Servico(servico);
+    public void Delete_Servico(int id){
+        daoServico.delete_Servico(id);
     }
 
     //Outros
