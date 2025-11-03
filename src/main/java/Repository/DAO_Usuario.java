@@ -117,6 +117,20 @@ public class DAO_Usuario
 
     public void update_Email(MODEL_Usuario usuario, String email){
 
+        String querySql = "update Usuario set email_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+                stmt.setString(1,email);
+                stmt.setInt(2,usuario.getId());
+                stmt.executeUpdate();
+
+                usuario.setEmail(email);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar o email "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar email no banco de dados. "+e);
+        }
     }
 
     public void update_Carga_Horaria(MODEL_Usuario usuario, int carga){
