@@ -175,8 +175,28 @@ public class DAO_Usuario
 
     // Outros
 
-    public static void verificar_Login(String cpf, String senha){
+    public boolean verificar_Login(String cpf, String senha) {
+        String querySql = "select u.senha_usuario \n" +
+                "From Usuario u\n" +
+                "where u.cpf_usuario = " + cpf + ";";
 
+
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql);
+             ResultSet resultSet = stmt.executeQuery()) {
+
+            String senhaSql = resultSet.getString("senha_usuario");
+
+            if (senhaSql.equals(senha)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao verificar login: " + e.getMessage());
+            throw new RuntimeException("Erro ao buscar senha no banco de dados. " + e);
+        }
     }
 
 }
