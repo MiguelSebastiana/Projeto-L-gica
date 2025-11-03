@@ -210,8 +210,20 @@ public class DAO_Servico
     // Delete
 
     public void delete_Servico(MODEL_Servico servico){
+        String querySql = "delete from Ordem_servico as o\n" + "where o.id_ordem_servico = ?";
 
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql)) {
+
+            stmt.setInt(1,servico.getId_Ordem_servico());
+            stmt.executeQuery();
+
+        }
+        catch (SQLException e){
+            System.err.println("Não foi possível excluir o Serviço: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
-
 }
 
