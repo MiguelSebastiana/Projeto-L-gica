@@ -52,7 +52,7 @@ public class DAO_Gerente {
             try{
 
                 stmt.setString(1, gerente.getCpf());
-                stmt.executeQuery();
+                stmt.executeUpdate();
 
                 int idUsuario = resultSet.getInt("id_usuario");
 
@@ -213,12 +213,12 @@ public class DAO_Gerente {
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
             stmt.setInt(1,gerente.getId());
-            stmt.executeQuery();
+            stmt.executeUpdate();
 
             try(PreparedStatement stmt2 = conexao.prepareStatement(querySql2)){
 
                 stmt2.setInt(2,gerente.getId());
-                stmt2.executeQuery();
+                stmt2.executeUpdate();
 
             }catch (SQLException e){
                 System.err.println("Não foi possível excluir o Gerente: " + e.getMessage());

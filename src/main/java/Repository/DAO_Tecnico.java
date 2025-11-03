@@ -39,7 +39,7 @@ public class DAO_Tecnico {
             stmt.setInt(11, tecnico.getSetor());
             stmt.setString(12, tecnico.getEspecialidade_tecnico());
             stmt.setBoolean(13, tecnico.isStatus_disponibilidade_tecnico());
-            stmt.executeQuery();
+            stmt.executeUpdate();
 
             String sql2 = "select u.id_usuario " +
                     "from Usuario u " +
@@ -232,12 +232,12 @@ public class DAO_Tecnico {
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
             stmt.setInt(1,tecnico.getId());
-            stmt.executeQuery();
+            stmt.executeUpdate();
 
             try(PreparedStatement stmt2 = conexao.prepareStatement(querySql2)){
 
                 stmt2.setInt(2,tecnico.getId());
-                stmt2.executeQuery();
+                stmt2.executeUpdate();
 
             }catch (SQLException e){
                 System.err.println("Não foi possível excluir o Tecnico: " + e.getMessage());
