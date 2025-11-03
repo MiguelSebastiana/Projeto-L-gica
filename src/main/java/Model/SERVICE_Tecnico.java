@@ -38,6 +38,7 @@ public class SERVICE_Tecnico {
         {
             System.out.println(rte.getMessage());
         }
+        return null;
     }
 
     public MODEL_Tecnico Find_By_Id(int id)
@@ -49,6 +50,7 @@ public class SERVICE_Tecnico {
             System.out.println(rte.getMessage());
         }
 
+        return null;
     }
 
     //Update
