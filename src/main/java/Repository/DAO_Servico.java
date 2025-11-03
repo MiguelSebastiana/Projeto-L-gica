@@ -11,10 +11,44 @@ public class DAO_Servico
 
     // Create
 
-    public void insert_Servico(int ordem_servico, String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina){
+    public void insert_Servico(MODEL_Servico servico){
 
+        String querySql = "insert into Ordem_servico(status_aberto_ordem_servico,descricao_ordem_servico," +
+                "Tecnico_id_tecnico, Maquina_id_maquina) values(?,?,?,?);";
 
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql);
+            ResultSet resultSet = stmt.executeQuery())
+        {
 
+            stmt.setString(1,servico.getStatus_aberto_ordem_servico());
+            stmt.setString(2,servico.getDescricao_ordem_servico());
+            stmt.setInt(3,servico.getTecnico());
+            stmt.setInt(4,servico.getMaquina());
+            stmt.executeQuery();
+
+            String querySql2 = "";
+
+            try
+            {
+
+                int id= resultSet.getInt("id_ordem_servico");
+
+                MODEL_Servico servico1 = new MODEL_Servico(id,servico.getStatus_aberto_ordem_servico(),servico.getDescricao_ordem_servico(),servico.getTecnico(),servico.getMaquina());
+
+            }catch (Exception e){
+
+                System.err.println("Não foi possível buscar a orden de serviço: " + e.getMessage());
+
+                throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+            }
+
+        }catch (SQLException e){
+
+            System.err.println("Não foi possível inserir a orden de serviço: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
 
     // Read

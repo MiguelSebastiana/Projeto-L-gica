@@ -71,7 +71,7 @@ public class DAO_Setor
             }
         }catch (SQLException e){
 
-            System.err.println("Não foi possível buscar todos os setores: " + e.getMessage());
+            System.err.println("Não foi possível buscar o setor: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
