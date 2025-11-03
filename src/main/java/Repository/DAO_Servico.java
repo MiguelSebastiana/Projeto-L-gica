@@ -258,6 +258,7 @@ public class DAO_Servico
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
+
     }
 
     public void update_Id_Tecnico(MODEL_Servico servico, int id){
