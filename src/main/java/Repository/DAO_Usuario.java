@@ -187,6 +187,23 @@ public class DAO_Usuario
         }
     }
 
+    public void update_Senha(MODEL_Usuario usuario, String senha){
+
+        String querySql = "update Usuario set senha_usuario = ? where id_usuario = ?";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+            stmt.setString(1,senha);
+            stmt.setInt(2,usuario.getId());
+            stmt.executeUpdate();
+
+            usuario.setSenha(senha);
+        }catch (SQLException e){
+            System.err.println("Erro ao atualizar a senha "+e.getMessage());
+            throw new RuntimeException("Erro ao atualizar a senha no banco de dados. "+e);
+        }
+    }
     // Outros
 
     public boolean verificar_Login(String cpf, String senha) {
