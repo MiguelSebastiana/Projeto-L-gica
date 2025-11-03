@@ -1,6 +1,6 @@
 package Util;
 
-import Exception.NOMEException;
+import Exception.STRINGException;
 import Model.MODEL_Setor;
 
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ public class Validator_Geral
     public static String  nome(String texto) {
         if (texto == null || texto.trim().isEmpty()){
             // -- REFEITO COM A CLASSE PROPRIA -- //
-            throw new NOMEException();
+            throw new STRINGException();
         }
 
             return texto;
