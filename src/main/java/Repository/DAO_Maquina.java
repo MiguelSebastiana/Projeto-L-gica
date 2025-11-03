@@ -63,7 +63,7 @@ public class DAO_Maquina
 
         String querySql = "select m.id_maquina, m.descricao_maquina, m.modelo_maquina, m.status_funcionamento_maquina, m.Setor_id_setor\n" +
                 "from Maquina m\n" +
-                "where m.id_maquina = ?";
+                "where m.id_maquina = ?;";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);

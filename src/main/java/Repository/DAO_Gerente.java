@@ -197,9 +197,9 @@ public class DAO_Gerente {
 
     public void delete_User_Gerente(MODEL_Gerente gerente){
 
-        String querySql = "delete from Usuario as u\n" + "where u.id_usuario = ?";
+        String querySql = "delete from Usuario as u\n" + "where u.id_usuario = ?;";
 
-        String querySql2 = "delete from Gerente as g\n" + "where g.id_usuario = ?";
+        String querySql2 = "delete from Gerente as g\n" + "where g.id_usuario = ?;";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {

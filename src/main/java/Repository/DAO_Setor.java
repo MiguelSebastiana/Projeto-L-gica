@@ -1,10 +1,12 @@
 package Repository;
 
 import DataBase.ConnectionFactory;
+import Model.MODEL_Gerente;
 import Model.MODEL_Setor;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DAO_Setor
 {
@@ -45,6 +47,36 @@ public class DAO_Setor
 
     public MODEL_Setor find_By_Id(int id){
 
+        MODEL_Setor setor = null;
+
+        String querySql = "select s.nome_setor, s.descricao_setor\n" +
+                "from Setor s\n" +
+                "where s.id_setor = ?;";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+        PreparedStatement stmt = conexao.prepareStatement(querySql)){
+
+            stmt.setInt(1,id);
+
+            try(ResultSet resultSet = stmt.executeQuery()) {
+
+                while (resultSet.next()) {
+
+                    String nome = resultSet.getString("nome_setor");
+                    String descricao = resultSet.getString("descricao_setor");
+
+                    setor = new MODEL_Setor(id,nome,descricao);
+
+                }
+            }
+        }catch (SQLException e){
+
+            System.err.println("Não foi possível buscar todos os setores: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
+
+        return setor;
     }
 
 }
