@@ -4,10 +4,9 @@ import DataBase.ConnectionFactory;
 import Model.MODEL_Supervisor;
 import Model.MODEL_Tecnico;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -25,13 +24,15 @@ public class DAO_Tecnico {
              PreparedStatement stmt = conexao.prepareStatement(sql);
              ResultSet resultSet = stmt.executeQuery()) {
 
+            java.sql.Date dataParaSQL = java.sql.Date.valueOf(tecnico.getDatanasci());
+
             stmt.setString(1, tecnico.getNome());
             stmt.setString(2, tecnico.getCpf());
             stmt.setString(3, tecnico.getSenha());
             stmt.setInt(4, tecnico.getNivelacesso());
             stmt.setString(5, tecnico.getTelefone());
             stmt.setDouble(6, tecnico.getSalario());
-            stmt.setDate(7, (java.sql.Date) tecnico.getDatanasci());
+            stmt.setDate(7, dataParaSQL);
             stmt.setString(8, tecnico.getEmail());
             stmt.setInt(9, tecnico.getCargahoraria());
             stmt.setString(10, tecnico.getFormacao());
@@ -52,7 +53,7 @@ public class DAO_Tecnico {
                 int idUsuario = resultSet.getInt("id_usuario");
 
                 MODEL_Tecnico tecnico1 = new MODEL_Tecnico(idUsuario, tecnico.getNome(), tecnico.getCpf(), tecnico.getSenha(), tecnico.getNivelacesso(),
-                        tecnico.getTelefone(), tecnico.getSalario(),(java.sql.Date) tecnico.getDatanasci(), tecnico.getEmail(), tecnico.getCargahoraria(),
+                        tecnico.getTelefone(), tecnico.getSalario(),tecnico.getDatanasci(), tecnico.getEmail(), tecnico.getCargahoraria(),
                         tecnico.getFormacao(), tecnico.getSetor(), tecnico.getEspecialidade_tecnico(), tecnico.isStatus_disponibilidade_tecnico());
 
             } catch (SQLException e) {
@@ -91,13 +92,15 @@ public class DAO_Tecnico {
                 int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
                 String telefoneUsuario = resultSet.getString("telefone_usuario");
                 double salarioUsuario = resultSet.getDouble("salario_usuario");
-                Date dataNascimento = resultSet.getDate("data_nasc_usuario");
+                Date dataNasciment = resultSet.getDate("data_nasc_usuario");
                 String emailUsuario = resultSet.getString("email_usuario");
                 int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
                 String formacaoUsuario = resultSet.getString("formacao_usuario");
                 int idSetor = resultSet.getInt("Setor_id_setor");
                 String especialidadeTecnico = resultSet.getString("especialidade_tecnico");
                 boolean statusDisponibilidadeTecnico = resultSet.getBoolean("status_disponibilidade_tecnico");
+
+                LocalDate dataNascimento = LocalDate.ofInstant(dataNasciment.toInstant(),ZoneId.systemDefault());
 
                 MODEL_Tecnico tecnico = new MODEL_Tecnico(idUsuario,nomeUsuario,cpfUsuario,senhaUsuario,nivelAcesso,
                         telefoneUsuario,salarioUsuario,dataNascimento,emailUsuario,cargaHoraria,formacaoUsuario,idSetor,especialidadeTecnico,statusDisponibilidadeTecnico);
@@ -136,13 +139,15 @@ public class DAO_Tecnico {
                     int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
                     String telefoneUsuario = resultSet.getString("telefone_usuario");
                     double salarioUsuario = resultSet.getDouble("salario_usuario");
-                    Date dataNascimento = resultSet.getDate("data_nasc_usuario");
+                    Date dataNasciment = resultSet.getDate("data_nasc_usuario");
                     String emailUsuario = resultSet.getString("email_usuario");
                     int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
                     String formacaoUsuario = resultSet.getString("formacao_usuario");
                     int idSetor = resultSet.getInt("Setor_id_setor");
                     String especialidadeTecnico = resultSet.getString("especialidade_tecnico");
                     boolean statusDisponibilidadeTecnico = resultSet.getBoolean("status_disponibilidade_tecnico");
+
+                    LocalDate dataNascimento = LocalDate.ofInstant(dataNasciment.toInstant(), ZoneId.systemDefault());
 
                     tecnico = new MODEL_Tecnico(
                             idUsuario, nomeUsuario, cpfUsuario, senhaUsuario, nivelAcesso,

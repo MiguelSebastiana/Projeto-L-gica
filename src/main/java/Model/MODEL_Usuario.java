@@ -3,7 +3,8 @@ package Model;
 import Util.Validator_Geral;
 import Util.Validator_Usuario;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public abstract class MODEL_Usuario {
 
@@ -15,7 +16,7 @@ public abstract class MODEL_Usuario {
     private int nivelacesso;
     private String telefone;
     private double salario;
-    private Date datanasci;
+    private LocalDate datanasci;
     private String email;
     private int cargahoraria;
     private String formacao;
@@ -23,7 +24,7 @@ public abstract class MODEL_Usuario {
 
     // Construtor com Id (para objetos já existentes no DB)
     public MODEL_Usuario(int id, String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
-                         Date datanasci, String email, int cargahoraria, String formacao, int id_setor) {
+                         LocalDate datanasci, String email, int cargahoraria, String formacao, int id_setor) {
         this.id = id;
         setNome(nome);
         setCpf(cpf);
@@ -40,7 +41,7 @@ public abstract class MODEL_Usuario {
 
     // Construtor sem Id (para novos objetos que serão inseridos no DB)
     public MODEL_Usuario(String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
-                         Date datanasci, String email, int cargahoraria, String formacao, int id_setor) {
+                         LocalDate datanasci, String email, int cargahoraria, String formacao, int id_setor) {
         setNome(nome);
         setCpf(cpf);
         setSenha(senha);
@@ -107,11 +108,11 @@ public abstract class MODEL_Usuario {
         this.salario = Validator_Usuario.validarSalario(salario);
     }
 
-    public Date getDatanasci() {
+    public LocalDate getDatanasci() {
         return datanasci;
     }
 
-    public void setDatanasci(Date datanasci) {
+    public void setDatanasci(LocalDate datanasci) {
         this.datanasci = Validator_Usuario.validarDataNascimento(datanasci);
     }
 

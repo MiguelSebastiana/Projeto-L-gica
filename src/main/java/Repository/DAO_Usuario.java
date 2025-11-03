@@ -5,13 +5,15 @@ import Model.MODEL_Gerente;
 import Model.MODEL_Supervisor;
 import Model.MODEL_Tecnico;
 import Model.MODEL_Usuario;
-
+import java.time.LocalDate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+
 
 public class DAO_Usuario
 {
@@ -47,12 +49,13 @@ public class DAO_Usuario
                 int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
                 String telefoneUsuario = resultSet.getString("telefone_usuario");
                 double salarioUsuario = resultSet.getDouble("salario_usuario");
-                Date dataNascimento = resultSet.getDate("data_nasc_usuario");
+                Date dataNasciment = resultSet.getDate("data_nasc_usuario");
                 String emailUsuario = resultSet.getString("email_usuario");
                 int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
                 String formacaoUsuario = resultSet.getString("formacao_usuario");
                 int idSetor = resultSet.getInt("Setor_id_setor");
 
+                LocalDate dataNascimento = LocalDate.ofInstant(dataNasciment.toInstant(),ZoneId.systemDefault());
 
                 if (nivelAcesso == 1) {
                     String especialidadeTecnico = resultSet.getString("especialidade_tecnico");

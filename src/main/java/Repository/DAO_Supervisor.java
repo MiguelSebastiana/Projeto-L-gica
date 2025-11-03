@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -25,13 +27,15 @@ public class DAO_Supervisor {
              PreparedStatement stmt = conexao.prepareStatement(sql);
              ResultSet resultSet = stmt.executeQuery()) {
 
+            java.sql.Date dataParaSQL = java.sql.Date.valueOf(supervisor.getDatanasci());
+
             stmt.setString(1, supervisor.getNome());
             stmt.setString(2, supervisor.getCpf());
             stmt.setString(3, supervisor.getSenha());
             stmt.setInt(4, supervisor.getNivelacesso());
             stmt.setString(5, supervisor.getTelefone());
             stmt.setDouble(6, supervisor.getSalario());
-            stmt.setDate(7, (java.sql.Date) supervisor.getDatanasci());
+            stmt.setDate(7, dataParaSQL);
             stmt.setString(8, supervisor.getEmail());
             stmt.setInt(9, supervisor.getCargahoraria());
             stmt.setString(10, supervisor.getFormacao());
@@ -51,7 +55,7 @@ public class DAO_Supervisor {
                     int idUsuario = resultSet.getInt("id_usuario");
 
                     MODEL_Supervisor supervisor1 = new MODEL_Supervisor(idUsuario,supervisor.getNome(),supervisor.getCpf(),supervisor.getSenha(),
-                            supervisor.getNivelacesso(),supervisor.getTelefone(),supervisor.getSalario(),(java.sql.Date) supervisor.getDatanasci(),
+                            supervisor.getNivelacesso(),supervisor.getTelefone(),supervisor.getSalario(), supervisor.getDatanasci(),
                             supervisor.getEmail(), supervisor.getCargahoraria(), supervisor.getFormacao(), supervisor.getSetor(),
                             supervisor.getExperiencia_anos_supervisor());
 
@@ -94,12 +98,14 @@ public class DAO_Supervisor {
                 int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
                 String telefoneSupervisor = resultSet.getString("telefone_usuario");
                 Double salarioSupervisor = resultSet.getDouble("salario_usuario");
-                Date dataNascimento = resultSet.getDate("data_nasc_usuario");
+                Date dataNasciment = resultSet.getDate("data_nasc_usuario");
                 String emailSupervisor = resultSet.getString("email_usuario");
                 int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
                 String formacaoSupervisor = resultSet.getString("formacao_usuario");
                 int idSetor = resultSet.getInt("Setor_id_setor");
                 int anosExperiencia = resultSet.getInt("experiencia_anos_supervisor");
+
+                LocalDate dataNascimento = LocalDate.ofInstant(dataNasciment.toInstant(),ZoneId.systemDefault());
 
                 supervisor = new MODEL_Supervisor(idSupervisor,nomeSupervisor,cpfSupervisor,senhaSupervisor,nivelAcesso,
                         telefoneSupervisor,salarioSupervisor,dataNascimento,emailSupervisor,cargaHoraria,formacaoSupervisor,idSetor,anosExperiencia);
@@ -142,12 +148,14 @@ public class DAO_Supervisor {
                      int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
                      String telefoneSupervisor = resultSet.getString("telefone_usuario");
                      Double salarioSupervisor = resultSet.getDouble("salario_usuario");
-                     Date dataNascimento = resultSet.getDate("data_nasc_usuario");
+                     Date dataNasciment = resultSet.getDate("data_nasc_usuario");
                      String emailSupervisor = resultSet.getString("email_usuario");
                      int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
                      String formacaoSupervisor = resultSet.getString("formacao_usuario");
                      int idSetor = resultSet.getInt("Setor_id_setor");
                      int anosExperiencia = resultSet.getInt("experiencia_anos_supervisor");
+
+                     LocalDate dataNascimento = LocalDate.ofInstant(dataNasciment.toInstant(), ZoneId.systemDefault());
 
                      supervisor = new MODEL_Supervisor(idSupervisor, nomeSupervisor, cpfSupervisor, senhaSupervisor, nivelAcesso,
                              telefoneSupervisor, salarioSupervisor, dataNascimento, emailSupervisor, cargaHoraria, formacaoSupervisor, idSetor, anosExperiencia);

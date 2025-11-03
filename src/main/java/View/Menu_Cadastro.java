@@ -194,7 +194,7 @@ public class Menu_Cadastro {
             try {
 
                 email = Ferramentas.lString();
-                Validator_Geral.nome(email);
+                Validator_Geral.ValidarEmail(email);
                 verifica = true;
             } catch (Exception e) {
                 Menu_Default.Default();
@@ -211,7 +211,7 @@ public class Menu_Cadastro {
             try {
 
                 senha = Ferramentas.lString();
-                Validator_Geral.nome(senha);
+                Validator_Usuario.senha(senha);
                 verifica = true;
             } catch (Exception e) {
                 Menu_Default.Default();
@@ -228,7 +228,7 @@ public class Menu_Cadastro {
             try {
 
                 nome = Ferramentas.lString();
-                Validator_Geral.ValidarString(nome);
+                Validator_Geral.validarString(nome);
                 verifica = true;
             } catch (Exception e) {
                 Menu_Default.Default();
@@ -246,7 +246,7 @@ public class Menu_Cadastro {
             try {
 
                 telefone = Ferramentas.lString();
-                Validator_Geral.ValidarString(telefone);
+                Validator_Geral.validarString(telefone);
                 verifica = true;
             } catch (Exception e) {
                 Menu_Default.Default();
@@ -360,7 +360,7 @@ public class Menu_Cadastro {
             System.out.print("Digite a formação: ");
             try {
                 formacao = Ferramentas.lString();
-                Validator_Geral.ValidarString(formacao);
+                Validator_Geral.validarString(formacao);
                 verifica = true;
             } catch (IllegalArgumentException e) {
                 Menu_Default.Default();
@@ -390,15 +390,12 @@ public class Menu_Cadastro {
 
         if (nivelAcesso == 1)
         {
-            return new MODEL_Tecnico(0, nome, cpf, nivelAcesso, telefone, salario, new Date(ano, mes, dia), email, cargaHoraria, formacao, setor, null, true);
         }
         else if (nivelAcesso == 2)
         {
-            return new MODEL_Supervisor(0, nome, cpf, nivelAcesso, telefone, salario, new Date(ano, mes, dia), email, cargaHoraria, formacao, setor, 0);
         }
         else if (nivelAcesso == 3)
         {
-            return new MODEL_Gerente(0, nome, cpf, nivelAcesso, telefone, salario, new Date(ano, mes, dia), email, cargaHoraria, formacao, setor, 0);
         }
 
         return null;
