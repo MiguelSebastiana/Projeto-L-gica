@@ -1,15 +1,23 @@
 package View;
+import Model.*;
 import Util.Ferramentas;
 
 import java.util.InputMismatchException;
 
 public class Menu_Administrador {
 
-    public static void Menu(){
+<<<<<<< Updated upstream
+    static SERVICE_Gerente gerente = new SERVICE_Gerente();
+    static SERVICE_Usuario usuario = new SERVICE_Usuario();
+
+    public static void Menu(MODEL_Administrador adm){
+=======
+    public static void Menu() {
+>>>>>>> Stashed changes
 
         boolean continuar = false;
 
-        do{
+        do {
 
             Ferramentas.limpaTerminal();
 
@@ -31,29 +39,109 @@ public class Menu_Administrador {
             }
 
             switch (escolha) {
+<<<<<<< Updated upstream
                 case 1:{
+
+                    CadastrarGerente(adm);
+
+=======
+                case 1: {
+>>>>>>> Stashed changes
                     break;
                 }
-                case 2:{
+                case 2: {
 
                     break;
                 }
-                case 3:{
+                case 3: {
 
                     break;
                 }
-                case 4:{
+                case 4: {
                     continuar = true;
                     break;
                 }
-                default:{
+                default: {
                     Menu_Default.Default();
                     break;
                 }
             }
 
-        }while (continuar);
+        } while (continuar);
 
         Menu_Inicial.Menu();
+    }
+
+    public static void CadastrarGerente(MODEL_Administrador adm){
+
+        Ferramentas.limpaTerminal();
+
+        System.out.println("     --------------------");
+        System.out.println("     - CADASTRO GERENTE -");
+        System.out.println("     --------------------");
+
+        Ferramentas.Delay(1500);
+
+        Menu_Cadastro.adicionarGerente();
+
+    }
+
+    public static void AtualizarGerente(MODEL_Administrador adm){
+
+        Ferramentas.limpaTerminal();
+        int id = 0;
+
+        System.out.println("     ---------------------");
+        System.out.println("     - ATUALIZAR GERENTE -");
+        System.out.println("     ---------------------");
+
+        System.out.println("\n\n");
+
+        System.out.print("Digite o ID do gerente que deseja atualizar: ");
+
+        try {
+            id = Ferramentas.lInteiro();
+            gerente.Find_By_Id(id);
+        }catch (Exception e){
+            Ferramentas.limpaTerminal();
+            System.err.println(e.getMessage());
+            Ferramentas.Delay(1500);
+        }
+
+
+
+    }
+
+    public static void ExcluirGerente(MODEL_Administrador adm){
+
+        Ferramentas.limpaTerminal();
+        int id = 0;
+
+        System.out.println("     -------------------");
+        System.out.println("     - EXCLUIR GERENTE -");
+        System.out.println("     -------------------");
+
+        System.out.println("\n\n");
+
+        System.out.print("Digite o ID do gerente que deseja excluir: ");
+
+        try {
+            id = Ferramentas.lInteiro();
+            gerente.Find_By_Id(id);
+        }catch (Exception e){
+            Ferramentas.limpaTerminal();
+            System.err.println(e.getMessage());
+            Ferramentas.Delay(1500);
+        }
+
+        MODEL_Gerente gerente1 = gerente.Find_By_Id(id);
+
+        try {
+            gerente.Delete_Gerente(gerente1);
+        }catch (Exception e){
+            Ferramentas.limpaTerminal();
+            System.err.println(e.getMessage());
+            Ferramentas.Delay(1500);
+        }
     }
 }
