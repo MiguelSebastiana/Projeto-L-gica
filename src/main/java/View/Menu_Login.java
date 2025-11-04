@@ -1,11 +1,14 @@
 package View;
+import Model.MODEL_Usuario;
 import Util.Ferramentas;
 import Util.Validator_Usuario;
+import Model.SERVICE_Usuario;
 
 public class Menu_Login {
 
+    static SERVICE_Usuario serviceUsuario;
 
-    public static void Menu() {
+    public MODEL_Usuario Menu() {
 
         boolean continuar = true;
         String cpf = null;
@@ -40,11 +43,9 @@ public class Menu_Login {
         senha = Ferramentas.lString();
         System.out.println("------------------");
 
-        //boolean login = SERVICE_Usuario.
-
         Ferramentas.Delay(500);
 
-        System.out.println("\n\n--- Login Realizado com sucesso ---");
+        return serviceUsuario.Verificar_Login(cpf,senha);
 
 
     }

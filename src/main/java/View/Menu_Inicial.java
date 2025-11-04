@@ -35,7 +35,7 @@ public class Menu_Inicial {
                 }
 
                 if (escolha == 1){
-                    Menu_Login.Menu();
+                    Menu_Login.();
                 } else if (escolha == 2) {
                     continuar = false;
                 }else {

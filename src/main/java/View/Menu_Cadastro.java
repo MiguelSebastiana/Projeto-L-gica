@@ -3,11 +3,15 @@ import Model.*;
 import Util.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.InputMismatchException;
+import java.util.Locale;
 
 public class Menu_Cadastro {
 
     static SERVICE_Gerente serviceGerente;
+    static SERVICE_Tecnico serviceTecnico;
+    static SERVICE_Supervisor serviceSupervisor;
 
     public static void Menu() {
 
@@ -51,7 +55,6 @@ public class Menu_Cadastro {
                 }
             }
         } while (!continuar);
-        return;
     }
 
     public static void adicionarSuperVisor() {
@@ -81,7 +84,7 @@ public class Menu_Cadastro {
         }while (verifica);
         System.out.println("-------------------------------------------");
 
-
+        serviceSupervisor.Insert_Supervisor(supervisor);
         //criar
     }
 
@@ -113,6 +116,7 @@ public class Menu_Cadastro {
         System.out.println("-------------------------------------------");
 
 
+        serviceTecnico.Inserir_Tecnico(tecnico);
         //Criar
 
     }
@@ -165,6 +169,7 @@ public class Menu_Cadastro {
         String formacao = null;
         int setor = 0;
         String senha = null;
+        LocalDate dataNascimento = null;
         boolean verifica = false;
 
 
@@ -325,6 +330,7 @@ public class Menu_Cadastro {
             try {
                 Validator_Usuario.validarData(dia, mes, ano);
                 verifica = true;
+                dataNascimento = LocalDate.of(ano,mes,dia);
             } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
             }
@@ -390,12 +396,15 @@ public class Menu_Cadastro {
 
         if (nivelAcesso == 1)
         {
+            MODEL_Tecnico tecnico = new MODEL_Tecnico(nome,cpf, senha, nivelAcesso, telefone, salario, dataNascimento, email, cargaHoraria, formacao, setor,null, true   );
         }
         else if (nivelAcesso == 2)
         {
+            MODEL_Supervisor supervisor = new MODEL_Supervisor(nome,cpf,senha,nivelAcesso,telefone,salario,dataNascimento,email,cargaHoraria,formacao,setor,0);
         }
         else if (nivelAcesso == 3)
         {
+            MODEL_Gerente gerente = new MODEL_Gerente(nome,cpf,senha,nivelAcesso,telefone,salario,dataNascimento,email,cargaHoraria,formacao,setor,0);
         }
 
         return null;
