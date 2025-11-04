@@ -41,7 +41,7 @@ public class DAO_Supervisor {
             stmt.setString(10, supervisor.getFormacao());
             stmt.setInt(11, supervisor.getSetor());
             stmt.setInt(12, supervisor.getExperiencia_anos_supervisor());
-            stmt.executeQuery();
+            stmt.executeUpdate();
 
             String sql2 = "select u.id_usuario " +
                     "from Usuario u " +
@@ -211,12 +211,12 @@ public class DAO_Supervisor {
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
             stmt.setInt(1,supervisor.getId());
-            stmt.executeQuery();
+            stmt.executeUpdate();
 
             try(PreparedStatement stmt2 = conexao.prepareStatement(querySql2)){
 
                 stmt2.setInt(2,supervisor.getId());
-                stmt2.executeQuery();
+                stmt2.executeUpdate();
 
             }catch (SQLException e){
                 System.err.println("Não foi possível excluir o Supervisor: " + e.getMessage());

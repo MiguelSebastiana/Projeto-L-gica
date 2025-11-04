@@ -1,11 +1,18 @@
 package View;
+import Model.MODEL_Supervisor;
+import Model.MODEL_Tecnico;
+import Model.SERVICE_Tecnico;
 import Util.Ferramentas;
+import Util.Validator_Geral;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class Menu_SuperVisor {
 
-    public static void Menu(){
+    static SERVICE_Tecnico serviceTecnico = new SERVICE_Tecnico();
+
+    public static void Menu(MODEL_Supervisor supervisor){
 
         boolean continuar = true;
 
@@ -31,11 +38,10 @@ public class Menu_SuperVisor {
 
             switch (escolha) {
                 case 1: {
-
+                    verTecnicos(supervisor);
                     break;
                 }
                 case 2:{
-
                     break;
                 }
                 case 3:{
@@ -57,4 +63,32 @@ public class Menu_SuperVisor {
         }while (continuar);
         Menu_Inicial.Menu();
     }
+
+    public static void verTecnicos(MODEL_Supervisor supervisor){
+
+        ArrayList<MODEL_Tecnico> tecnicos = serviceTecnico.All_Tecnicos();
+
+        Ferramentas.limpaTerminal();
+
+        System.out.println("      ------------");
+        System.out.println("      - Tecnicos -");
+        System.out.println("      ------------");
+
+        Ferramentas.Delay(1500);
+
+        if (tecnicos == null || tecnicos.isEmpty()){
+            System.err.println("Não há nenhum técnico para ser listado!");
+        }else{
+            System.out.println("--- Lista de técnicos ---");
+            for(MODEL_Tecnico tecnico : tecnicos){
+                System.out.println("");
+                System.out.println("ID: " + tecnico.getId());
+                System.out.println("Nome: " + tecnico.getNome());
+                System.out.println("Especialidade: " + tecnico.getEspecialidade_tecnico());
+                System.out.println("Status: " + (tecnico.isStatus_disponibilidade_tecnico() ? "Disponível" : "Em Atendimento"));
+                System.out.println("-------------------------");
+            }
+        }
+    }
+
 }
