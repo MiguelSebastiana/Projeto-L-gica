@@ -6,14 +6,18 @@ import java.util.InputMismatchException;
 
 public class Menu_Administrador {
 
+<<<<<<< Updated upstream
     static SERVICE_Gerente gerente = new SERVICE_Gerente();
     static SERVICE_Usuario usuario = new SERVICE_Usuario();
 
     public static void Menu(MODEL_Administrador adm){
+=======
+    public static void Menu() {
+>>>>>>> Stashed changes
 
         boolean continuar = false;
 
-        do{
+        do {
 
             Ferramentas.limpaTerminal();
 
@@ -35,31 +39,35 @@ public class Menu_Administrador {
             }
 
             switch (escolha) {
+<<<<<<< Updated upstream
                 case 1:{
 
                     CadastrarGerente(adm);
 
+=======
+                case 1: {
+>>>>>>> Stashed changes
                     break;
                 }
-                case 2:{
+                case 2: {
 
                     break;
                 }
-                case 3:{
+                case 3: {
 
                     break;
                 }
-                case 4:{
+                case 4: {
                     continuar = true;
                     break;
                 }
-                default:{
+                default: {
                     Menu_Default.Default();
                     break;
                 }
             }
 
-        }while (continuar);
+        } while (continuar);
 
         Menu_Inicial.Menu();
     }
