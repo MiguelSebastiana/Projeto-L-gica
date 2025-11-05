@@ -102,7 +102,7 @@ public class Menu_SuperVisor {
         System.out.println("      - Criar Ordens de Serviço -");
         System.out.println("      ---------------------------");
 
-        Menu_Servicos.Criar();
+        Menu_Servicos.Criar(supervisor);
 
 
     }
