@@ -35,6 +35,9 @@ public class MODEL_Tecnico extends MODEL_Usuario {
         this.especialidade_tecnico = Validator_Tecnico.validarEspecialidade(especialidade_tecnico);
     }
 
+    public void setStatus_Disponibilidade_Tecnico(boolean status_disponibilidade_tecnico){
+        this.status_disponibilidade_tecnico = status_disponibilidade_tecnico;
+    }
 
     public boolean isStatus_disponibilidade_tecnico() {
         return status_disponibilidade_tecnico;

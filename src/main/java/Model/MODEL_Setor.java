@@ -1,5 +1,6 @@
 package Model;
 
+import Util.Validator_Geral;
 import Util.Validator_Setor;
 
 public class MODEL_Setor {
@@ -51,7 +52,7 @@ public class MODEL_Setor {
     }
 
     public void setDescricaoSetor(String descricaoSetor) {
-        this.descricaoSetor = descricaoSetor;
+        this.descricaoSetor = Validator_Geral.validarString(descricaoSetor);
     }
 
 

@@ -1,5 +1,7 @@
 package Model;
 
+import Util.Validator_Supervisor;
+
 import java.sql.SQLData;
 import java.time.LocalDate;
 import java.util.Date;
@@ -29,6 +31,6 @@ public class MODEL_Supervisor extends MODEL_Usuario {
     }
 
     public void setExperiencia_anos_supervisor(int experiencia_anos_supervisor) {
-        this.experiencia_anos_supervisor = experiencia_anos_supervisor;
+        this.experiencia_anos_supervisor = Validator_Supervisor.validarAnosExperiencia(experiencia_anos_supervisor);
     }
 }
