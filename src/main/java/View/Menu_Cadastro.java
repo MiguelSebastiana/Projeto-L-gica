@@ -9,6 +9,10 @@ public class Menu_Cadastro {
 
     static SERVICE_Gerente serviceGerente;
 
+    static SERVICE_Supervisor serviceSupervisor;
+
+    static SERVICE_Tecnico serviceTecnico;
+
     public static void Menu() {
 
         int escolha = 0;
@@ -52,6 +56,8 @@ public class Menu_Cadastro {
             }
         } while (!continuar);
         return;
+
+
     }
 
     public static void adicionarSuperVisor() {
@@ -83,6 +89,8 @@ public class Menu_Cadastro {
 
 
         //criar
+
+            serviceSupervisor.Insert_Supervisor(supervisor);
     }
 
     public static void adicionarTecnico() {
@@ -114,6 +122,8 @@ public class Menu_Cadastro {
 
 
         //Criar
+
+        serviceTecnico.Inserir_Tecnico(tecnico);
 
     }
 
@@ -390,12 +400,15 @@ public class Menu_Cadastro {
 
         if (nivelAcesso == 1)
         {
+            adicionarSuperVisor();
         }
         else if (nivelAcesso == 2)
         {
+            adicionarTecnico();
         }
         else if (nivelAcesso == 3)
         {
+            adicionarGerente();
         }
 
         return null;

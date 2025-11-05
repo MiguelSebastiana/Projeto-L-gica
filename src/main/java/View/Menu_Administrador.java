@@ -6,14 +6,12 @@ import java.util.InputMismatchException;
 
 public class Menu_Administrador {
 
-<<<<<<< Updated upstream
+
     static SERVICE_Gerente gerente = new SERVICE_Gerente();
     static SERVICE_Usuario usuario = new SERVICE_Usuario();
 
-    public static void Menu(MODEL_Administrador adm){
-=======
-    public static void Menu() {
->>>>>>> Stashed changes
+
+    public static void Menu(MODEL_Administrador adm) {
 
         boolean continuar = false;
 
@@ -39,16 +37,12 @@ public class Menu_Administrador {
             }
 
             switch (escolha) {
-<<<<<<< Updated upstream
-                case 1:{
 
-                    CadastrarGerente(adm);
-
-=======
                 case 1: {
->>>>>>> Stashed changes
+                    CadastrarGerente(adm);
                     break;
                 }
+
                 case 2: {
 
                     break;
