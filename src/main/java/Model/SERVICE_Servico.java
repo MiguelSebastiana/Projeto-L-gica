@@ -50,6 +50,7 @@ public class SERVICE_Servico {
         Validator_Geral.validarString(status);
         MODEL_Servico modelServico = serviceServico.Find_by_Id(id);
         modelServico.setStatus_aberto_ordem_servico(modelServico.getStatus_aberto_ordem_servico());
+        daoServico.update_Status(id,status);
     }
 
     public void Update_Descricao(String Descricao, int id)
