@@ -51,7 +51,7 @@ public class Menu_Gerente {
                 }
                 case 3:{
                     Ferramentas.Delay(1500);
-                    Menu_Servicos.Criar();
+                    Menu_Servicos.Criar(gerente);
                     break;
                 }
                 case 4:{
@@ -83,14 +83,14 @@ public class Menu_Gerente {
             System.out.println("Nenhuma Ordem de Serviço cadastrada.");
         }
         for (MODEL_Servico ordem : ordensServico) {
-            System.out.println("-------------- Relatório --------------");
+            System.out.println("\n-------------- Relatório --------------");
             System.out.println("| ID da Ordem: " + ordem.getId_Ordem_servico());
             System.out.println("| Técnico:     " + ordem.getTecnico());
             System.out.println("| Máquina:     " + ordem.getMaquina());
             System.out.println("| Descrição:   " + ordem.getDescricao_ordem_servico());
             System.out.println("| Status:      " + ordem.getStatus_aberto_ordem_servico());
             System.out.println("----------------------------------------");
-            System.out.println("");
+            System.out.println("\n");
         }
 
         System.out.println("+--------------------------------------+");
