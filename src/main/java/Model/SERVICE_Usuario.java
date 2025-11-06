@@ -1,6 +1,7 @@
 package Model;
 
 import Repository.DAO_Usuario;
+import Util.Validator_Geral;
 import Util.Validator_Usuario;
 import Exception.EMAILException;
 import Exception.CARGAHORARIAException;
@@ -26,68 +27,99 @@ public class SERVICE_Usuario {
 
     public ArrayList<MODEL_Usuario> All_Users()
     {
-        return daoUsuario.find_All_Users();
+        try {
+            return daoUsuario.find_All_Users();
+        }catch (RuntimeException re){
+            throw new RuntimeException(re.getMessage());
+        }
+    }
+
+    public MODEL_Usuario Find_By_ID(int id){
+        try {
+            Validator_Usuario.verificarID(id);
+            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
+            return usuario;
+        }catch (RuntimeException ru){
+            throw new RuntimeException(ru.getMessage());
+        }
     }
 
     //Update
 
-    public void Update_Telefone(String telefone, MODEL_Usuario usuario)
+    public void Update_Telefone(String telefone, int id)
     {
         try {
-            Validator_Usuario.ValidarTelefone(telefone);
+            Validator_Usuario.verificarID(id);
+            Validator_Geral.ValidarTelefone(telefone);
+            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
+            daoUsuario.update_Telefone(id,telefone);
             usuario.setTelefone(telefone);
         }
-        catch(IllegalArgumentException iae)
+        catch(RuntimeException ru)
         {
-            System.out.println(iae.getMessage());
+            throw new RuntimeException(ru.getMessage());
         }
     }
 
-    public void Update_Email(MODEL_Usuario usuario, String email)
+    public void Update_Email(int id, String email)
     {
         try
         {
-            if(usuario != null) {
-                daoUsuario.update_Email(usuario.getId(), Validator_Usuario.ValidarEmail(email));
-            }
+            Validator_Usuario.verificarID(id);
+            Validator_Geral.ValidarEmail(email);
+            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
+            daoUsuario.update_Email(id,email);
+            usuario.setEmail(email);
         }
-        catch(EMAILException ee)
+        catch(RuntimeException ru)
         {
-            System.out.println(ee.getMessage());
+            throw new RuntimeException(ru.getMessage());
         }
     }
 
-    public void Update_CargaHoraria(MODEL_Usuario usuario, int cargaHoraria)
+    public void Update_CargaHoraria(int id, int cargaHoraria)
     {
         try
         {
-            daoUsuario.update_Carga_Horaria(usuario.getId(), Validator_Usuario.validarCargaHoraria(cargaHoraria));
+            Validator_Usuario.verificarID(id);
+            Validator_Usuario.validarCargaHoraria(cargaHoraria);
+            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
+            daoUsuario.update_Carga_Horaria(id,cargaHoraria);
+            usuario.setCargahoraria(cargaHoraria);
         }
-        catch(CARGAHORARIAException che)
+        catch(RuntimeException ru)
         {
-            System.out.println(che.getMessage());
+            throw new RuntimeException(ru.getMessage());
         }
     }
 
-    public void Update_Formacao(MODEL_Usuario usuario, String formacao) {
+    public void Update_Formacao(int id, String formacao) {
         try
         {
-            daoUsuario.update_Formacao(usuario.getId(), Validator_Usuario.formacao(formacao));
+            Validator_Usuario.verificarID(id);
+            Validator_Usuario.formacao(formacao);
+            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
+            daoUsuario.update_Formacao(id,formacao);
+            usuario.setFormacao(formacao);
         }
-        catch(FORMACAOException fe)
+        catch(RuntimeException ru)
         {
-            System.out.println(fe.getMessage());
+            throw new RuntimeException(ru.getMessage());
         }
     }
-    public void Update_Setor(MODEL_Usuario usuario, int setor)
+    public void Update_Setor(int id, int setor)
     {
         try
         {
-            daoUsuario.update_Setor(usuario.getId(), Validator_Usuario.validarSetor(setor));
+            Validator_Usuario.verificarID(id);
+            Validator_Usuario.validarSetor(setor);
+            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
+            daoUsuario.update_Setor(id,setor);
+            usuario.setSetor(setor);
         }
-        catch(SETORException se)
+        catch(RuntimeException ru)
         {
-            System.out.println(se.getMessage());
+            throw new RuntimeException(ru.getMessage());
         }
     }
 
@@ -106,23 +138,26 @@ public class SERVICE_Usuario {
             }
         }catch(CPFException ce)
         {
-            System.out.println(ce.getMessage());
+            throw new CPFException(ce.getMessage());
         }
         catch(SENHAException se)
         {
-            System.out.println(se.getMessage());
+            throw new SENHAException(se.getMessage());
         }
-
+        catch (RuntimeException ru){
+            throw new RuntimeException(ru.getMessage());
+        }
         return null;
     }
 
-    public int verificarIdFuncao(int usuario)
+    public int verificarIdFuncao(int id)
     {
-        Validator_Usuario.verificarID(usuario);
-
-        ArrayList<>
-        return usuario();
+        try {
+            Validator_Usuario.verificarID(id);
+            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
+            return usuario.getNivelacesso();
+        }catch (RuntimeException re){
+            throw new RuntimeException(re.getMessage());
+        }
     }
-
-
 }
