@@ -49,11 +49,11 @@ public class Menu_Administrador {
                 }
 
                 case 2: {
-
+                    AtualizarGerente(adm);
                     break;
                 }
                 case 3: {
-
+                    ExcluirGerente(adm);
                     break;
                 }
                 case 4: {
