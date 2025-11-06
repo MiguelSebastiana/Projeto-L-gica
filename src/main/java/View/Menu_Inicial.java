@@ -17,9 +17,11 @@ public class Menu_Inicial {
                 System.out.println("      |       WEG OS       |");
                 System.out.println("      +--------------------+");
 
-                System.out.println("\n\n\n Este projeto . . .");
+                Ferramentas.limpaTerminalOpcional(3);
 
-                System.out.println("      --- Opções ---");
+                System.out.println(" Este projeto . . .");
+
+                System.out.println("--- Opções ---");
 
                 System.out.println("1-Login");
                 System.out.println("2-Sair");

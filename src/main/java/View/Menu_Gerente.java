@@ -51,7 +51,7 @@ public class Menu_Gerente {
                 }
                 case 3:{
                     Ferramentas.Delay(1500);
-                    Menu_Servicos.Criar();
+                    Menu_Servicos.Criar(gerente);
                     break;
                 }
                 case 4:{
