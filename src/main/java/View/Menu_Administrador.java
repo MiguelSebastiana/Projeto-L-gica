@@ -20,14 +20,18 @@ public class Menu_Administrador {
 
             Ferramentas.limpaTerminal();
 
-            System.out.println("      ==========================");
-            System.out.println("      ==  Menu Administrador  ==");
-            System.out.println("      ==========================");
+            System.out.println("      +--------------------------------+");
+            System.out.println("      |       Menu Administrador       |");
+            System.out.println("      +--------------------------------+");
+            Ferramentas.Delay(1500);
+
 
             System.out.println("1 - Cadastrar Gerente");
             System.out.println("2 - Atualizar Gerente");
             System.out.println("3 - Excluir Gerente");
             System.out.println("4 - Sair");
+            System.out.println("\n ----------------------------------");
+            System.out.print("> Digite a opção desejada: ");
 
             int escolha = 0;
 
