@@ -5,6 +5,7 @@ import Model.MODEL_Usuario;
 import Model.SERVICE_Servico;
 import Util.Ferramentas;
 import Util.Validator_Geral;
+import Util.Validator_Maquina;
 import Util.Validator_Usuario;
 
 import java.util.InputMismatchException;
@@ -123,7 +124,7 @@ public class Menu_Servicos {
             System.out.print("> Digite o ID da máquina associada: ");
             try {
                 idMaquina = Ferramentas.lInteiro();
-                Validator_Usuario.verificarID(idMaquina);
+                Validator_Maquina.validarId(idMaquina);
                 feito = true;
             } catch (InputMismatchException e) {
                 Ferramentas.limpaTerminal();

@@ -1,6 +1,7 @@
 package View;
 import Model.*;
 import Util.Ferramentas;
+import Util.Validator_Usuario;
 
 import java.util.InputMismatchException;
 
@@ -82,7 +83,27 @@ public class Menu_Administrador {
 
     public static void AtualizarGerente(MODEL_Administrador adm){
 
-        Menu_Atualizar.AtualizarGerente(adm);
+        Ferramentas.limpaTerminal();
+        int id = 0;
+
+        System.out.println("     ---------------------");
+        System.out.println("     - ATUALIZAR GERENTE -");
+        System.out.println("     ---------------------");
+
+        System.out.println("\n\n");
+
+        System.out.print("Digite o ID do gerente que deseja atualizar: ");
+
+        try {
+            id = Ferramentas.lInteiro();
+            Validator_Usuario.verificarID(id);
+            gerente.Find_By_Id(id);
+        }catch (Exception e){
+            Ferramentas.limpaTerminal();
+            System.err.println(e.getMessage());
+            Ferramentas.Delay(1500);
+        }
+        Menu_Atualizar.AtualizarGerente(adm, id);
 
     }
 
