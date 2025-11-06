@@ -120,7 +120,30 @@ public class Menu_Servicos {
             }
         } while (!maquinaValida);
 
+        double preco = 0;
+        boolean precoValdio = false;
+
+        do {
+            System.out.print("Digite o ID da máquina associada: ");
+            try {
+                preco = Ferramentas.lDouble();
+                if (preco <= 0) {
+                    System.err.println("O preço do serviço deve ser maior que zero!");
+                    Ferramentas.Delay(1500);
+                } else {
+                    precoValdio = true;
+                }
+            } catch (InputMismatchException e) {
+                System.err.println("Valor inválido! Digite um número inteiro.");
+                Ferramentas.Delay(1500);
+            }
+        } while (!maquinaValida);
+
         System.out.println("\nOrdem de Serviço criada com sucesso!");
         Ferramentas.Delay(1500);
-    }
+
+        MODEL_Servico servico1 = new MODEL_Servico(status, descricao, idTecnico, idMaquina, preco);
+
+        servico.Insert_Servico(servico1);
+        }
     }
