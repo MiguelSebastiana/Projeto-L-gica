@@ -62,28 +62,32 @@ public class SERVICE_Supervisor {
 
     public void Update_Experiencia(int id, int experiencia)
     {
-        Validator_Usuario.verificarID(id);
-        Validator_Supervisor.validarAnosExperiencia(experiencia);
-        MODEL_Supervisor modelSupervisor = daoSupervisor.find_By_Id(id);
-        modelSupervisor.setExperiencia_anos_supervisor(modelSupervisor.getExperiencia_anos_supervisor());
-        daoSupervisor.update_Experiencia(id,experiencia);
+        try {
+            Validator_Usuario.verificarID(id);
+            Validator_Supervisor.validarAnosExperiencia(experiencia);
+            MODEL_Supervisor modelSupervisor = daoSupervisor.find_By_Id(id);
+            modelSupervisor.setExperiencia_anos_supervisor(modelSupervisor.getExperiencia_anos_supervisor());
+            daoSupervisor.update_Experiencia(id,experiencia);
+        }catch (RuntimeException re){
+            throw new RuntimeException(re.getMessage());
+        }
+
     }
 
 
 
     //Delete
 
-    public void Delete_Supervisor(MODEL_Supervisor supervisor)
+    public void Delete_Supervisor(int id)
     {
-        try
+        try {
+
+            Validator_Usuario.verificarID(id);
+            daoSupervisor.delete_Supervisor(id);
+        }
+        catch (RuntimeException re)
         {
-            if(supervisor != null)
-            {
-                daoSupervisor.delete_Supervisor(supervisor);
-            }
-        }catch(RuntimeException re)
-        {
-            System.out.println(re.getMessage());
+            throw new RuntimeException(re.getMessage());
         }
     }
 
