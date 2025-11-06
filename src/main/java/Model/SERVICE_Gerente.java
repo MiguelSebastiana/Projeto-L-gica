@@ -36,30 +36,41 @@ public class SERVICE_Gerente {
     }
 
     public MODEL_Gerente Find_By_Id(int id){
-        Validator_Usuario.verificarID(id);
-        return daoGerente.find_By_Id(id);
+        try {
+            Validator_Usuario.verificarID(id);
+            return daoGerente.find_By_Id(id);
+        }catch(RuntimeException re)
+        {
+            throw new RuntimeException(re.getMessage());
+        }
     }
 
     //Update
 
-    public void Update_TempoFuncao(MODEL_Gerente gerente, int tempoFuncao) {
-        if (gerente != null)
+    public void Update_TempoFuncao(int id, int tempoFuncao) {
+        try {
+            Validator_Usuario.verificarID(id);
+            MODEL_Gerente modelGerente = SERVICE_Gerente.daoGerente.find_By_Id(id);
+            modelGerente.setTempo_na_funcao_anos_gerente(tempoFuncao);
+            daoGerente.update_Tempo_Funcao(id, tempoFuncao);
+        }catch(RuntimeException rte)
         {
-            daoGerente.update_Tempo_Funcao(gerente, Validator_Gerente.validarTempoFuncao(tempoFuncao));
+            throw new RuntimeException(rte.getMessage());
         }
     }
 
     //Delete
 
-    public void Delete_Gerente(MODEL_Gerente gerente )
+    public void Delete_Gerente(int id)
     {
-        try {
-            if (gerente != null) {
-                daoGerente.delete_User_Gerente(gerente);
-            }
-        }catch(RuntimeException re)
+        try
         {
-            System.out.println(re.getMessage());
+            Validator_Usuario.verificarID(id);
+            daoGerente.delete_User_Gerente(id);
+        }
+        catch(RuntimeException re)
+        {
+            throw new RuntimeException(re.getMessage());
         }
     }
 
