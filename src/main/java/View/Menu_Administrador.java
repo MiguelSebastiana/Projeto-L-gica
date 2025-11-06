@@ -98,13 +98,12 @@ public class Menu_Administrador {
             id = Ferramentas.lInteiro();
             Validator_Usuario.verificarID(id);
             gerente.Find_By_Id(id);
+            Menu_Atualizar.AtualizarGerente(adm, id);
         }catch (Exception e){
             Ferramentas.limpaTerminal();
             System.err.println(e.getMessage());
             Ferramentas.Delay(1500);
         }
-        Menu_Atualizar.AtualizarGerente(adm, id);
-
     }
 
     public static void ExcluirGerente(MODEL_Administrador adm){

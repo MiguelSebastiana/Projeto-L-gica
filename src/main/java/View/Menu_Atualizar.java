@@ -4,20 +4,18 @@ import Model.MODEL_Administrador;
 import Model.MODEL_Gerente;
 import Model.MODEL_Usuario;
 import Model.SERVICE_Gerente;
+import Repository.DAO_Gerente;
 import Repository.DAO_Usuario;
 import Util.Ferramentas;
 import Util.Validator_Geral;
 import Util.Validator_Gerente;
-import Util.Validator_Usuario;
-
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-
-import static View.Menu_Administrador.gerente;
 
 public class Menu_Atualizar {
 
     static SERVICE_Gerente serviceGerente = new SERVICE_Gerente();
+    static DAO_Gerente daoGerente = new DAO_Gerente();
+    static DAO_Usuario daoUsuario = new DAO_Usuario();
 
     public static void AtualizarGerente(MODEL_Administrador adm,int id){
 
@@ -54,6 +52,8 @@ public class Menu_Atualizar {
                         String email = Ferramentas.lString();
                         Validator_Geral.ValidarEmail(email);
                         gerente.setEmail(email);
+                        daoUsuario.update_Email(gerente,email);
+
                     }catch (IllegalArgumentException e)
                     {
                         Ferramentas.limpaTerminal();
@@ -69,6 +69,8 @@ public class Menu_Atualizar {
                         String telefone = Ferramentas.lString();
                         Validator_Geral.ValidarTelefone(telefone);
                         gerente.setTelefone(telefone);
+                        daoUsuario.update_Telefone(gerente,telefone);
+
                     }catch (IllegalArgumentException e)
                     {
                         Ferramentas.limpaTerminal();
@@ -84,6 +86,8 @@ public class Menu_Atualizar {
                         String senha = Ferramentas.lString();
                         Validator_Geral.validarString(senha);
                         gerente.setSenha(senha);
+                        daoUsuario.update_Senha(gerente,senha);
+
                     }catch (IllegalArgumentException e)
                     {
                         Ferramentas.limpaTerminal();
@@ -99,6 +103,8 @@ public class Menu_Atualizar {
                         int anos = Ferramentas.lInteiro();
                         Validator_Gerente.validarTempoFuncao(anos);
                         gerente.setTempo_na_funcao_anos_gerente(anos);
+                        daoGerente.update_Tempo_Funcao(gerente,anos);
+
                     }catch (IllegalArgumentException e)
                     {
                         Ferramentas.limpaTerminal();
@@ -114,6 +120,8 @@ public class Menu_Atualizar {
                         String formacao = Ferramentas.lString();
                         Validator_Geral.validarString(formacao);
                         gerente.setFormacao(formacao);
+                        daoUsuario.update_Formacao(gerente,formacao);
+
                     }catch (IllegalArgumentException e)
                     {
                         Ferramentas.limpaTerminal();
