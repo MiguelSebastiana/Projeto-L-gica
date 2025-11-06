@@ -15,16 +15,18 @@ public class Menu_Inicial {
 
                 Ferramentas.limpaTerminal();
 
-                System.out.println("      ===================");
-                System.out.println("      ====   WEG OS  ====");
-                System.out.println("      ===================");
-
+                System.out.println("      +--------------------+");
+                System.out.println("      |       WEG OS       |");
+                System.out.println("      +--------------------+");
 
                 System.out.println("\n\n\n Este projeto . . .");
 
-                System.out.println("\n\n\nDigite");
+                System.out.println("      --- Opções ---");
+
                 System.out.println("1-Login");
                 System.out.println("2-Sair");
+                System.out.println("\n ----------------------------------");
+                System.out.print("> Digite a opção desejada: ");
 
                 int escolha = 0;
 
