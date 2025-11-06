@@ -6,6 +6,8 @@ import Model.MODEL_Usuario;
 import Model.SERVICE_Gerente;
 import Repository.DAO_Usuario;
 import Util.Ferramentas;
+import Util.Validator_Geral;
+import Util.Validator_Gerente;
 import Util.Validator_Usuario;
 
 import java.util.ArrayList;
@@ -25,9 +27,9 @@ public class Menu_Atualizar {
 
             MODEL_Gerente gerente = serviceGerente.Find_By_Id(id);
 
-            System.out.println("       -----------------             ------------------------");
+            System.out.println("       +---------------+             ------------------------");
             System.out.println("       |    GERENTE    |             |Nome: " + gerente.getNome());
-            System.out.println("       -----------------             |CPF: " + gerente.getCpf());
+            System.out.println("       +---------------+             |CPF: " + gerente.getCpf());
             System.out.println("                                     |EMAIL: " + gerente.getEmail());
             System.out.println("Digite para alterar:                 |Telefone: " + gerente.getTelefone());
             System.out.println("1-Email                              |Anos de servico: " + gerente.getTempo_na_funcao_anos_gerente());
@@ -46,36 +48,90 @@ public class Menu_Atualizar {
             switch (escolha){
 
                 case 1:{
+                    System.out.println("Digite seu novo Email: ");
 
+                    try {
+                        String email = Ferramentas.lString();
+                        Validator_Geral.ValidarEmail(email);
+                        gerente.setEmail(email);
+                    }catch (IllegalArgumentException e)
+                    {
+                        Ferramentas.limpaTerminal();
+                        System.err.print(e.getMessage());
+                        Ferramentas.Delay(1500);
+                    }
                     break;
                 }
                 case 2:{
+                    System.out.println("Digite seu novo telefone: ");
 
+                    try {
+                        String telefone = Ferramentas.lString();
+                        Validator_Geral.ValidarTelefone(telefone);
+                        gerente.setTelefone(telefone);
+                    }catch (IllegalArgumentException e)
+                    {
+                        Ferramentas.limpaTerminal();
+                        System.err.print(e.getMessage());
+                        Ferramentas.Delay(1500);
+                    }
                     break;
                 }
                 case 3:{
+                    System.out.println("Digite sua nova senha: ");
 
+                    try {
+                        String senha = Ferramentas.lString();
+                        Validator_Geral.validarString(senha);
+                        gerente.setSenha(senha);
+                    }catch (IllegalArgumentException e)
+                    {
+                        Ferramentas.limpaTerminal();
+                        System.err.print(e.getMessage());
+                        Ferramentas.Delay(1500);
+                    }
                     break;
                 }
                 case 4:{
+                    System.out.println("Digite seu novo Anos de servico: ");
 
+                    try {
+                        int anos = Ferramentas.lInteiro();
+                        Validator_Gerente.validarTempoFuncao(anos);
+                        gerente.setTempo_na_funcao_anos_gerente(anos);
+                    }catch (IllegalArgumentException e)
+                    {
+                        Ferramentas.limpaTerminal();
+                        System.err.print(e.getMessage());
+                        Ferramentas.Delay(1500);
+                    }
                     break;
                 }
                 case 5:{
+                    System.out.println("Digite sua nova formação: ");
 
+                    try {
+                        String formacao = Ferramentas.lString();
+                        Validator_Geral.validarString(formacao);
+                        gerente.setFormacao(formacao);
+                    }catch (IllegalArgumentException e)
+                    {
+                        Ferramentas.limpaTerminal();
+                        System.err.print(e.getMessage());
+                        Ferramentas.Delay(1500);
+                    }
                     break;
                 }
                 case 6:{
 
-                    break;
+                    return;
                 }
                 default:{
 
+                    Menu_Default.Default();
                     break;
                 }
-
             }
-
         }while (true);
     }
 
