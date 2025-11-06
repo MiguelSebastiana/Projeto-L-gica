@@ -26,7 +26,7 @@ public class Menu_SuperVisor {
 
             Ferramentas.limpaTerminalOpcional(3);
 
-            System.out.println("1 - Ver todos os técnicos ");
+            System.out.println("1 - Ver todos os técnicos");
             System.out.println("2 - Criar ordens de serviço");
             System.out.println("3 - Visualizar todas as ordens de serviço");
             System.out.println("4 - Visualizar todas as maquínas");
