@@ -51,7 +51,7 @@ public class Menu_Gerente {
                 }
                 case 3:{
                     Ferramentas.Delay(1500);
-                    Menu_Servicos.Criar(gerente);
+                    Menu_Servicos.Criar();
                     break;
                 }
                 case 4:{
@@ -74,24 +74,28 @@ public class Menu_Gerente {
 
         List<MODEL_Servico>ordensServico = servico.All_Servicos();
 
-        System.out.println("Relatório de ordens de serviço");
+        System.out.println("      +--------------------------------+");
+        System.out.println("      |       Relatório Serviços       |");
+        System.out.println("      +--------------------------------+");
         Ferramentas.Delay(1500);
 
         if (ordensServico.isEmpty()) {
             System.out.println("Nenhuma Ordem de Serviço cadastrada.");
         }
         for (MODEL_Servico ordem : ordensServico) {
-            System.out.println("\n----------------------------------------");
-            System.out.println("ID da Ordem: " + ordem.getId_Ordem_servico());
-            System.out.println("Técnico:     " + ordem.getTecnico());
-            System.out.println("Máquina:     " + ordem.getMaquina());
-            System.out.println("Descrição:   " + ordem.getDescricao_ordem_servico());
-            System.out.println("Status:      " + ordem.getStatus_aberto_ordem_servico() + "\n");
+            System.out.println("-------------- Relatório --------------");
+            System.out.println("| ID da Ordem: " + ordem.getId_Ordem_servico());
+            System.out.println("| Técnico:     " + ordem.getTecnico());
+            System.out.println("| Máquina:     " + ordem.getMaquina());
+            System.out.println("| Descrição:   " + ordem.getDescricao_ordem_servico());
+            System.out.println("| Status:      " + ordem.getStatus_aberto_ordem_servico());
+            System.out.println("----------------------------------------");
+            System.out.println("");
         }
 
-        System.out.println("----------------------------------------");
-        System.out.println("           Fim do Relatório.            ");
-        System.out.println("----------------------------------------");
+        System.out.println("+--------------------------------------+");
+        System.out.println("|           Fim do Relatório.          |");
+        System.out.println("+--------------------------------------+");
         Ferramentas.Delay(1500);
         Menu_Cadastro.Menu();
     }

@@ -1,14 +1,13 @@
 package View;
-import Model.MODEL_Usuario;
+import Model.*;
 import Util.Ferramentas;
 import Util.Validator_Usuario;
-import Model.SERVICE_Usuario;
 
 public class Menu_Login {
 
     static SERVICE_Usuario serviceUsuario;
 
-    public MODEL_Usuario Menu() {
+    public static void Menu() {
 
         boolean continuar = true;
         String cpf = null;
@@ -45,8 +44,14 @@ public class Menu_Login {
 
         Ferramentas.Delay(500);
 
-        return serviceUsuario.Verificar_Login(cpf,senha);
+        MODEL_Usuario usuario = serviceUsuario.Verificar_Login(cpf, senha);
 
-
+        if (serviceUsuario.verificarIdFuncao(usuario) == 1) {
+            Menu_Tecnico.Menu((MODEL_Tecnico) usuario);
+        } else if (serviceUsuario.verificarIdFuncao(usuario) == 2) {
+            Menu_SuperVisor.Menu((MODEL_Supervisor) usuario);
+        } else if (serviceUsuario.verificarIdFuncao(usuario) == 3) {
+            Menu_Gerente.Menu((MODEL_Gerente) usuario);
+        }
     }
 }
