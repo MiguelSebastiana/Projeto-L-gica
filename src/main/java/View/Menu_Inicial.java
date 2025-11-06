@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 
 public class Menu_Inicial {
 
-
+    static Menu_Login login;
 
         public static void Menu() {
 
@@ -37,7 +37,7 @@ public class Menu_Inicial {
                 }
 
                 if (escolha == 1){
-                    Menu_Login.();
+                    login.Menu();
                 } else if (escolha == 2) {
                     continuar = false;
                 }else {
