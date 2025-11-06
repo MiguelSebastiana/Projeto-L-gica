@@ -48,6 +48,7 @@ public class SERVICE_Supervisor {
     {
         try
         {
+            Validator_Usuario.verificarID(id);
             return daoSupervisor.find_By_Id(id);
         }
         catch(RuntimeException re)
