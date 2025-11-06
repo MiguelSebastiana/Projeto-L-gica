@@ -5,13 +5,14 @@ import Repository.DAO_Servico;
 import java.util.ArrayList;
 import Exception.STRINGException;
 import Util.Validator_Geral;
+import Util.Validator_Servico;
 import Util.Validator_Usuario;
 
 
 public class SERVICE_Servico {
 
     static DAO_Servico daoServico = new DAO_Servico();
-
+    static SERVICE_Servico serviceServico = new SERVICE_Servico();
 
     //--Atributos--//
 
@@ -43,10 +44,11 @@ public class SERVICE_Servico {
 
 
     //Update
-    static MODEL_Servico modelServico;
+
     public void Update_Status(int id, String status){
-        Validator_Usuario.verificarID(id);
+        Validator_Servico.validarID(id);
         Validator_Geral.validarString(status);
+        MODEL_Servico modelServico = serviceServico.Find_by_Id(id);
         modelServico.setStatus_aberto_ordem_servico(modelServico.getStatus_aberto_ordem_servico());
     }
 
@@ -54,7 +56,7 @@ public class SERVICE_Servico {
     {
         try
         {
-            daoServico.update_Descricao(id, modelServico.getDescricao_ordem_servico());
+            daoServico.update_Descricao(id,Descricao);
         }
         catch (STRINGException se)
         {
