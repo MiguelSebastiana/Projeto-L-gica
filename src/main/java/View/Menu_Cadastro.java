@@ -30,14 +30,11 @@ public class Menu_Cadastro {
             System.out.println("2 - Super Visor");
             System.out.println("3 - Sair");
 
-
             try
             {
                 escolha = Ferramentas.lInteiro();
             } catch (InputMismatchException e) {
-                Ferramentas.limpaTerminal();
-                System.err.println("VALOR DIGITADO  INVALIDO!");
-                Ferramentas.Delay(1500);
+                Menu_Default.Default();
             }
 
             switch (escolha) {
@@ -79,14 +76,11 @@ public class Menu_Cadastro {
                 verifica = true;
 
             } catch (IllegalArgumentException iae) {
-                Ferramentas.limpaTerminal();
-                System.err.println(iae.getMessage());
-                Ferramentas.Delay(1500);
+                Menu_Default.Default();
             }
 
         }while (verifica);
         System.out.println("-------------------------------------------");
-
 
         //criar
 
@@ -112,9 +106,7 @@ public class Menu_Cadastro {
                 verifica = true;
 
             } catch (IllegalArgumentException iae) {
-                Ferramentas.limpaTerminal();
-                System.err.println(iae.getMessage());
-                Ferramentas.Delay(1500);
+                Menu_Default.Default();
             }
 
         }while (verifica);
@@ -147,13 +139,13 @@ public class Menu_Cadastro {
                 verifica = true;
 
             } catch (InputMismatchException e) {
-                Ferramentas.limpaTerminal();
-                System.err.println("ERRO - VALOR DIGITADO INCORRETO!");
-                Ferramentas.Delay(1500);
+                Menu_Default.Default();
             }
 
         }while (verifica);
         System.out.println("-------------------------------------------");
+
+        // Criar
 
         serviceGerente.Inserir_Gerente(gerente);
     }
@@ -189,7 +181,7 @@ public class Menu_Cadastro {
                 Validator_Usuario.validarCpf(cpf);
                 verifica = true;
 
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 Menu_Default.Default();
             }
         } while (verifica);
@@ -206,7 +198,7 @@ public class Menu_Cadastro {
                 email = Ferramentas.lString();
                 Validator_Geral.ValidarEmail(email);
                 verifica = true;
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 Menu_Default.Default();
             }
         } while (verifica);
@@ -223,7 +215,7 @@ public class Menu_Cadastro {
                 senha = Ferramentas.lString();
                 Validator_Usuario.senha(senha);
                 verifica = true;
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 Menu_Default.Default();
             }
         } while (verifica);
@@ -240,7 +232,7 @@ public class Menu_Cadastro {
                 nome = Ferramentas.lString();
                 Validator_Geral.validarString(nome);
                 verifica = true;
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 Menu_Default.Default();
             }
         } while (verifica);
@@ -275,7 +267,7 @@ public class Menu_Cadastro {
                 salario = Ferramentas.lDouble();
                 Validator_Usuario.validarSalario(salario);
                 verifica = true;
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 Menu_Default.Default();
             }
         } while (verifica);

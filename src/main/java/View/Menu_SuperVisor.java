@@ -24,6 +24,8 @@ public class Menu_SuperVisor {
             System.out.println("      == Menu SuperVisor ==");
             System.out.println("      =====================");
 
+            Ferramentas.limpaTerminalOpcional(3);
+
             System.out.println("1 - Ver todos os técnicos ");
             System.out.println("2 - Criar ordens de serviço");
             System.out.println("3 - Visualizar todas as ordens de serviço");
@@ -71,26 +73,32 @@ public class Menu_SuperVisor {
 
         ArrayList<MODEL_Tecnico> tecnicos = serviceTecnico.All_Tecnicos();
 
-        Ferramentas.limpaTerminal();
+        try {
 
-        System.out.println("      ------------");
-        System.out.println("      - Tecnicos -");
-        System.out.println("      ------------");
+            Ferramentas.limpaTerminal();
 
-        Ferramentas.Delay(1500);
+            System.out.println("      ------------");
+            System.out.println("      - Tecnicos -");
+            System.out.println("      ------------");
 
-        if (tecnicos == null || tecnicos.isEmpty()) {
-            System.err.println("Não há nenhum técnico para ser listado!");
-        } else {
-            System.out.println("--- Lista de técnicos ---");
-            for (MODEL_Tecnico tecnico : tecnicos) {
-                System.out.println("");
-                System.out.println("ID: " + tecnico.getId());
-                System.out.println("Nome: " + tecnico.getNome());
-                System.out.println("Especialidade: " + tecnico.getEspecialidade_tecnico());
-                System.out.println("Status: " + (tecnico.isStatus_disponibilidade_tecnico() ? "Disponível" : "Em Atendimento"));
-                System.out.println("-------------------------");
-            }
+            Ferramentas.Delay(1500);
+
+            if (tecnicos == null || tecnicos.isEmpty()) {
+                System.err.println("Não há nenhum técnico para ser listado!");
+            } else {
+                System.out.println("--- Lista de técnicos ---");
+
+                for (MODEL_Tecnico tecnico : tecnicos) {
+                    System.out.println("");
+                    System.out.println("ID: " + tecnico.getId());
+                    System.out.println("Nome: " + tecnico.getNome());
+                    System.out.println("Especialidade: " + tecnico.getEspecialidade_tecnico());
+                    System.out.println("Status: " + (tecnico.isStatus_disponibilidade_tecnico() ? "Disponível" : "Em Atendimento"));
+                    System.out.println("-------------------------");
+                    }
+                }
+        }catch (RuntimeException e) {
+        System.err.println("ERRO - FALHA AO MOSTRAR TODOS OS TECNICOS");
         }
     }
 
@@ -104,12 +112,13 @@ public class Menu_SuperVisor {
 
         Menu_Servicos.Criar(supervisor);
 
-
     }
 
     public static void visualizarOrdens(MODEL_Supervisor supervisor) {
 
         ArrayList<MODEL_Servico> servicos = serviceServico.All_Servicos();
+
+        try {
 
         Ferramentas.limpaTerminal();
 
@@ -125,6 +134,7 @@ public class Menu_SuperVisor {
             System.out.println("--- Lista de serviços ---");
 
             for (MODEL_Servico servico : servicos) {
+
                 System.out.println("");
                 System.out.println("ID: " + servico.getId_Ordem_servico());
                 System.out.println("Status: " + servico.getStatus_aberto_ordem_servico());
@@ -132,7 +142,12 @@ public class Menu_SuperVisor {
                 System.out.println("Id do técnico: " + servico.getTecnico());
                 System.out.println("Id da máquina: " + servico.getMaquina());
                 System.out.println("-------------------------");
+
+                }
+
             }
+        }catch (RuntimeException e) {
+            System.err.println("ERRO - FALHA AO MOSTRAR TODOS OS SERVIÇOS");
         }
     }
 
@@ -140,28 +155,34 @@ public class Menu_SuperVisor {
 
         ArrayList<MODEL_Maquina> modelMaquinas = serviceMaquina.All_Maquinas();
 
-        Ferramentas.limpaTerminal();
+        try {
 
-        System.out.println("      ------------");
-        System.out.println("      - Máquinas -");
-        System.out.println("      ------------");
+            Ferramentas.limpaTerminal();
 
-        Ferramentas.Delay(1500);
+            System.out.println("      ------------");
+            System.out.println("      - Máquinas -");
+            System.out.println("      ------------");
 
-        if (modelMaquinas == null || modelMaquinas.isEmpty()) {
-            System.err.println("Não há nenhuma máquina para ser listado");
-        } else {
-            System.out.println("--- Lista de Máquinas ---");
-            for (MODEL_Maquina maquina : modelMaquinas) {
-                System.out.println("");
-                System.out.println("ID: " + maquina.getId_maquina());
-                System.out.println("Modelo: " + maquina.getModeloMaquina());
-                System.out.println("Status: " + maquina.getStatusFuncionamentoMaquina());
-                System.out.println("Descrição: " + maquina.getDescricaoMaquina());
-                System.out.println("-------------------------");
+            Ferramentas.Delay(1500);
 
+            if (modelMaquinas == null || modelMaquinas.isEmpty()) {
+                System.err.println("Não há nenhuma máquina para ser listado");
+            } else {
+                System.out.println("--- Lista de Máquinas ---");
+                for (MODEL_Maquina maquina : modelMaquinas) {
+
+                    System.out.println("");
+                    System.out.println("ID: " + maquina.getId_maquina());
+                    System.out.println("Modelo: " + maquina.getModeloMaquina());
+                    System.out.println("Status: " + maquina.getStatusFuncionamentoMaquina());
+                    System.out.println("Descrição: " + maquina.getDescricaoMaquina());
+                    System.out.println("-------------------------");
+
+                }
             }
-        }
+        }catch (RuntimeException e) {
+        System.err.println("ERRO - FALHA AO MOSTRAR TODAS AS MAQUINAS");
+    }
 
     }
 }
