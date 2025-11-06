@@ -4,6 +4,7 @@ import Model.MODEL_Supervisor;
 import Model.MODEL_Usuario;
 import Model.SERVICE_Servico;
 import Util.Ferramentas;
+import Util.Validator_Geral;
 
 import java.util.InputMismatchException;
 public class Menu_Servicos {
@@ -29,9 +30,7 @@ public class Menu_Servicos {
             try {
                 escolha = Ferramentas.lInteiro();
             } catch (InputMismatchException e) {
-                Ferramentas.limpaTerminal();
-                System.err.println("VALOR DIGITADO  INVALIDO!");
-                Ferramentas.Delay(1500);
+                Menu_Default.Default();
             }
 
             switch (escolha) {
@@ -56,33 +55,27 @@ public class Menu_Servicos {
     public static void Adicionar(MODEL_Supervisor supervisor){
 
         Ferramentas.limpaTerminal();
+        int idTecnico = 0;
+        String descricao = null;
+        boolean feito = false;
 
         System.out.println("=== Criar Novo Serviço ===");
-        String nome = "";
-        String status = "";
-        do {
-            System.out.print("Digite o status da ordem de serviço : ");
+
+
+
+        do{
+            System.out.print("Digite a descrição da ordem de serviço: ");
             try {
-                status = Ferramentas.lString().trim();
-                if (status.isEmpty()) {
-                    System.err.println("O status não pode estar vazio!");
-                    Ferramentas.Delay(1500);
-                    Ferramentas.limpaTerminal();
-                }
-            } catch (InputMismatchException e) {
-                System.err.println("Entrada inválida!");
-                Ferramentas.Delay(1500);
-                Ferramentas.limpaTerminal();
+                descricao = Ferramentas.lString();
+                Validator_Geral.validarString(descricao);
+                feito = true;
+            }catch (RuntimeException e){
+                Menu_Default.Default();
             }
-        } while (status.isEmpty());
+        while (feito);
 
+        feito = false;
 
-        System.out.print("Digite a descrição da ordem de serviço: ");
-        String descricao = Ferramentas.lString();
-
-
-        int idTecnico = 0;
-        boolean tecnicoValido = false;
 
         do {
             System.out.print("Digite o ID do técnico responsável: ");
@@ -142,8 +135,11 @@ public class Menu_Servicos {
         System.out.println("\nOrdem de Serviço criada com sucesso!");
         Ferramentas.Delay(1500);
 
+<<<<<<< Updated upstream
         MODEL_Servico servico1 = new MODEL_Servico(status, descricao, idTecnico, idMaquina, preco);
 
         servico.Insert_Servico(servico1);
         }
+=======
+>>>>>>> Stashed changes
     }
