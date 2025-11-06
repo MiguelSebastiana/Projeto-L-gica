@@ -1,5 +1,7 @@
 package Model;
 
+import Util.Validator_Gerente;
+
 import java.sql.SQLData;
 import java.time.LocalDate;
 import java.util.Date;
@@ -27,6 +29,6 @@ public class MODEL_Gerente extends MODEL_Usuario {
     }
 
     public void setTempo_na_funcao_anos_gerente(int tempo_na_funcao_anos_gerente) {
-        this.tempo_na_funcao_anos_gerente = tempo_na_funcao_anos_gerente;
+        this.tempo_na_funcao_anos_gerente = Validator_Gerente.validarTempoFuncao(tempo_na_funcao_anos_gerente);
     }
 }

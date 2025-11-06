@@ -15,14 +15,14 @@ public class MODEL_Tecnico extends MODEL_Usuario {
     // Construtor Tecnico //
     public MODEL_Tecnico(int id, String nome, String cpf, String senha, int nivelacesso, String telefone, double salario, LocalDate datanasci, String email, int cargahoraria, String formacao, int id_setor, String especialidade_tecnico, boolean status_disponibilidade_tecnico){
         super(id,nome,cpf,senha,nivelacesso,telefone,salario, datanasci,email,cargahoraria,formacao,id_setor);
-        this.especialidade_tecnico = especialidade_tecnico;
+        setEspecialidade_tecnico(especialidade_tecnico);
         this.status_disponibilidade_tecnico = status_disponibilidade_tecnico;
     }
 
     // Construtor sem Id //
     public MODEL_Tecnico(String nome, String cpf,String senha, int nivelacesso, String telefone, double salario, LocalDate datanasci, String email, int cargahoraria, String formacao, int id_setor, String especialidade_tecnico, boolean status_disponibilidade_tecnico){
         super(nome,cpf,senha,nivelacesso,telefone,salario,datanasci,email,cargahoraria,formacao,id_setor);
-        this.especialidade_tecnico = especialidade_tecnico;
+        setEspecialidade_tecnico(especialidade_tecnico);
         this.status_disponibilidade_tecnico = status_disponibilidade_tecnico;
     }
 
@@ -35,6 +35,9 @@ public class MODEL_Tecnico extends MODEL_Usuario {
         this.especialidade_tecnico = Validator_Tecnico.validarEspecialidade(especialidade_tecnico);
     }
 
+    public void setStatus_Disponibilidade_Tecnico(boolean status_disponibilidade_tecnico){
+        this.status_disponibilidade_tecnico = status_disponibilidade_tecnico;
+    }
 
     public boolean isStatus_disponibilidade_tecnico() {
         return status_disponibilidade_tecnico;

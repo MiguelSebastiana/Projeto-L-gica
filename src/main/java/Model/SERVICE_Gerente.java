@@ -2,6 +2,7 @@ package Model;
 
 import Repository.DAO_Gerente;
 import Util.Validator_Gerente;
+import Util.Validator_Usuario;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class SERVICE_Gerente {
     }
 
     public MODEL_Gerente Find_By_Id(int id){
+        Validator_Usuario.verificarID(id);
         return daoGerente.find_By_Id(id);
     }
 

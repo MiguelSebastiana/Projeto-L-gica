@@ -34,7 +34,7 @@ public class  MODEL_Maquina{
     }
 
     public void setId_maquina(int id_maquina) {
-        this.id_maquina = id_maquina;
+        this.id_maquina = Validator_Geral.ValidarNumeroNegativoInt(id_maquina);
     }
 
     public String getDescricaoMaquina() {
@@ -42,7 +42,7 @@ public class  MODEL_Maquina{
     }
 
     public void setDescricaoMaquina(String descricaoMaquina) {
-        DescricaoMaquina = descricaoMaquina;
+        DescricaoMaquina = Validator_Geral.validarString(descricaoMaquina);
     }
 
     public String getModeloMaquina() {
@@ -58,7 +58,7 @@ public class  MODEL_Maquina{
     }
 
     public void setStatusFuncionamentoMaquina(String statusFuncionamentoMaquina) {
-        StatusFuncionamentoMaquina = statusFuncionamentoMaquina;
+        StatusFuncionamentoMaquina = Validator_Geral.validarString(statusFuncionamentoMaquina);
     }
 
     public int getId_Setor() {
@@ -66,7 +66,7 @@ public class  MODEL_Maquina{
     }
 
     public void setId_Setor(int setor) {
-        this.id_setor = setor;
+        this.id_setor = Validator_Geral.ValidarNumeroNegativoInt(setor);
     }
 
 }

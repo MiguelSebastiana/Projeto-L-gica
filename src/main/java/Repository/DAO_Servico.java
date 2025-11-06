@@ -14,7 +14,7 @@ public class DAO_Servico
     public void insert_Servico(MODEL_Servico servico){
 
         String querySql = "insert into Ordem_servico(status_aberto_ordem_servico,descricao_ordem_servico," +
-                "Tecnico_id_tecnico, Maquina_id_maquina) values(?,?,?,?) ";
+                "Tecnico_id_tecnico, Maquina_id_maquina, Custo) values(?,?,?,?,?) ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -25,16 +25,25 @@ public class DAO_Servico
             stmt.setString(2,servico.getDescricao_ordem_servico());
             stmt.setInt(3,servico.getTecnico());
             stmt.setInt(4,servico.getMaquina());
+            stmt.setDouble(5,servico.getPreco());
             stmt.executeQuery();
 
-            String querySql2 = "";
+            String querySql2 = "select os.id_ordem_servico " +
+                    "from Ordem_servico os" +
+                    "where os.descricao_ordem_servico = ?";
 
             try
             {
 
-                int id= resultSet.getInt("id_ordem_servico");
 
-                MODEL_Servico servico1 = new MODEL_Servico(id,servico.getStatus_aberto_ordem_servico(),servico.getDescricao_ordem_servico(),servico.getTecnico(),servico.getMaquina());
+                stmt.executeQuery(querySql2);
+
+                stmt.setString(1,servico.getDescricao_ordem_servico());
+
+                int id = resultSet.getInt("id_ordem_servico");
+
+
+                MODEL_Servico servico1 = new MODEL_Servico(id,servico.getStatus_aberto_ordem_servico(),servico.getDescricao_ordem_servico(),servico.getTecnico(),servico.getMaquina(),servico.getPreco());
 
             }catch (Exception e){
 
@@ -60,7 +69,8 @@ public class DAO_Servico
         String querySql = "SELECT " +
                 "    os.id_ordem_servico, " +
                 "    os.status_aberto_ordem_servico, " +
-                "    os.descricao_ordem_servico, " +
+                "    os.descricao_ordem_servico," +
+                "    os.Custo " +
 
                 "    m.id_maquina, " +
                 "    m.descricao_maquina, " +
@@ -102,6 +112,7 @@ public class DAO_Servico
                 int id_ordem_servico = resultSet.getInt("id_ordem_servico");
                 String status_aberto_ordem_servico = resultSet.getString("status_aberto_ordem_servico");
                 String descricao_ordem_servico = resultSet.getString("descricao_ordem_servico");
+                double custo = resultSet.getDouble("Custo");
 
                 int id_usuario = resultSet.getInt("id_usuario");
                 String nome_usuario = resultSet.getString("nome_usuario");
@@ -129,14 +140,7 @@ public class DAO_Servico
                 boolean status_disponibilidade_tecnico = resultSet.getBoolean("status_disponibilade_tecnico");
 
 
-                MODEL_Servico ordemServico = new MODEL_Servico
-                        (
-                        id_ordem_servico,
-                        status_aberto_ordem_servico,
-                        descricao_ordem_servico,
-                        id_tecnico,
-                        id_maquina
-                );
+                MODEL_Servico ordemServico = new MODEL_Servico(id_ordem_servico, status_aberto_ordem_servico, descricao_ordem_servico, id_tecnico, id_maquina,custo);
 
                 listaOrdens.add(ordemServico);
             }
@@ -156,7 +160,7 @@ public class DAO_Servico
 
         MODEL_Servico servico = null;
 
-        String querySql = "select os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina " +
+        String querySql = "select os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina, os.Custo" +
                 "from Ordem_servico os " +
                 "where os.id_ordem_servico = ? ";
 
@@ -171,8 +175,9 @@ public class DAO_Servico
             String descricao = resultSet.getString("descricao_ordem_servico");
             int tecnico_id = resultSet.getInt("Tecnico_id_tecnico");
             int maquina_id = resultSet.getInt("Maquina_id_maquina");
+            double custo = resultSet.getDouble("Custo");
 
-            MODEL_Servico servico1 = new MODEL_Servico(id,status,descricao,tecnico_id,maquina_id);
+            MODEL_Servico servico1 = new MODEL_Servico(id,status,descricao,tecnico_id,maquina_id,custo);
 
         }catch (SQLException e){
 
@@ -188,7 +193,7 @@ public class DAO_Servico
 
         ArrayList<MODEL_Servico> servicos = new ArrayList<>();
 
-        String querySql = "select os.id_ordem_servico,os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina " +
+        String querySql = "select os.id_ordem_servico,os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina, os.Custo " +
                 "from Ordem_servico os " +
                 "where  os.status_aberto_ordem_servico = 'Aberta' ";
 
@@ -204,8 +209,9 @@ public class DAO_Servico
                 String descricao = resultSet.getString("descricao_ordem_servico");
                 int id_tecnico = resultSet.getInt("Tecnico_id_tecnico");
                 int id_maquina = resultSet.getInt("Maquina_id_maquina");
+                double custo = resultSet.getDouble("Custo");
 
-                MODEL_Servico servico = new MODEL_Servico(id,status,descricao,id_tecnico,id_maquina);
+                MODEL_Servico servico = new MODEL_Servico(id,status,descricao,id_tecnico,id_maquina,custo);
 
                 servicos.add(servico);
             }
@@ -305,6 +311,28 @@ public class DAO_Servico
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
+    }
+
+    public void update_Custo(int id, double custo){
+
+        String querySql = "update Ordem_servico os " +
+                "set os.Custo = ? " +
+                "where os.Maquina_id_maquina = ? ";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+            PreparedStatement stmt = conexao.prepareStatement(querySql))
+        {
+            stmt.setDouble(1, custo);
+            stmt.setInt(2, id);
+            stmt.executeQuery();
+
+        }catch (SQLException e){
+
+            System.err.println("Não foi possível modificar a ordem de serviço: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
+
     }
 
     // Delete

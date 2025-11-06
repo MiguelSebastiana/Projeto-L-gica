@@ -2,11 +2,14 @@ package Util;
 
 import Exception.*;
 import Model.MODEL_Setor;
+import Model.MODEL_Usuario;
+import Repository.DAO_Usuario;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.YearMonth;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +17,8 @@ import java.util.List;
 public class Validator_Usuario {
 
     // ---- VALIDAÇÃO DE CPF ---- //
+
+    static DAO_Usuario usuario = new DAO_Usuario();
 
     // Metodo para validar cpf
     public static String validarCpf(String cpf) {
@@ -213,5 +218,18 @@ public class Validator_Usuario {
         }
 
         return formacao;
+    }
+
+    public static void verificarID(int id){
+
+        ArrayList<MODEL_Usuario> usuarios = usuario.find_All_Users();
+
+        for (MODEL_Usuario u : usuarios){
+            if (u.getId() == id){
+                return;
+            }
+        }
+
+        throw new IDException();
     }
 }

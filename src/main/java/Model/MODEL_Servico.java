@@ -1,5 +1,7 @@
 package Model;
 
+import Util.Validator_Geral;
+
 public class MODEL_Servico {
 
     //Atributos ordens de Serviço//
@@ -8,24 +10,27 @@ public class MODEL_Servico {
     private String descricao_ordem_servico;
     private int id_tecnico;
     private int id_maquina;
+    private double preco;
 
     //Construtor ordens de Serviço//
-    public MODEL_Servico(int id_ordem_servico, String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina) {
+    public MODEL_Servico(int id_ordem_servico, String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina, double preco) {
 
-        this.id_ordem_servico = id_ordem_servico;
-        this.status_aberto_ordem_servico = status_aberto_ordem_servico;
-        this.descricao_ordem_servico = descricao_ordem_servico;
-        this.id_tecnico = tecnico;
-        this.id_maquina = maquina;
+        setId_ordem_servico(id_ordem_servico);
+        setStatus_aberto_ordem_servico(status_aberto_ordem_servico);
+        setDescricao_ordem_servico(descricao_ordem_servico);
+        setTecnico(tecnico);
+        setMaquina(maquina);
+        setPreco(preco);
     }
 
     // Construtor sem Id //
-    public MODEL_Servico(String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina) {
+    public MODEL_Servico(String status_aberto_ordem_servico, String descricao_ordem_servico, int tecnico, int maquina,double preco) {
 
-        this.status_aberto_ordem_servico = status_aberto_ordem_servico;
-        this.descricao_ordem_servico = descricao_ordem_servico;
-        this.id_tecnico = tecnico;
-        this.id_maquina = maquina;
+        setStatus_aberto_ordem_servico(status_aberto_ordem_servico);
+        setDescricao_ordem_servico(descricao_ordem_servico);
+        setTecnico(tecnico);
+        setMaquina(maquina);
+        setPreco(preco);
     }
 
 
@@ -35,7 +40,7 @@ public class MODEL_Servico {
     }
 
     public void setId_ordem_servico(int ordem_servico) {
-        this.id_ordem_servico = ordem_servico;
+        this.id_ordem_servico = Validator_Geral.ValidarNumeroNegativoInt(ordem_servico);
     }
 
     public String getStatus_aberto_ordem_servico() {
@@ -43,7 +48,7 @@ public class MODEL_Servico {
     }
 
     public void setStatus_aberto_ordem_servico(String status_aberto_ordem_servico) {
-        this.status_aberto_ordem_servico = status_aberto_ordem_servico;
+        this.status_aberto_ordem_servico = Validator_Geral.validarString(status_aberto_ordem_servico);
     }
 
     public String getDescricao_ordem_servico() {
@@ -51,7 +56,7 @@ public class MODEL_Servico {
     }
 
     public void setDescricao_ordem_servico(String descricao_ordem_servico) {
-        this.descricao_ordem_servico = descricao_ordem_servico;
+        this.descricao_ordem_servico = Validator_Geral.validarString(status_aberto_ordem_servico);
     }
 
     public int getTecnico() {
@@ -59,7 +64,7 @@ public class MODEL_Servico {
     }
 
     public void setTecnico(int tecnico) {
-        this.id_tecnico = tecnico;
+        this.id_tecnico = Validator_Geral.ValidarNumeroNegativoInt(tecnico);
     }
 
     public int getMaquina() {
@@ -67,6 +72,14 @@ public class MODEL_Servico {
     }
 
     public void setMaquina(int maquina) {
-        this.id_maquina = maquina;
+        this.id_maquina = Validator_Geral.ValidarNumeroNegativoInt(maquina);
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = Validator_Geral.ValidarNumeroNegativoDouble(preco);
     }
 }

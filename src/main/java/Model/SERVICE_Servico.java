@@ -4,6 +4,8 @@ import Repository.DAO_Servico;
 
 import java.util.ArrayList;
 import Exception.STRINGException;
+import Util.Validator_Geral;
+import Util.Validator_Usuario;
 
 
 public class SERVICE_Servico {
@@ -12,8 +14,6 @@ public class SERVICE_Servico {
 
 
     //--Atributos--//
-
-
 
     //--Métodos--//
 
@@ -33,6 +33,7 @@ public class SERVICE_Servico {
     }
 
     public MODEL_Servico Find_by_Id(int id){
+        Validator_Usuario.verificarID(id);
         return daoServico.find_By_Id(id);
     }
 
@@ -43,11 +44,13 @@ public class SERVICE_Servico {
 
     //Update
     static MODEL_Servico modelServico;
-    public void Update_Status(){
-    modelServico.setStatus_aberto_ordem_servico(modelServico.getStatus_aberto_ordem_servico());
+    public void Update_Status(int id, String status){
+        Validator_Usuario.verificarID(id);
+        Validator_Geral.validarString(status);
+        modelServico.setStatus_aberto_ordem_servico(modelServico.getStatus_aberto_ordem_servico());
     }
 
-    public void Update_Descricao(MODEL_Servico servico, String Descricao, int id)
+    public void Update_Descricao(String Descricao, int id)
     {
         try
         {
@@ -60,17 +63,25 @@ public class SERVICE_Servico {
 
     }
 
-    public void Update_Id_Tecnico(MODEL_Servico servico, int id, int idt){
+    public void Update_Id_Tecnico(int id, int idt){
+        Validator_Usuario.verificarID(idt);
         daoServico.update_Id_Tecnico(id, idt);
     }
 
     public void Update_Id_Maquina(int id, int idm){
+        Validator_Usuario.verificarID(idm);
         daoServico.update_Id_Maquina(id, idm);
+    }
+
+    public void Update_Custo(int id, double custo){
+        Validator_Geral.ValidarNumeroNegativoDouble(custo);
+        daoServico.update_Custo(id,custo);
     }
 
     //Delete
 
     public void Delete_Servico(int id){
+        Validator_Usuario.verificarID(id);
         daoServico.delete_Servico(id);
     }
 
