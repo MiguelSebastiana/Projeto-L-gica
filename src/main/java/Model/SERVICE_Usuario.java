@@ -10,13 +10,15 @@ import Exception.SENHAException;
 import Exception.CPFException;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SERVICE_Usuario {
 
-    static DAO_Usuario daoUsuario;
+
     //--Atributos--//
 
-
+    static DAO_Usuario daoUsuario;
+    static SERVICE_Usuario serviceUsuario;
 
     //--Métodos--//
 
@@ -24,7 +26,6 @@ public class SERVICE_Usuario {
 
     public ArrayList<MODEL_Usuario> All_Users()
     {
-
         return daoUsuario.find_All_Users();
     }
 
@@ -47,7 +48,7 @@ public class SERVICE_Usuario {
         try
         {
             if(usuario != null) {
-                daoUsuario.update_Email(usuario, Validator_Usuario.ValidarEmail(email));
+                daoUsuario.update_Email(usuario.getId(), Validator_Usuario.ValidarEmail(email));
             }
         }
         catch(EMAILException ee)
@@ -60,7 +61,7 @@ public class SERVICE_Usuario {
     {
         try
         {
-            daoUsuario.update_Carga_Horaria(usuario, Validator_Usuario.validarCargaHoraria(cargaHoraria));
+            daoUsuario.update_Carga_Horaria(usuario.getId(), Validator_Usuario.validarCargaHoraria(cargaHoraria));
         }
         catch(CARGAHORARIAException che)
         {
@@ -71,7 +72,7 @@ public class SERVICE_Usuario {
     public void Update_Formacao(MODEL_Usuario usuario, String formacao) {
         try
         {
-            daoUsuario.update_Formacao(usuario, Validator_Usuario.formacao(formacao));
+            daoUsuario.update_Formacao(usuario.getId(), Validator_Usuario.formacao(formacao));
         }
         catch(FORMACAOException fe)
         {
@@ -82,7 +83,7 @@ public class SERVICE_Usuario {
     {
         try
         {
-            daoUsuario.update_Setor(usuario, Validator_Usuario.validarSetor(setor));
+            daoUsuario.update_Setor(usuario.getId(), Validator_Usuario.validarSetor(setor));
         }
         catch(SETORException se)
         {
@@ -115,9 +116,12 @@ public class SERVICE_Usuario {
         return null;
     }
 
-    public int verificarIdFuncao(MODEL_Usuario usuario)
+    public int verificarIdFuncao(int usuario)
     {
-        return usuario.getNivelacesso();
+        Validator_Usuario.verificarID(usuario);
+
+        ArrayList<>
+        return usuario();
     }
 
 
