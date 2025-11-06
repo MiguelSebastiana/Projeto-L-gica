@@ -8,10 +8,9 @@ import java.util.ArrayList;
 
 public class SERVICE_Gerente {
 
-    static DAO_Gerente daoGerente;
     //--Atributos--//
 
-
+    static DAO_Gerente daoGerente;
 
     //--Métodos--//
 
@@ -29,6 +28,7 @@ public class SERVICE_Gerente {
         }
 
     }
+
     //Read
 
     public ArrayList<MODEL_Gerente> All_Gerentes(){
@@ -50,6 +50,7 @@ public class SERVICE_Gerente {
     public void Update_TempoFuncao(int id, int tempoFuncao) {
         try {
             Validator_Usuario.verificarID(id);
+            Validator_Gerente.validarTempoFuncao(tempoFuncao);
             MODEL_Gerente modelGerente = SERVICE_Gerente.daoGerente.find_By_Id(id);
             modelGerente.setTempo_na_funcao_anos_gerente(tempoFuncao);
             daoGerente.update_Tempo_Funcao(id, tempoFuncao);
