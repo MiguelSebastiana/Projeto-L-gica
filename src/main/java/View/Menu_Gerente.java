@@ -17,14 +17,19 @@ public class Menu_Gerente {
         do{
             Ferramentas.limpaTerminal();
 
-            System.out.println("      ====================");
-            System.out.println("      ==  Menu Gerente  ==");
-            System.out.println("      ====================");
+            System.out.println("      +--------------------------+");
+            System.out.println("      |       Menu Gerente       |");
+            System.out.println("      +--------------------------+");
 
-            System.out.println("1 - Cadastrar Funcionário");
+            Ferramentas.limpaTerminalOpcional(2);
+
+            System.out.println("--- Opções ---");
+            System.out.println("\n1 - Cadastrar Funcionário");
             System.out.println("2 - Visualizar relatórios gerais");
             System.out.println("3 - Criar ordens de serviço");
             System.out.println("4 - Sair");
+            System.out.println("\n ----------------------------------");
+            System.out.print("> Digite a opção desejada: ");
 
             int escolha = 0;
 
@@ -78,10 +83,10 @@ public class Menu_Gerente {
         for (MODEL_Servico ordem : ordensServico) {
             System.out.println("\n----------------------------------------");
             System.out.println("ID da Ordem: " + ordem.getId_Ordem_servico());
-            System.out.println("Técnico: " + ordem.getTecnico());
-            System.out.println("Máquina: " + ordem.getMaquina());
-            System.out.println("Descrição: " + ordem.getDescricao_ordem_servico());
-            System.out.println("Status: " + ordem.getStatus_aberto_ordem_servico() + "\n");
+            System.out.println("Técnico:     " + ordem.getTecnico());
+            System.out.println("Máquina:     " + ordem.getMaquina());
+            System.out.println("Descrição:   " + ordem.getDescricao_ordem_servico());
+            System.out.println("Status:      " + ordem.getStatus_aberto_ordem_servico() + "\n");
         }
 
         System.out.println("----------------------------------------");

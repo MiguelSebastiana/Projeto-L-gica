@@ -16,13 +16,13 @@ public class Menu_Login {
 
         Ferramentas.limpaTerminal();
 
-        System.out.println("      =================");
-        System.out.println("      ===   Login   ===");
-        System.out.println("      =================");
+        System.out.println("      +------------------------+");
+        System.out.println("      |       Menu Login       |");
+        System.out.println("      +------------------------+");
 
-
-        System.out.println("\n\n\n------------------");
-        System.out.print("-Digite o seu cpf: ");
+        Ferramentas.limpaTerminalOpcional(2);
+        System.out.println("------------------");
+        System.out.print("> Digite o seu cpf: ");
 
         do {
             try {
@@ -37,9 +37,9 @@ public class Menu_Login {
         }while (continuar);
         System.out.println("------------------");
 
-        System.out.println("\n\n");
+        Ferramentas.limpaTerminalOpcional(1);
         System.out.println("------------------");
-        System.out.print("-Digite a sua senha: ");
+        System.out.print("> Digite a sua senha: ");
         senha = Ferramentas.lString();
         System.out.println("------------------");
 
