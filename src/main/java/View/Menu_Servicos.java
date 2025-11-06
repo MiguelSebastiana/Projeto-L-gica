@@ -13,7 +13,7 @@ public class Menu_Servicos {
 
     static SERVICE_Servico servico = new SERVICE_Servico();
 
-    public static void Criar(MODEL_Supervisor supervisor) {
+    public static void Criar(MODEL_Usuario supervisor) {
 
         boolean continuar = true;
         int escolha = 0;
@@ -60,7 +60,7 @@ public class Menu_Servicos {
         }while(!continuar);
     }
 
-    public static void Adicionar(MODEL_Supervisor supervisor) {
+    public static void Adicionar(MODEL_Usuario supervisor) {
 
         Ferramentas.limpaTerminalOpcional(5);
         int idTecnico = 0;
