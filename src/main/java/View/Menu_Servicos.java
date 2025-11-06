@@ -5,6 +5,7 @@ import Model.MODEL_Usuario;
 import Model.SERVICE_Servico;
 import Util.Ferramentas;
 import Util.Validator_Geral;
+import Util.Validator_Usuario;
 
 import java.util.InputMismatchException;
 public class Menu_Servicos {
@@ -52,94 +53,84 @@ public class Menu_Servicos {
         }while(!continuar);
     }
 
-    public static void Adicionar(MODEL_Supervisor supervisor){
+    public static void Adicionar(MODEL_Supervisor supervisor) {
 
         Ferramentas.limpaTerminal();
         int idTecnico = 0;
-        String descricao = null;
+        String descricao = "";
         boolean feito = false;
+        int idMaquina = 0;
+        double preco = 0;
+        String status = "Em andamento";
 
         System.out.println("=== Criar Novo Serviço ===");
 
 
-
-        do{
+        do {
             System.out.print("Digite a descrição da ordem de serviço: ");
             try {
                 descricao = Ferramentas.lString();
                 Validator_Geral.validarString(descricao);
                 feito = true;
-            }catch (RuntimeException e){
-                Menu_Default.Default();
+            } catch (RuntimeException e) {
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
-        while (feito);
+        }while (feito) ;
 
         feito = false;
 
-
         do {
+            System.out.print("Digite o valor da ordem de serviço: ");
+            try {
+                preco = Ferramentas.lDouble();
+                Validator_Geral.ValidarNumeroNegativoDouble(preco);
+                feito = true;
+            } catch (RuntimeException e) {
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
+            }
+        }while (feito) ;
+
+        feito = false;
+
+        do{
             System.out.print("Digite o ID do técnico responsável: ");
             try {
                 idTecnico = Ferramentas.lInteiro();
-                if (idTecnico <= 0) {
-                    System.err.println("O ID do técnico deve ser maior que zero!");
-                    Ferramentas.Delay(1500);
-                } else {
-                    tecnicoValido = true;
-                }
+                Validator_Usuario.verificarID(idTecnico);
+                feito = true;
             } catch (InputMismatchException e) {
-                System.err.println("Valor inválido! Digite um número inteiro.");
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
                 Ferramentas.Delay(1500);
             }
-        } while (!tecnicoValido);
+        }while (feito);
 
-        
-        int idMaquina = 0;
-        boolean maquinaValida = false;
+        feito = false;
 
         do {
             System.out.print("Digite o ID da máquina associada: ");
             try {
                 idMaquina = Ferramentas.lInteiro();
-                if (idMaquina <= 0) {
-                    System.err.println("O ID da máquina deve ser maior que zero!");
-                    Ferramentas.Delay(1500);
-                } else {
-                    maquinaValida = true;
-                }
+                Validator_Usuario.verificarID(idMaquina);
+                feito = true;
             } catch (InputMismatchException e) {
-                System.err.println("Valor inválido! Digite um número inteiro.");
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
                 Ferramentas.Delay(1500);
             }
-        } while (!maquinaValida);
+        } while (feito);
 
-        double preco = 0;
-        boolean precoValdio = false;
-
-        do {
-            System.out.print("Digite o ID da máquina associada: ");
-            try {
-                preco = Ferramentas.lDouble();
-                if (preco <= 0) {
-                    System.err.println("O preço do serviço deve ser maior que zero!");
-                    Ferramentas.Delay(1500);
-                } else {
-                    precoValdio = true;
-                }
-            } catch (InputMismatchException e) {
-                System.err.println("Valor inválido! Digite um número inteiro.");
-                Ferramentas.Delay(1500);
-            }
-        } while (!maquinaValida);
-
-        System.out.println("\nOrdem de Serviço criada com sucesso!");
+        System.out.println("\n\n\nOrdem de Serviço criada com sucesso!");
         Ferramentas.Delay(1500);
 
-<<<<<<< Updated upstream
-        MODEL_Servico servico1 = new MODEL_Servico(status, descricao, idTecnico, idMaquina, preco);
+        MODEL_Servico servico1 = new MODEL_Servico(status,descricao,idTecnico,idMaquina,preco);
 
         servico.Insert_Servico(servico1);
-        }
-=======
->>>>>>> Stashed changes
+
+
     }
+}
