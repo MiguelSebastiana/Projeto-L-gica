@@ -19,15 +19,21 @@ public class Menu_Servicos {
 
         do {
             Ferramentas.limpaTerminal();
-            Ferramentas.limpaTerminal();
-            System.out.println("      =======================");
-            System.out.println("      ==   Criar Serviços  ==");
-            System.out.println("      =======================");
-            System.out.println("\n\n\n");
-            System.out.println("--- Adicione um novo Serviço ---");
-            System.out.println("\n\n");
-            System.out.println("1 - Criar");
+
+            System.out.println("      +----------------------+");
+            System.out.println("      |       Máquinas       |");
+            System.out.println("      +----------------------+");
+
+            Ferramentas.limpaTerminalOpcional(2);
+
+            System.out.println("--- Opções ---");
+
+            System.out.println("\n");
+            System.out.println("1 - Criar Ordem de serviço");
             System.out.println("2 - Sair");
+            System.out.println("\n ----------------------------------");
+            System.out.print("> Digite a opção desejada: ");
+
             try {
                 escolha = Ferramentas.lInteiro();
             } catch (InputMismatchException e) {
@@ -55,7 +61,7 @@ public class Menu_Servicos {
 
     public static void Adicionar(MODEL_Supervisor supervisor) {
 
-        Ferramentas.limpaTerminal();
+        Ferramentas.limpaTerminalOpcional(5);
         int idTecnico = 0;
         String descricao = "";
         boolean feito = false;
@@ -63,11 +69,13 @@ public class Menu_Servicos {
         double preco = 0;
         String status = "Em andamento";
 
-        System.out.println("=== Criar Novo Serviço ===");
+        System.out.println("      +----------------------------------+");
+        System.out.println("      |       Criando novo serviço       |");
+        System.out.println("      +----------------------------------+");
 
 
         do {
-            System.out.print("Digite a descrição da ordem de serviço: ");
+            System.out.print("> Digite a descrição da ordem de serviço: ");
             try {
                 descricao = Ferramentas.lString();
                 Validator_Geral.validarString(descricao);
@@ -82,7 +90,7 @@ public class Menu_Servicos {
         feito = false;
 
         do {
-            System.out.print("Digite o valor da ordem de serviço: ");
+            System.out.print("> Digite o valor da ordem de serviço: ");
             try {
                 preco = Ferramentas.lDouble();
                 Validator_Geral.ValidarNumeroNegativoDouble(preco);
@@ -97,7 +105,7 @@ public class Menu_Servicos {
         feito = false;
 
         do{
-            System.out.print("Digite o ID do técnico responsável: ");
+            System.out.print("> Digite o ID do técnico responsável: ");
             try {
                 idTecnico = Ferramentas.lInteiro();
                 Validator_Usuario.verificarID(idTecnico);
@@ -112,7 +120,7 @@ public class Menu_Servicos {
         feito = false;
 
         do {
-            System.out.print("Digite o ID da máquina associada: ");
+            System.out.print("> Digite o ID da máquina associada: ");
             try {
                 idMaquina = Ferramentas.lInteiro();
                 Validator_Usuario.verificarID(idMaquina);
@@ -124,7 +132,8 @@ public class Menu_Servicos {
             }
         } while (feito);
 
-        System.out.println("\n\n\nOrdem de Serviço criada com sucesso!");
+        Ferramentas.limpaTerminalOpcional(3);
+        System.out.println("Ordem de Serviço criada com sucesso!");
         Ferramentas.Delay(1500);
 
         MODEL_Servico servico1 = new MODEL_Servico(status,descricao,idTecnico,idMaquina,preco);

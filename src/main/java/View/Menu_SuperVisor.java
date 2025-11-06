@@ -27,8 +27,7 @@ public class Menu_SuperVisor {
             Ferramentas.limpaTerminalOpcional(2);
 
             System.out.println("      --- Opções ---");
-
-            System.out.println("1 - Ver todos os técnicos");
+            System.out.println("\n1 - Ver todos os técnicos");
             System.out.println("2 - Criar ordens de serviço");
             System.out.println("3 - Visualizar todas as ordens de serviço");
             System.out.println("4 - Visualizar todas as maquínas");
@@ -167,6 +166,8 @@ public class Menu_SuperVisor {
             System.out.println("      +----------------------+");
             System.out.println("      |       Máquinas       |");
             System.out.println("      +----------------------+");
+
+            Ferramentas.limpaTerminalOpcional(2);
 
             Ferramentas.Delay(1500);
 
