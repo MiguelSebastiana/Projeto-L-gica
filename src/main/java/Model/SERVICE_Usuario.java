@@ -115,4 +115,10 @@ public class SERVICE_Usuario {
         return null;
     }
 
+    public int verificarIdFuncao(MODEL_Usuario usuario)
+    {
+        return usuario.getNivelacesso();
+    }
+
+
 }
