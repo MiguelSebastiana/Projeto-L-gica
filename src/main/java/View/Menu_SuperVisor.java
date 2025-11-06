@@ -20,17 +20,21 @@ public class Menu_SuperVisor {
 
         do {
             Ferramentas.limpaTerminal();
-            System.out.println("      =====================");
-            System.out.println("      == Menu SuperVisor ==");
-            System.out.println("      =====================");
+            System.out.println("      +-----------------------------+");
+            System.out.println("      |       Menu Supervisor       |");
+            System.out.println("      +-----------------------------+");
 
-            Ferramentas.limpaTerminalOpcional(3);
+            Ferramentas.limpaTerminalOpcional(2);
+
+            System.out.println("      --- Opções ---");
 
             System.out.println("1 - Ver todos os técnicos");
             System.out.println("2 - Criar ordens de serviço");
             System.out.println("3 - Visualizar todas as ordens de serviço");
             System.out.println("4 - Visualizar todas as maquínas");
             System.out.println("5 - Sair");
+            System.out.println("\n ----------------------------------");
+            System.out.print("> Digite a opção desejada: ");
 
             int escolha = 0;
 
@@ -77,9 +81,9 @@ public class Menu_SuperVisor {
 
             Ferramentas.limpaTerminal();
 
-            System.out.println("      ------------");
-            System.out.println("      - Tecnicos -");
-            System.out.println("      ------------");
+            System.out.println("      +----------------------+");
+            System.out.println("      |       Técnicos       |");
+            System.out.println("      +----------------------+");
 
             Ferramentas.Delay(1500);
 
@@ -90,10 +94,10 @@ public class Menu_SuperVisor {
 
                 for (MODEL_Tecnico tecnico : tecnicos) {
                     System.out.println("");
-                    System.out.println("ID: " + tecnico.getId());
-                    System.out.println("Nome: " + tecnico.getNome());
+                    System.out.println("ID:            " + tecnico.getId());
+                    System.out.println("Nome:          " + tecnico.getNome());
                     System.out.println("Especialidade: " + tecnico.getEspecialidade_tecnico());
-                    System.out.println("Status: " + (tecnico.isStatus_disponibilidade_tecnico() ? "Disponível" : "Em Atendimento"));
+                    System.out.println("Status:        " + (tecnico.isStatus_disponibilidade_tecnico() ? "Disponível" : "Em Atendimento"));
                     System.out.println("-------------------------");
                     }
                 }
@@ -106,9 +110,9 @@ public class Menu_SuperVisor {
 
         Ferramentas.limpaTerminal();
 
-        System.out.println("      ---------------------------");
-        System.out.println("      - Criar Ordens de Serviço -");
-        System.out.println("      ---------------------------");
+        System.out.println("      +--------------------------+");
+        System.out.println("      |       Criar Ordens       |");
+        System.out.println("      +--------------------------+");
 
         Menu_Servicos.Criar(supervisor);
 
@@ -122,9 +126,9 @@ public class Menu_SuperVisor {
 
         Ferramentas.limpaTerminal();
 
-        System.out.println("      ------------");
-        System.out.println("      - Serviços -");
-        System.out.println("      ------------");
+            System.out.println("      +----------------------+");
+            System.out.println("      |       Serviços       |");
+            System.out.println("      +----------------------+");
 
         Ferramentas.Delay(1500);
 
@@ -135,13 +139,14 @@ public class Menu_SuperVisor {
 
             for (MODEL_Servico servico : servicos) {
 
+                System.out.println("--- Ordem de serviço ---");
+                System.out.println("| ID:            " + servico.getId_Ordem_servico());
+                System.out.println("| Status:        " + servico.getStatus_aberto_ordem_servico());
+                System.out.println("| Descrição:     " + servico.getDescricao_ordem_servico());
+                System.out.println("| Id do técnico: " + servico.getTecnico());
+                System.out.println("| Id da máquina: " + servico.getMaquina());
+                System.out.println("------------------------");
                 System.out.println("");
-                System.out.println("ID: " + servico.getId_Ordem_servico());
-                System.out.println("Status: " + servico.getStatus_aberto_ordem_servico());
-                System.out.println("Descrição: " + servico.getDescricao_ordem_servico());
-                System.out.println("Id do técnico: " + servico.getTecnico());
-                System.out.println("Id da máquina: " + servico.getMaquina());
-                System.out.println("-------------------------");
 
                 }
 
@@ -159,9 +164,9 @@ public class Menu_SuperVisor {
 
             Ferramentas.limpaTerminal();
 
-            System.out.println("      ------------");
-            System.out.println("      - Máquinas -");
-            System.out.println("      ------------");
+            System.out.println("      +----------------------+");
+            System.out.println("      |       Máquinas       |");
+            System.out.println("      +----------------------+");
 
             Ferramentas.Delay(1500);
 
@@ -171,12 +176,13 @@ public class Menu_SuperVisor {
                 System.out.println("--- Lista de Máquinas ---");
                 for (MODEL_Maquina maquina : modelMaquinas) {
 
+                    System.out.println("--- Máquina ---");
+                    System.out.println("| ID:        " + maquina.getId_maquina());
+                    System.out.println("| Modelo:    " + maquina.getModeloMaquina());
+                    System.out.println("| Status:    " + maquina.getStatusFuncionamentoMaquina());
+                    System.out.println("| Descrição: " + maquina.getDescricaoMaquina());
+                    System.out.println("---------------");
                     System.out.println("");
-                    System.out.println("ID: " + maquina.getId_maquina());
-                    System.out.println("Modelo: " + maquina.getModeloMaquina());
-                    System.out.println("Status: " + maquina.getStatusFuncionamentoMaquina());
-                    System.out.println("Descrição: " + maquina.getDescricaoMaquina());
-                    System.out.println("-------------------------");
 
                 }
             }
