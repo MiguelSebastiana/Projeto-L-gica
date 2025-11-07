@@ -15,10 +15,12 @@ public class Menu_Login {
 
         Ferramentas.limpaTerminal();
 
-        System.out.println("      +------------------------+");
-        System.out.println("      |       Menu Login       |");
-        System.out.println("      +------------------------+");
-
+        System.out.println("      ███╗   ███╗██╗   ██╗");
+        System.out.println("      ████╗ ████║ ██║   ██║ ");
+        System.out.println("      ██╔████╔██║ ██║   ██║");
+        System.out.println("      ██║╚██╔╝██║ ██║   ██║");
+        System.out.println("      ██║ ╚═╝ ██║ ╚██████╔╝");
+        System.out.println("      ╚═╝     ╚═╝  ╚═════╝");
         Ferramentas.limpaTerminalOpcional(2);
         System.out.println("------------------");
         System.out.print("> Digite o seu cpf: ");
