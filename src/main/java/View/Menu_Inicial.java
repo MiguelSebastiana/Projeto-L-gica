@@ -13,12 +13,12 @@ public class Menu_Inicial {
 
                 Ferramentas.limpaTerminal();
 
-            System.out.println("        ██╗    ██╗███████╗ ██████╗     ██████╗ ███████╗");
-            System.out.println("        ██║    ██║██╔════╝██╔════╝    ██╔═══██╗██╔════╝");
-            System.out.println("        ██║ █╗ ██║█████╗  ██║  ███╗   ██║   ██║███████╗");
-            System.out.println("        ██║███╗██║██╔══╝  ██║   ██║   ██║   ██║╚════██║");
-            System.out.println("        ╚███╔███╔╝███████╗╚██████╔╝   ╚██████╔╝███████║");
-            System.out.println("         ╚══╝╚══╝ ╚══════╝ ╚═════╝    ╚═════╝ ╚══════╝");
+            System.out.println("                                                    ██╗    ██╗███████╗ ██████╗     ██████╗ ███████╗");
+            System.out.println("                                                    ██║    ██║██╔════╝██╔════╝    ██╔═══██╗██╔════╝");
+            System.out.println("                                                    ██║ █╗ ██║█████╗  ██║  ███╗   ██║   ██║███████╗");
+            System.out.println("                                                    ██║███╗██║██╔══╝  ██║   ██║   ██║   ██║╚════██║");
+            System.out.println("                                                    ╚███╔███╔╝███████╗╚██████╔╝   ╚██████╔╝███████║");
+            System.out.println("                                                     ╚══╝╚══╝ ╚══════╝ ╚═════╝     ╚═════╝ ╚══════╝");
 
                 Ferramentas.limpaTerminalOpcional(3);
 

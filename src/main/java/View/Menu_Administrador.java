@@ -19,9 +19,12 @@ public class Menu_Administrador {
 
             Ferramentas.limpaTerminal();
 
-            System.out.println("      +--------------------------------+");
-            System.out.println("      |       Menu Administrador       |");
-            System.out.println("      +--------------------------------+");
+            System.out.println("            ███╗   ███╗███████╗███╗   ██╗ ██╗   ██╗    █████╗ ██████╗  ███╗ ███╗ ██╗███╗   ██╗" );
+            System.out.println("            ████╗ ████║██╔════╝████╗  ██║ ██║   ██║   ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║");
+            System.out.println("            ██╔████╔██║█████╗  ██╔██╗ ██║ ██║   ██║   ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║");
+            System.out.println("            ██║╚██╔╝██║██╔══╝  ██║╚██╗██║ ██║   ██║   ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║");
+            System.out.println("            ██║ ╚═╝ ██║███████╗██║ ╚████║ ╚██████╔╝   ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║");
+            System.out.println("            ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═════╝    ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝");
             Ferramentas.Delay(1500);
 
             Ferramentas.limpaTerminalOpcional(2);
