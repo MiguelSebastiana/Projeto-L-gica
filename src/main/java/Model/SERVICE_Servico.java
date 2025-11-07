@@ -22,36 +22,65 @@ public class SERVICE_Servico {
     //Create
 
     public void Insert_Servico(MODEL_Servico servico){
-        if(servico != null)
-        {
-            daoServico.insert_Servico(servico);
+        try {
+            if (servico != null) {
+                daoServico.insert_Servico(servico);
+            }
         }
+        catch (RuntimeException re)
+            {
+                throw new RuntimeException(re.getMessage());
+            }
     }
 
     //Read
 
     public ArrayList<MODEL_Servico> All_Servicos(){
+        try {
         return daoServico.find_All_Ordens_Servico();
+        }
+        catch (RuntimeException re)
+        {
+            throw new RuntimeException(re.getMessage());
+        }
     }
 
     public MODEL_Servico Find_by_Id(int id){
         Validator_Usuario.verificarID(id);
+        try {
         return daoServico.find_By_Id(id);
+        }
+        catch (RuntimeException re)
+        {
+            throw new RuntimeException(re.getMessage());
+        }
     }
 
     public ArrayList<MODEL_Servico> Find_by_Pendente(){
-        return daoServico.find_By_Aberta();
+        try {
+            return daoServico.find_By_Aberta();
+        }
+         catch (RuntimeException re)
+            {
+                throw new RuntimeException(re.getMessage());
+            }
     }
 
 
     //Update
 
     public void Update_Status(int id, String status){
+        try {
         Validator_Servico.validarID(id);
         Validator_Geral.validarString(status);
         MODEL_Servico modelServico = serviceServico.Find_by_Id(id);
         modelServico.setStatus_aberto_ordem_servico(modelServico.getStatus_aberto_ordem_servico());
         daoServico.update_Status(id,status);
+        }
+        catch (RuntimeException re)
+        {
+            throw new RuntimeException(re.getMessage());
+        }
     }
 
     public void Update_Descricao(String Descricao, int id)
@@ -118,8 +147,15 @@ public class SERVICE_Servico {
     //Delete
 
     public void Delete_Servico(int id){
+        try
+        {
         Validator_Servico.validarID(id);
         daoServico.delete_Servico(id);
+        }
+        catch (RuntimeException re)
+        {
+            throw new RuntimeException(re.getMessage());
+        }
     }
 
     //Outros
