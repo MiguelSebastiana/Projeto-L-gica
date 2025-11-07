@@ -12,10 +12,10 @@ import Util.Validator_Usuario;
 
 public class SERVICE_Servico {
 
+    //--Atributos--//
+
     static DAO_Servico daoServico = new DAO_Servico();
     static SERVICE_Servico serviceServico = new SERVICE_Servico();
-
-    //--Atributos--//
 
     //--Métodos--//
 
