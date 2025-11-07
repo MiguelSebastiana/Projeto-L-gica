@@ -9,7 +9,6 @@ public class Menu_Administrador {
 
 
     static SERVICE_Gerente gerente = new SERVICE_Gerente();
-    static SERVICE_Usuario usuario = new SERVICE_Usuario();
 
 
     public static void Menu(MODEL_Administrador adm) {
