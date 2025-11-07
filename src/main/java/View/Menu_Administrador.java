@@ -25,8 +25,10 @@ public class Menu_Administrador {
             System.out.println("      +--------------------------------+");
             Ferramentas.Delay(1500);
 
+            Ferramentas.limpaTerminalOpcional(2);
 
-            System.out.println("1 - Cadastrar Gerente");
+            System.out.println("--- Opções ---");
+            System.out.println("\n1 - Cadastrar Gerente");
             System.out.println("2 - Atualizar Gerente");
             System.out.println("3 - Excluir Gerente");
             System.out.println("4 - Sair");
@@ -75,9 +77,9 @@ public class Menu_Administrador {
 
         Ferramentas.limpaTerminal();
 
-        System.out.println("     --------------------");
-        System.out.println("     - CADASTRO GERENTE -");
-        System.out.println("     --------------------");
+        System.out.println("      +-------------------------------+");
+        System.out.println("      |       Cadastrar Gerente       |");
+        System.out.println("      +-------------------------------+");
 
         Ferramentas.Delay(1500);
 
@@ -90,13 +92,13 @@ public class Menu_Administrador {
         Ferramentas.limpaTerminal();
         int id = 0;
 
-        System.out.println("     ---------------------");
-        System.out.println("     - ATUALIZAR GERENTE -");
-        System.out.println("     ---------------------");
+        System.out.println("      +-------------------------------+");
+        System.out.println("      |       Atualizar Gerente       |");
+        System.out.println("      +-------------------------------+");
 
-        System.out.println("\n\n");
+        Ferramentas.limpaTerminalOpcional(2);
 
-        System.out.print("Digite o ID do gerente que deseja atualizar: ");
+        System.out.print("> Digite o ID do gerente que deseja atualizar: ");
 
         try {
             id = Ferramentas.lInteiro();
@@ -115,13 +117,13 @@ public class Menu_Administrador {
         Ferramentas.limpaTerminal();
         int id = 0;
 
-        System.out.println("     -------------------");
-        System.out.println("     - EXCLUIR GERENTE -");
-        System.out.println("     -------------------");
+        System.out.println("      +---------------------------+");
+        System.out.println("      |       Excluir gerente       |");
+        System.out.println("      +---------------------------+");
 
-        System.out.println("\n\n");
+        Ferramentas.limpaTerminalOpcional(2);
 
-        System.out.print("Digite o ID do gerente que deseja excluir: ");
+        System.out.print("> Digite o ID do gerente que deseja excluir: ");
 
         try {
             id = Ferramentas.lInteiro();
@@ -135,7 +137,7 @@ public class Menu_Administrador {
         MODEL_Gerente gerente1 = gerente.Find_By_Id(id);
 
         try {
-            gerente.Delete_Gerente(gerente1);
+            gerente.Delete_Gerente(id);
         }catch (Exception e){
             Ferramentas.limpaTerminal();
             System.err.println(e.getMessage());
