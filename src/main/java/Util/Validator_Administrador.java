@@ -5,7 +5,7 @@ public class Validator_Administrador {
     // ---- VALIDAÇÃO DE CPF ---- //
 
     public static String validarCodigo(String codigo) {
-        if (codigo.length() < 5){
+        if (codigo.length() < 7){
             throw CODIGOException.tamanho();
         }
 
