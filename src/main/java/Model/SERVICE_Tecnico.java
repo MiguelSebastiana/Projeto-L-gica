@@ -71,10 +71,12 @@ public class SERVICE_Tecnico {
     public void Update_Disponibilidade(int id_tecnico, boolean disponibilidade)
     {
         try{
-            daoTecnico.update_Disponibilidade(tecnico, disponibilidade);
-        }catch(RuntimeException re)
-        {
-            System.out.println(re.getMessage());
+            Validator_Usuario.verificarID(id_tecnico);
+            MODEL_Tecnico modelTecnico = daoTecnico.find_By_Id(id_tecnico);
+            daoTecnico.update_Disponibilidade(id_tecnico,disponibilidade);
+            modelTecnico.setStatus_disponibilidade_tecnico(disponibilidade);
+        }catch (RuntimeException rte){
+            throw new RuntimeException(rte.getMessage());
         }
     }
 
