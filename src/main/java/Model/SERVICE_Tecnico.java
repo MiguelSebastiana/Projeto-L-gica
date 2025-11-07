@@ -82,19 +82,17 @@ public class SERVICE_Tecnico {
 
     //Delete
 
-    public void Delete_Tecnico(MODEL_Tecnico tecnico)
+    public void Delete_Tecnico(int id_tecnico)
     {
         try
         {
-            if (tecnico != null)
-            {
-                daoTecnico.delete_Tecnico(tecnico);
-            }
-
+            Validator_Usuario.verificarID(id_tecnico);
+            MODEL_Tecnico modelTecnico = daoTecnico.find_By_Id(id_tecnico);
+            daoTecnico.delete_Tecnico(id_tecnico);
         }
         catch(RuntimeException re)
         {
-            System.out.println(re.getMessage());
+            throw new RuntimeException(re.getMessage());
         }
     }
 
