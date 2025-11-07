@@ -1,10 +1,8 @@
 package Repository;
 
 import DataBase.ConnectionFactory;
-import Model.MODEL_Gerente;
-import Model.MODEL_Supervisor;
-import Model.MODEL_Tecnico;
-import Model.MODEL_Usuario;
+import Model.*;
+
 import java.time.LocalDate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -169,6 +167,47 @@ public class DAO_Usuario
         }
 
         return usuario;
+    }
+
+    public MODEL_Administrador buscarAdm(String cpf, String senha){
+
+        Model.MODEL_Administrador adm = null;
+
+        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario,  \n" +
+                "u.telefone_usuario, u.salario_usuario,u.data_nasc_usuario,u.email_usuario,  \n" +
+                "u.carga_horaria_minutos_usuario,u.formacao_usuario,  \n" +
+                "u.Setor_id_setor\n" +
+                "from Usuario u\n" +
+                "where u.nome_usuario = 'ADMIN';";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+        PreparedStatement stmt = conexao.prepareStatement(querySql);
+        ResultSet resultSet = stmt.getResultSet()){
+
+            int idUsuario = resultSet.getInt("id_usuario");
+            String nomeUsuario = resultSet.getString("nome_usuario");
+            String cpfUsuario = resultSet.getString("cpf_usuario");
+            String senhaUsuario = resultSet.getString("senha_usuario");
+            int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
+            String telefoneUsuario = resultSet.getString("telefone_usuario");
+            double salarioUsuario = resultSet.getDouble("salario_usuario");
+            Date dataNasciment = resultSet.getDate("data_nasc_usuario");
+            String emailUsuario = resultSet.getString("email_usuario");
+            int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
+            String formacaoUsuario = resultSet.getString("formacao_usuario");
+            int idSetor = resultSet.getInt("Setor_id_setor");
+
+
+            adm = new MODEL_Administrador(cpf,senha);
+
+            return adm;
+
+        }catch (SQLException e)
+        {
+            System.err.println("Não foi possível buscar todos os usuários: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
     }
 
     // Update

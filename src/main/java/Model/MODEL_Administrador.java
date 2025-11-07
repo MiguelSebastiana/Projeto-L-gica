@@ -5,20 +5,16 @@ import Util.Validator_Administrador;
 public class MODEL_Administrador {
 
     // ---- ATRIBUTOS PRIVADOS ---- //
-    private String codigo;
+    private String cpf;
+    private String senha;
 
     // ---- CONSTRUTOR ---- //
-    public MODEL_Administrador(String codigo) {
-       setCodigo(codigo);
+    public MODEL_Administrador(String cpf, String senha) {
+        this.cpf = cpf;
+        this.senha = senha;
     }
 
     // ---- GETTERS E SETTERS ---- //
 
-    public String getCodigo() {
-        return codigo;
-    }
 
-    public void setCodigo(String codigo) {
-        this.codigo = Validator_Administrador.validarCodigo(codigo);
-    }
 }

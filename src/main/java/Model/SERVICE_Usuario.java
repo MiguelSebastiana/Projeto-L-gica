@@ -1,6 +1,7 @@
 package Model;
 
 import Repository.DAO_Usuario;
+import Util.Validator_Administrador;
 import Util.Validator_Geral;
 import Util.Validator_Usuario;
 import Exception.EMAILException;
@@ -129,6 +130,7 @@ public class SERVICE_Usuario {
     {
         try
         {
+            Validator_Administrador.validarAdm(cpf,senha);
             for (MODEL_Usuario u : daoUsuario.find_All_Users())
             {
                 if (Validator_Usuario.validarCpf(cpf).equals(cpf) && Validator_Usuario.senha(senha).equals(senha))
