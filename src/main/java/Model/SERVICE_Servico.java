@@ -5,6 +5,7 @@ import Repository.DAO_Servico;
 import java.util.ArrayList;
 import Exception.STRINGException;
 import Util.Validator_Geral;
+import Util.Validator_Maquina;
 import Util.Validator_Servico;
 import Util.Validator_Usuario;
 
@@ -57,34 +58,67 @@ public class SERVICE_Servico {
     {
         try
         {
+            Validator_Servico.validarID(id);
+            Validator_Geral.validarString(Descricao);
+            MODEL_Servico modelServico = serviceServico.Find_by_Id(id);
+            modelServico.setDescricao_ordem_servico(modelServico.getDescricao_ordem_servico());
             daoServico.update_Descricao(id,Descricao);
         }
-        catch (STRINGException se)
+        catch (RuntimeException re)
         {
-            System.out.println(se.getMessage());
+            throw new RuntimeException(re.getMessage());
         }
-
     }
 
     public void Update_Id_Tecnico(int id, int idt){
-        Validator_Usuario.verificarID(idt);
-        daoServico.update_Id_Tecnico(id, idt);
+        try
+        {
+            Validator_Usuario.verificarID(idt);
+            MODEL_Servico modelTecnico = serviceServico.Find_by_Id(idt);
+            modelTecnico.setTecnico(modelTecnico.getTecnico());
+            daoServico.update_Id_Tecnico(id, idt);
+        }
+        catch (RuntimeException re)
+        {
+            throw new RuntimeException(re.getMessage());
+        }
     }
 
     public void Update_Id_Maquina(int id, int idm){
-        Validator_Usuario.verificarID(idm);
-        daoServico.update_Id_Maquina(id, idm);
+        try
+        {
+            Validator_Servico.validarID(id);
+            Validator_Maquina.validarId(idm);
+            MODEL_Servico modelmaquina = serviceServico.Find_by_Id(idm);
+            modelmaquina.setMaquina(modelmaquina.getMaquina());
+            daoServico.update_Id_Maquina(id, idm);
+        }
+        catch (RuntimeException re)
+        {
+            throw new RuntimeException(re.getMessage());
+        }
+
     }
 
     public void Update_Custo(int id, double custo){
+        try
+        {
         Validator_Geral.ValidarNumeroNegativoDouble(custo);
+        Validator_Servico.validarID(id);
+        MODEL_Servico modelCusto = serviceServico.Find_by_Id(id);
+        modelCusto.setPreco(modelCusto.getPreco());
         daoServico.update_Custo(id,custo);
+        }
+        catch (RuntimeException re)
+        {
+            throw new RuntimeException(re.getMessage());
+        }
     }
 
     //Delete
 
     public void Delete_Servico(int id){
-        Validator_Usuario.verificarID(id);
+        Validator_Servico.validarID(id);
         daoServico.delete_Servico(id);
     }
 
