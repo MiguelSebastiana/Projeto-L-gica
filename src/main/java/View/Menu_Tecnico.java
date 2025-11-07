@@ -181,7 +181,7 @@ public class Menu_Tecnico {
         tecnico.setStatus_disponibilidade_tecnico(statusNovo);
 
         try{
-            serviceTecnico.Update_Disponibilidade(tecnico,statusNovo);
+            serviceTecnico.Update_Disponibilidade(tecnico.getId(),statusNovo);
             System.out.println("Seu status foi alterado com sucesso!");
         }catch (Exception e){
             System.err.println("ERRO - NÃO FOI POSSIVEL SALVAR NO BANCO DE DADOS!");
