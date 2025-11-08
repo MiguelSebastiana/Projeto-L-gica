@@ -1,6 +1,7 @@
 package View;
 import Model.*;
 import Util.Ferramentas;
+import Util.Validator_Administrador;
 import Util.Validator_Usuario;
 
 public class Menu_Login {
@@ -15,10 +16,12 @@ public class Menu_Login {
 
         Ferramentas.limpaTerminal();
 
-        System.out.println("      +------------------------+");
-        System.out.println("      |       Menu Login       |");
-        System.out.println("      +------------------------+");
-
+        System.out.println("                                   ███╗   ███╗███████╗███╗   ██╗ ██╗   ██╗   ██╗      ██████╗  ██████╗  ██╗ ███╗   ██╗");
+        System.out.println("                                   ████╗ ████║██╔════╝████╗  ██║ ██║   ██║   ██║     ██╔═══██╗██╔════╝  ██║ ████╗  ██║");
+        System.out.println("                                   ██╔████╔██║█████╗  ██╔██╗ ██║ ██║   ██║   ██║     ██║   ██║██║  ███╗ ██║ ██╔██╗ ██║");
+        System.out.println("                                   ██║╚██╔╝██║██╔══╝  ██║╚██╗██║ ██║   ██║   ██║     ██║   ██║██║   ██║ ██║ ██║╚██╗██║");
+        System.out.println("                                   ██║ ╚═╝ ██║███████╗██║ ╚████║ ╚██████╔╝   ███████╗╚██████╔╝╚██████╔╝ ██║ ██║ ╚████║");
+        System.out.println("                                   ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═════╝    ╚══════╝ ╚═════╝  ╚═════╝  ╚═╝ ╚═╝  ╚═══╝");
         Ferramentas.limpaTerminalOpcional(2);
         System.out.println("------------------");
         System.out.print("> Digite o seu cpf: ");
@@ -40,10 +43,12 @@ public class Menu_Login {
         System.out.println("------------------");
         System.out.print("> Digite a sua senha: ");
         senha = Ferramentas.lString();
+        Validator_Usuario.senha(senha);
         System.out.println("------------------");
 
         Ferramentas.Delay(500);
 
+        Validator_Administrador.validarAdm(cpf,senha);
         MODEL_Usuario usuario = serviceUsuario.Verificar_Login(cpf,senha);
         int nivelacesso = usuario.getNivelacesso();
 
