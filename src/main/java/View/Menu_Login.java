@@ -16,15 +16,17 @@ public class Menu_Login {
 
         Ferramentas.limpaTerminal();
 
-        System.out.println("                                   ███╗   ███╗███████╗███╗   ██╗ ██╗   ██╗   ██╗      ██████╗  ██████╗  ██╗ ███╗   ██╗");
-        System.out.println("                                   ████╗ ████║██╔════╝████╗  ██║ ██║   ██║   ██║     ██╔═══██╗██╔════╝  ██║ ████╗  ██║");
-        System.out.println("                                   ██╔████╔██║█████╗  ██╔██╗ ██║ ██║   ██║   ██║     ██║   ██║██║  ███╗ ██║ ██╔██╗ ██║");
-        System.out.println("                                   ██║╚██╔╝██║██╔══╝  ██║╚██╗██║ ██║   ██║   ██║     ██║   ██║██║   ██║ ██║ ██║╚██╗██║");
-        System.out.println("                                   ██║ ╚═╝ ██║███████╗██║ ╚████║ ╚██████╔╝   ███████╗╚██████╔╝╚██████╔╝ ██║ ██║ ╚████║");
-        System.out.println("                                   ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═════╝    ╚══════╝ ╚═════╝  ╚═════╝  ╚═╝ ╚═╝  ╚═══╝");
+        System.out.println("┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+        System.out.println("│                                   ███╗   ███╗███████╗███╗   ██╗ ██╗   ██╗   ██╗      ██████╗  ██████╗  ██╗ ███╗   ██╗                                 │");
+        System.out.println("│                                   ████╗ ████║██╔════╝████╗  ██║ ██║   ██║   ██║     ██╔═══██╗██╔════╝  ██║ ████╗  ██║                                 │");
+        System.out.println("│                                   ██╔████╔██║█████╗  ██╔██╗ ██║ ██║   ██║   ██║     ██║   ██║██║  ███╗ ██║ ██╔██╗ ██║                                 │");
+        System.out.println("│                                   ██║╚██╔╝██║██╔══╝  ██║╚██╗██║ ██║   ██║   ██║     ██║   ██║██║   ██║ ██║ ██║╚██╗██║                                 │");
+        System.out.println("│                                   ██║ ╚═╝ ██║███████╗██║ ╚████║ ╚██████╔╝   ███████╗╚██████╔╝╚██████╔╝ ██║ ██║ ╚████║                                 │");
+        System.out.println("│                                   ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═════╝    ╚══════╝ ╚═════╝  ╚═════╝  ╚═╝ ╚═╝  ╚═══╝                                 │");
+        System.out.println("└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
         Ferramentas.limpaTerminalOpcional(2);
-        System.out.println("------------------");
-        System.out.print("> Digite o seu cpf: ");
+        System.out.println("┌──────────────────────────────────────┐");
+        System.out.print("│ ➤ Digite o seu cpf: ");
 
         do {
             try {
@@ -35,16 +37,16 @@ public class Menu_Login {
                 Ferramentas.limpaTerminal();
                 System.err.println(e.getMessage());
                 Ferramentas.Delay(1500);
+                System.out.println("┌──────────────────────────────────────┐");
+                System.out.print("│ > Digite o seu cpf: ");
             }
         }while (continuar);
-        System.out.println("------------------");
+        System.out.println("└──────────────────────────────────────┘");
 
-        Ferramentas.limpaTerminalOpcional(1);
-        System.out.println("------------------");
-        System.out.print("> Digite a sua senha: ");
+        System.out.print("│ > Digite a sua senha: ");
         senha = Ferramentas.lString();
         Validator_Usuario.senha(senha);
-        System.out.println("------------------");
+        System.out.println("└──────────────────────────────────────┘");
 
         Ferramentas.Delay(500);
 

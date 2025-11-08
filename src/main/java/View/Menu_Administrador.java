@@ -19,23 +19,26 @@ public class Menu_Administrador {
 
             Ferramentas.limpaTerminal();
 
-            System.out.println("            ███╗   ███╗███████╗███╗   ██╗ ██╗   ██╗    █████╗ ██████╗  ███╗ ███╗ ██╗███╗   ██╗" );
-            System.out.println("            ████╗ ████║██╔════╝████╗  ██║ ██║   ██║   ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║");
-            System.out.println("            ██╔████╔██║█████╗  ██╔██╗ ██║ ██║   ██║   ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║");
-            System.out.println("            ██║╚██╔╝██║██╔══╝  ██║╚██╗██║ ██║   ██║   ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║");
-            System.out.println("            ██║ ╚═╝ ██║███████╗██║ ╚████║ ╚██████╔╝   ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║");
-            System.out.println("            ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═════╝    ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝");
+            System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+            System.out.println("│            ███╗   ███╗███████╗███╗   ██╗ ██╗   ██╗    █████╗ ██████╗  ███╗ ███╗ ██╗███╗   ██╗            │");
+            System.out.println("│            ████╗ ████║██╔════╝████╗  ██║ ██║   ██║   ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║            │");
+            System.out.println("│            ██╔████╔██║█████╗  ██╔██╗ ██║ ██║   ██║   ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║            │");
+            System.out.println("│            ██║╚██╔╝██║██╔══╝  ██║╚██╗██║ ██║   ██║   ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║            │");
+            System.out.println("│            ██║ ╚═╝ ██║███████╗██║ ╚████║ ╚██████╔╝   ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║            │");
+            System.out.println("│            ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═════╝    ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝            │");
+            System.out.println("└─────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
             Ferramentas.Delay(1500);
 
             Ferramentas.limpaTerminalOpcional(2);
 
-            System.out.println("--- Opções ---");
-            System.out.println("\n1 - Cadastrar Gerente");
-            System.out.println("2 - Atualizar Gerente");
-            System.out.println("3 - Excluir Gerente");
-            System.out.println("4 - Sair");
-            System.out.println("\n ----------------------------------");
-            System.out.print("> Digite a opção desejada: ");
+            System.out.println("┌───────────────────────────────┐");
+            System.out.println("│             \uD835\uDCDE\uD835\uDCDF\uD835\uDCD2\uD835\uDCDE\uD835\uDCD4\uD835\uDCE2:           │");
+            System.out.println("│    (1) ➔ Cadastrar Gerente    │");
+            System.out.println("│    (2) ➔ Atualizar Gerente    │");
+            System.out.println("│    (3) ➔ Excluir Gerente      │");
+            System.out.println("│         (4) ➔ Sair            │");
+            System.out.println("└───────────────────────────────┘");
+            System.out.print("➤ Digite a opção desejada: ");
 
             int escolha = 0;
 

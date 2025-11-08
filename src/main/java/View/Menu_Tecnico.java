@@ -21,22 +21,24 @@ public class Menu_Tecnico {
         SERVICE_Tecnico serviceTecnico = new SERVICE_Tecnico();
 
         do{
-            System.out.println("        ███╗   ███╗███████╗███╗   ██╗██╗   ██╗    ████████╗███████╗ ██████╗███╗   ██╗██╗ ██████╗ ██████╗ ");
-            System.out.println("        ████╗ ████║██╔════╝████╗  ██║██║   ██║    ╚══██╔══╝██╔════╝██╔════╝████╗  ██║██║██╔════╝██╔═══██╗");
-            System.out.println("        ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║       ██║   █████╗  ██║     ██╔██╗ ██║██║██║     ██║   ██║");
-            System.out.println("        ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║       ██║   ██╔══╝  ██║     ██║╚██╗██║██║██║     ██║   ██║");
-            System.out.println("        ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝       ██║   ███████╗╚██████╗██║ ╚████║██║╚██████╗╚██████╔╝");
-            System.out.println("        ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝        ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═════╝ ");
-
+            System.out.println("┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+            System.out.println("│        ███╗   ███╗███████╗███╗   ██╗██╗   ██╗    ████████╗███████╗ ██████╗███╗   ██╗██╗ ██████╗ ██████╗        │");
+            System.out.println("│        ████╗ ████║██╔════╝████╗  ██║██║   ██║    ╚══██╔══╝██╔════╝██╔════╝████╗  ██║██║██╔════╝██╔═══██╗       │");
+            System.out.println("│        ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║       ██║   █████╗  ██║     ██╔██╗ ██║██║██║     ██║   ██║       │");
+            System.out.println("│        ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║       ██║   ██╔══╝  ██║     ██║╚██╗██║██║██║     ██║   ██║       │");
+            System.out.println("│        ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝       ██║   ███████╗╚██████╗██║ ╚████║██║╚██████╗╚██████╔╝       │");
+            System.out.println("│        ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝        ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═════╝        │");
+            System.out.println("└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
             Ferramentas.limpaTerminalOpcional(2);
 
-            System.out.println("--- Opções ---");
-            System.out.println("\n1 - Ver as ordens atribuidas");
-            System.out.println("2 - Alterar os Status das ordens");
-            System.out.println("3 - Alterar Status de Disponibilidade: ");
-            System.out.println("4 - Sair");
-            System.out.println("\n ----------------------------------");
-            System.out.print("> Digite a opção desejada: ");
+            System.out.println("┌──────────────────────────────────────────┐");
+            System.out.println("│                  \uD835\uDCDE\uD835\uDCDF\uD835\uDCD2\uD835\uDCDE\uD835\uDCD4\uD835\uDCE2:                 │");
+            System.out.println("│       1 ➔ Ver as ordens atribuidas       │");
+            System.out.println("│     2 ➔ Alterar os Status das ordens     │");
+            System.out.println("│  3 ➔ Alterar Status de Disponibilidade:  │");
+            System.out.println("│                 4 ➔ Sair                 │");
+            System.out.println("└──────────────────────────────────────────┘");
+            System.out.print("➤ Digite a opção desejada: ");
 
             int escolha = 0;
             try {

@@ -20,23 +20,26 @@ public class Menu_SuperVisor {
 
         do {
             Ferramentas.limpaTerminal();
-            System.out.println("       ███╗   ███╗███████╗███╗   ██╗ ██╗   ██╗   ███████╗██╗   ██╗██████╗ ███████╗ █████╗ ██╗   ██╗██╗███████╗ ██████╗  █████╗ ");
-            System.out.println("       ████╗ ████║██╔════╝████╗  ██║ ██║   ██║   ██╔════╝██║   ██║██╔══██╗██╔════╝██╔══██╗██║   ██║██║██╔════╝██╔═══██╗██╔══██╗");
-            System.out.println("       ██╔████╔██║█████╗  ██╔██╗ ██║ ██║   ██║   ███████╗██║   ██║██████╔╝█████╗  ██████╔╝██║   ██║██║███████╗██║   ██║██████╔╝");
-            System.out.println("       ██║╚██╔╝██║██╔══╝  ██║╚██╗██║ ██║   ██║   ╚════██║██║   ██║██╔═══╝ ██╔══╝  ██╔══██╗╚██╗ ██╔╝██║╚════██║██║   ██║██╔══██╗");
-            System.out.println("       ██║ ╚═╝ ██║███████╗██║ ╚████║ ╚██████╔╝   ███████║╚██████╔╝██║     ███████╗██║  ██║ ╚████╔╝ ██║███████║╚██████╔╝██║  ██║");
-            System.out.println("       ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═════╝    ╚══════╝ ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝");
+            System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+            System.out.println("│       ███╗   ███╗███████╗███╗   ██╗ ██╗   ██╗   ███████╗██╗   ██╗██████╗ ███████╗ █████╗ ██╗   ██╗██╗███████╗ ██████╗  █████╗       │");
+            System.out.println("│       ████╗ ████║██╔════╝████╗  ██║ ██║   ██║   ██╔════╝██║   ██║██╔══██╗██╔════╝██╔══██╗██║   ██║██║██╔════╝██╔═══██╗██╔══██╗      │");
+            System.out.println("│       ██╔████╔██║█████╗  ██╔██╗ ██║ ██║   ██║   ███████╗██║   ██║██████╔╝█████╗  ██████╔╝██║   ██║██║███████╗██║   ██║██████╔╝      │");
+            System.out.println("│       ██║╚██╔╝██║██╔══╝  ██║╚██╗██║ ██║   ██║   ╚════██║██║   ██║██╔═══╝ ██╔══╝  ██╔══██╗╚██╗ ██╔╝██║╚════██║██║   ██║██╔══██╗      │");
+            System.out.println("│       ██║ ╚═╝ ██║███████╗██║ ╚████║ ╚██████╔╝   ███████║╚██████╔╝██║     ███████╗██║  ██║ ╚████╔╝ ██║███████║╚██████╔╝██║  ██║      │");
+            System.out.println("│       ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═════╝    ╚══════╝ ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝      │");
+            System.out.println("└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
 
             Ferramentas.limpaTerminalOpcional(2);
 
-            System.out.println("      --- Opções ---");
-            System.out.println("\n1 - Ver todos os técnicos");
-            System.out.println("2 - Criar ordens de serviço");
-            System.out.println("3 - Visualizar todas as ordens de serviço");
-            System.out.println("4 - Visualizar todas as maquínas");
-            System.out.println("5 - Sair");
-            System.out.println("\n ----------------------------------");
-            System.out.print("> Digite a opção desejada: ");
+            System.out.println("┌───────────────────────────────────────────┐");
+            System.out.println("│                 \uD835\uDCDE\uD835\uDCDF\uD835\uDCD2\uD835\uDCDE\uD835\uDCD4\uD835\uDCE2:                   │");
+            System.out.println("│       1 ➔ Ver todos os técnicos           │");
+            System.out.println("│      2 ➔ Criar ordens de serviço          │");
+            System.out.println("│ 3 ➔ Visualizar todas as ordens de serviço │");
+            System.out.println("│    4 ➔ Visualizar todas as maquínas       │");
+            System.out.println("│                5 ➔ Sair                   │");
+            System.out.println("└───────────────────────────────────────────┘");
+            System.out.print("➤ Digite a opção desejada: ");
 
             int escolha = 0;
 
