@@ -1,5 +1,6 @@
 package Util;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ferramentas {
@@ -35,12 +36,18 @@ public class Ferramentas {
     }
 
     // ------ FAZ INPUT DE INTEIRO E RETORNA ------ //
-    public static int lInteiro() {
-        int num = ler.nextInt();
+    public static int lInteiro(){
 
-        ler.nextLine(); // Esvazia o buffer
+        try {
+            int num = ler.nextInt();
 
-        return num;
+            ler.nextLine(); // Esvazia o buffer
+
+            return num;
+        }catch (InputMismatchException e){
+
+            ler.nextLine(); // Esvazia o buffer
+        }
     }
 
     // ------ PULA MUITAS LINHAS DO TERMINAL ------ //
