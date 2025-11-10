@@ -1,34 +1,19 @@
 package Model;
 
-import Util.Validator_Administrador;
+import java.time.LocalDate;
 
-public class MODEL_Administrador {
+public class MODEL_Administrador extends MODEL_Usuario {
 
-    // ---- ATRIBUTOS PRIVADOS ---- //
-    private String cpf;
-    private String senha;
+    public MODEL_Administrador(int id, String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
+                               LocalDate datanasci, String email, int cargahoraria, String formacao) {
+        super(id, nome, cpf, senha, nivelacesso, telefone, salario, datanasci, email, cargahoraria, formacao);
 
-    // ---- CONSTRUTOR ---- //
-    public MODEL_Administrador(String cpf, String senha){
-        this.cpf = cpf;
-        this.senha = senha;
+
     }
 
-    // ---- GETTERS E SETTERS ---- //
-    public String getCpf(){
-        return cpf;
+    public MODEL_Administrador(String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
+                               LocalDate datanasci, String email, int cargahoraria, String formacao) {
+        super(nome, cpf, senha, nivelacesso, telefone, salario, datanasci, email, cargahoraria, formacao);
     }
 
-    public String getSenha(){
-        return senha;
-    }
-
-    public void setCpf(String cpf)
-    {
-        this.cpf = Validator_Administrador.validarCpf(cpf);
-    }
-
-    public void setSenha(String senha) {
-        this.senha = Validator_Administrador.validarSenha(senha);
-    }
 }

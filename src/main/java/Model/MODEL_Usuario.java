@@ -20,11 +20,10 @@ public abstract class MODEL_Usuario {
     private String email;
     private int cargahoraria;
     private String formacao;
-    private int id_setor;
 
     // Construtor com Id (para objetos já existentes no DB)
     public MODEL_Usuario(int id, String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
-                         LocalDate datanasci, String email, int cargahoraria, String formacao, int id_setor) {
+                         LocalDate datanasci, String email, int cargahoraria, String formacao) {
         this.id = id;
         setNome(nome);
         setCpf(cpf);
@@ -41,7 +40,7 @@ public abstract class MODEL_Usuario {
 
     // Construtor sem Id (para novos objetos que serão inseridos no DB)
     public MODEL_Usuario(String nome, String cpf, String senha, int nivelacesso, String telefone, double salario,
-                         LocalDate datanasci, String email, int cargahoraria, String formacao, int id_setor) {
+                         LocalDate datanasci, String email, int cargahoraria, String formacao) {
         setNome(nome);
         setCpf(cpf);
         setSenha(senha);
@@ -52,7 +51,6 @@ public abstract class MODEL_Usuario {
         setEmail(email);
         setCargahoraria(cargahoraria);
         setFormacao(formacao);
-        setSetor(id_setor);
     }
 
     // Getters e Setters //
@@ -140,11 +138,4 @@ public abstract class MODEL_Usuario {
         this.formacao = Validator_Usuario.formacao(formacao);
     }
 
-    public int getSetor() {
-        return id_setor;
-    }
-
-    public void setSetor(int setor) {
-        this.id_setor = Validator_Usuario.validarSetor(setor);
-    }
 }

@@ -1,6 +1,7 @@
 package Model;
 
 import Util.Validator_Tecnico;
+import Util.Validator_Usuario;
 
 import java.sql.SQLData;
 import java.time.LocalDate;
@@ -11,19 +12,22 @@ public class MODEL_Tecnico extends MODEL_Usuario {
     // Atributos exclusivos Tecnico //
     private String especialidade_tecnico;
     private boolean status_disponibilidade_tecnico;
+    private int id_setor;
 
     // Construtor Tecnico //
     public MODEL_Tecnico(int id, String nome, String cpf, String senha, int nivelacesso, String telefone, double salario, LocalDate datanasci, String email, int cargahoraria, String formacao, int id_setor, String especialidade_tecnico, boolean status_disponibilidade_tecnico){
-        super(id,nome,cpf,senha,nivelacesso,telefone,salario, datanasci,email,cargahoraria,formacao,id_setor);
+        super(id,nome,cpf,senha,nivelacesso,telefone,salario, datanasci,email,cargahoraria,formacao);
         setEspecialidade_tecnico(especialidade_tecnico);
         this.status_disponibilidade_tecnico = status_disponibilidade_tecnico;
+        setIdSetor(id_setor);
     }
 
     // Construtor sem Id //
     public MODEL_Tecnico(String nome, String cpf,String senha, int nivelacesso, String telefone, double salario, LocalDate datanasci, String email, int cargahoraria, String formacao, int id_setor, String especialidade_tecnico, boolean status_disponibilidade_tecnico){
-        super(nome,cpf,senha,nivelacesso,telefone,salario,datanasci,email,cargahoraria,formacao,id_setor);
+        super(nome,cpf,senha,nivelacesso,telefone,salario,datanasci,email,cargahoraria,formacao);
         setEspecialidade_tecnico(especialidade_tecnico);
         this.status_disponibilidade_tecnico = status_disponibilidade_tecnico;
+        setIdSetor(id_setor);
     }
 
     // Getters e Setters Tecnico //
@@ -45,5 +49,12 @@ public class MODEL_Tecnico extends MODEL_Usuario {
 
     public void setStatus_disponibilidade_tecnico(boolean status_disponibilidade_tecnico) {
         this.status_disponibilidade_tecnico = status_disponibilidade_tecnico;
+    }
+
+    public int getIdSetor(){
+        return id_setor;
+    }
+    public void setIdSetor(int setor){
+        this.id_setor = Validator_Usuario.validarSetor(setor);
     }
 }

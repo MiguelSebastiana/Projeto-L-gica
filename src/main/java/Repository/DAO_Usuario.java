@@ -1,10 +1,8 @@
 package Repository;
 
 import DataBase.ConnectionFactory;
-import Model.MODEL_Gerente;
-import Model.MODEL_Supervisor;
-import Model.MODEL_Tecnico;
-import Model.MODEL_Usuario;
+import Model.*;
+
 import java.time.LocalDate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 
 public class DAO_Usuario
@@ -20,78 +18,77 @@ public class DAO_Usuario
 
     // Read
 
-    public ArrayList<MODEL_Usuario> find_All_Users()
-    {
+    // Read
+    public ArrayList<MODEL_Usuario> find_All_Users() {
 
         ArrayList<MODEL_Usuario> listaUsuarios = new ArrayList<>();
 
-        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario, " +
-                "u.telefone_usuario, u.salario_usuario,u.data_nasc_usuario,u.email_usuario, " +
-                "u.carga_horaria_minutos_usuario,u.formacao_usuario, " +
-                " u.Setor_id_setor, g.tempo_na_funcao_anos_gerente,sp.experiencia_anos_supervisor, " +
-                " t.especialidade_tecnico,t.status_disponibilidade_tecnico " +
-                "from Usuario u " +
-                "left join Gerente g on u.id_usuario = g.Usuario_id_usuario " +
-                "left join Supervisor sp on u.id_usuario = sp.Usuario_id_usuario " +
-                "left join Tecnico t on u.id_usuario = t.Usuario_id_usuario " +
-                "order by u.id_usuario";
+
+        String querySql = "SELECT " +
+                "    u.*, " +
+                "    na.nome_nivel_acesso, " +
+                "    t.especialidade_tecnico, t.status_disponibilidade_tecnico, t.Setor_id_setor, " +
+                "    s.experiencia_supervisor, " +
+                "    g.anos_funcao_gerente, " +
+                "    a.id_administrador " +
+                "FROM " +
+                "    Usuario u " +
+                "LEFT JOIN Nivel_Acesso na ON u.Nivel_Acesso_id_nivel_acesso = na.id_nivel_acesso " +
+                "LEFT JOIN Tecnico t ON u.id_usuario = t.Usuario_id_usuario " +
+                "LEFT JOIN Supervisor s ON u.id_usuario = s.Usuario_id_usuario " +
+                "LEFT JOIN Gerente g ON u.id_usuario = g.Usuario_id_usuario " +
+                "LEFT JOIN Administrador a ON u.id_usuario = a.Usuario_id_usuario " +
+                "ORDER BY u.id_usuario;";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql);
-             ResultSet resultSet = stmt.executeQuery())
-        {
-            while (resultSet.next())
-            {
+             ResultSet resultSet = stmt.executeQuery()) {
+
+
+            while (resultSet.next()) {
                 int idUsuario = resultSet.getInt("id_usuario");
                 String nomeUsuario = resultSet.getString("nome_usuario");
                 String cpfUsuario = resultSet.getString("cpf_usuario");
                 String senhaUsuario = resultSet.getString("senha_usuario");
-                int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
                 String telefoneUsuario = resultSet.getString("telefone_usuario");
                 double salarioUsuario = resultSet.getDouble("salario_usuario");
-                Date dataNasciment = resultSet.getDate("data_nasc_usuario");
+                Date dataNascimentoSQL = resultSet.getDate("data_nascimento_usuario");
                 String emailUsuario = resultSet.getString("email_usuario");
-                int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
+                int cargaHorariaUsuario = resultSet.getInt("carga_horaria_usuario");
                 String formacaoUsuario = resultSet.getString("formacao_usuario");
-                int idSetor = resultSet.getInt("Setor_id_setor");
+                int nivelAcessoID = resultSet.getInt("Nivel_Acesso_id_nivel_acesso");
 
-                LocalDate dataNascimento = LocalDate.ofInstant(dataNasciment.toInstant(),ZoneId.systemDefault());
+                LocalDate dataNascimento = LocalDate.ofInstant(dataNascimentoSQL.toInstant(),ZoneId.systemDefault());
 
-                if (nivelAcesso == 1) {
+                if (nivelAcessoID == 4) {
                     String especialidadeTecnico = resultSet.getString("especialidade_tecnico");
-                    boolean status;
+                    boolean status = "Disponível".equals(resultSet.getString("status_disponibilidade_tecnico"));
+                    int idSetor = resultSet.getInt("Setor_id_setor");
 
-                    if (resultSet.getString("status_disponibilidade_tecnico").equals("Disponível")) {
-                        status = true;
-                    } else {
-                        status = false;
-                    }
-
-                    MODEL_Usuario tecnico = new MODEL_Tecnico(idUsuario, nomeUsuario, cpfUsuario,senhaUsuario,nivelAcesso, telefoneUsuario, salarioUsuario,
-                            dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, especialidadeTecnico, status);
-
+                    MODEL_Usuario tecnico = new MODEL_Tecnico(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario, nivelAcessoID, telefoneUsuario, salarioUsuario,
+                            dataNascimento, emailUsuario, cargaHorariaUsuario, formacaoUsuario, idSetor, especialidadeTecnico, status);
                     listaUsuarios.add(tecnico);
-                } else if (nivelAcesso == 2) {
-                    int anosSupervisor = resultSet.getInt("experiencia_anos_supervisor");
 
-                    MODEL_Usuario supervisor = new MODEL_Supervisor(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario,nivelAcesso, telefoneUsuario, salarioUsuario,
-                            dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, anosSupervisor);
-
+                } else if (nivelAcessoID == 3) {
+                    int anosSupervisor = resultSet.getInt("experiencia_supervisor");
+                    MODEL_Usuario supervisor = new MODEL_Supervisor(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario, nivelAcessoID, telefoneUsuario, salarioUsuario,
+                            dataNascimento, emailUsuario, cargaHorariaUsuario, formacaoUsuario, anosSupervisor);
                     listaUsuarios.add(supervisor);
-                } else if (nivelAcesso == 3) {
-                    int anosGerente = resultSet.getInt("tempo_na_funcao_anos_gerente");
 
-                    MODEL_Usuario gerente = new MODEL_Gerente(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario,nivelAcesso, telefoneUsuario, salarioUsuario,
-                            dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, anosGerente);
-
+                } else if (nivelAcessoID == 2) {
+                    int anosGerente = resultSet.getInt("anos_funcao_gerente");
+                    MODEL_Usuario gerente = new MODEL_Gerente(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario, nivelAcessoID, telefoneUsuario, salarioUsuario,
+                            dataNascimento, emailUsuario, cargaHorariaUsuario, formacaoUsuario, anosGerente);
                     listaUsuarios.add(gerente);
+
+                } else if (nivelAcessoID == 1) {
+                    MODEL_Usuario admin = new MODEL_Administrador(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario, nivelAcessoID, telefoneUsuario, salarioUsuario,
+                            dataNascimento, emailUsuario, cargaHorariaUsuario, formacaoUsuario);
+                    listaUsuarios.add(admin);
                 }
             }
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Não foi possível buscar todos os usuários: " + e.getMessage());
-
+        } catch (SQLException e) {
+            System.err.println("Não foi possivel visualizar todos os usuarios :" + e.getMessage());
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
 
@@ -138,7 +135,7 @@ public class DAO_Usuario
 
     public void update_Carga_Horaria(MODEL_Usuario usuario, int carga){
 
-        String querySql = "update Usuario set carga_horaria_minutos_usuario = ? where id_usuario = ?";
+        String querySql = "update Usuario set carga_horaria_usuario = ? where id_usuario = ?";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql)){
@@ -169,24 +166,6 @@ public class DAO_Usuario
         }catch (SQLException e){
             System.err.println("Erro ao atualizar a formação "+e.getMessage());
             throw new RuntimeException("Erro ao atualizar a formação no banco de dados. "+e);
-        }
-    }
-
-    public void update_Setor(MODEL_Usuario usuario, int setor){
-
-        String querySql = "update Usuario set Setor_id_setor = ? where id_usuario = ?";
-
-        try(Connection conexao = ConnectionFactory.getConn();
-            PreparedStatement stmt = conexao.prepareStatement(querySql)){
-
-            stmt.setInt(1,setor);
-            stmt.setInt(2,usuario.getId());
-            stmt.executeUpdate();
-
-            usuario.setSetor(setor);
-        }catch (SQLException e){
-            System.err.println("Erro ao atualizar o setor "+e.getMessage());
-            throw new RuntimeException("Erro ao atualizar o setor no banco de dados. "+e);
         }
     }
 
