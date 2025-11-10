@@ -1,6 +1,7 @@
 package View;
 import Model.*;
 import Util.Ferramentas;
+import Util.Validator_Administrador;
 import Util.Validator_Usuario;
 
 public class Menu_Login {
@@ -15,13 +16,17 @@ public class Menu_Login {
 
         Ferramentas.limpaTerminal();
 
-        System.out.println("      +------------------------+");
-        System.out.println("      |       Menu Login       |");
-        System.out.println("      +------------------------+");
-
+        System.out.println("┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+        System.out.println("│                                   ███╗   ███╗███████╗███╗   ██╗ ██╗   ██╗   ██╗      ██████╗  ██████╗  ██╗ ███╗   ██╗                                 │");
+        System.out.println("│                                   ████╗ ████║██╔════╝████╗  ██║ ██║   ██║   ██║     ██╔═══██╗██╔════╝  ██║ ████╗  ██║                                 │");
+        System.out.println("│                                   ██╔████╔██║█████╗  ██╔██╗ ██║ ██║   ██║   ██║     ██║   ██║██║  ███╗ ██║ ██╔██╗ ██║                                 │");
+        System.out.println("│                                   ██║╚██╔╝██║██╔══╝  ██║╚██╗██║ ██║   ██║   ██║     ██║   ██║██║   ██║ ██║ ██║╚██╗██║                                 │");
+        System.out.println("│                                   ██║ ╚═╝ ██║███████╗██║ ╚████║ ╚██████╔╝   ███████╗╚██████╔╝╚██████╔╝ ██║ ██║ ╚████║                                 │");
+        System.out.println("│                                   ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═════╝    ╚══════╝ ╚═════╝  ╚═════╝  ╚═╝ ╚═╝  ╚═══╝                                 │");
+        System.out.println("└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
         Ferramentas.limpaTerminalOpcional(2);
-        System.out.println("------------------");
-        System.out.print("> Digite o seu cpf: ");
+        System.out.println("┌──────────────────────────────────────┐");
+        System.out.print("│ ➤ Digite o seu cpf: ");
 
         do {
             try {
@@ -32,25 +37,35 @@ public class Menu_Login {
                 Ferramentas.limpaTerminal();
                 System.err.println(e.getMessage());
                 Ferramentas.Delay(1500);
+                System.out.println("┌──────────────────────────────────────┐");
+                System.out.print("│ > Digite o seu cpf: ");
             }
         }while (continuar);
-        System.out.println("------------------");
+        System.out.println("└──────────────────────────────────────┘");
 
-        Ferramentas.limpaTerminalOpcional(1);
-        System.out.println("------------------");
-        System.out.print("> Digite a sua senha: ");
+        System.out.print("│ > Digite a sua senha: ");
         senha = Ferramentas.lString();
-        System.out.println("------------------");
+        Validator_Usuario.senha(senha);
+        System.out.println("└──────────────────────────────────────┘");
 
         Ferramentas.Delay(500);
 
-        MODEL_Usuario usuario = serviceUsuario.Verificar_Login(cpf, senha);
+        Validator_Administrador.validarAdm(cpf,senha);
+        MODEL_Usuario usuario = serviceUsuario.Verificar_Login(cpf,senha);
+        int nivelacesso = usuario.getNivelacesso();
 
-        if (serviceUsuario.verificarIdFuncao(usuario) == 1) {
+
+        if (nivelacesso == 1)
+        {
             Menu_Tecnico.Menu((MODEL_Tecnico) usuario);
-        } else if (serviceUsuario.verificarIdFuncao(usuario) == 2) {
+
+        }
+        else if (nivelacesso == 2)
+        {
             Menu_SuperVisor.Menu((MODEL_Supervisor) usuario);
-        } else if (serviceUsuario.verificarIdFuncao(usuario) == 3) {
+        }
+        else if (nivelacesso == 3)
+        {
             Menu_Gerente.Menu((MODEL_Gerente) usuario);
         }
     }

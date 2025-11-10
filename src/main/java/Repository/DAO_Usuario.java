@@ -1,10 +1,8 @@
 package Repository;
 
 import DataBase.ConnectionFactory;
-import Model.MODEL_Gerente;
-import Model.MODEL_Supervisor;
-import Model.MODEL_Tecnico;
-import Model.MODEL_Usuario;
+import Model.*;
+
 import java.time.LocalDate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -98,9 +96,123 @@ public class DAO_Usuario
         return listaUsuarios;
     }
 
+    public MODEL_Usuario find_by_id(int id){
+
+        MODEL_Usuario usuario = null;
+
+        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario, \n" +
+                "                u.telefone_usuario, u.salario_usuario,u.data_nasc_usuario,u.email_usuario, \n" +
+                "                u.carga_horaria_minutos_usuario,u.formacao_usuario, \n" +
+                "                 u.Setor_id_setor, g.tempo_na_funcao_anos_gerente,sp.experiencia_anos_supervisor, \n" +
+                "                 t.especialidade_tecnico,t.status_disponibilidade_tecnico \n" +
+                "                from Usuario u \n" +
+                "                left join Gerente g on u.id_usuario = g.Usuario_id_usuario \n" +
+                "                left join Supervisor sp on u.id_usuario = sp.Usuario_id_usuario \n" +
+                "                left join Tecnico t on u.id_usuario = t.Usuario_id_usuario\n" +
+                "                where u.id_usuario = ?";
+
+        try (Connection conexao = ConnectionFactory.getConn();
+             PreparedStatement stmt = conexao.prepareStatement(querySql);
+             ResultSet resultSet = stmt.executeQuery())
+        {
+
+            stmt.setInt(1,id);
+
+            int idUsuario = resultSet.getInt("id_usuario");
+            String nomeUsuario = resultSet.getString("nome_usuario");
+            String cpfUsuario = resultSet.getString("cpf_usuario");
+            String senhaUsuario = resultSet.getString("senha_usuario");
+            int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
+            String telefoneUsuario = resultSet.getString("telefone_usuario");
+            double salarioUsuario = resultSet.getDouble("salario_usuario");
+            Date dataNasciment = resultSet.getDate("data_nasc_usuario");
+            String emailUsuario = resultSet.getString("email_usuario");
+            int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
+            String formacaoUsuario = resultSet.getString("formacao_usuario");
+            int idSetor = resultSet.getInt("Setor_id_setor");
+
+            LocalDate dataNascimento = LocalDate.ofInstant(dataNasciment.toInstant(),ZoneId.systemDefault());
+
+            if (nivelAcesso == 1) {
+                String especialidadeTecnico = resultSet.getString("especialidade_tecnico");
+                boolean status;
+
+                if (resultSet.getString("status_disponibilidade_tecnico").equals("Disponível")) {
+                    status = true;
+                } else {
+                    status = false;
+                }
+
+                usuario = new MODEL_Tecnico(idUsuario, nomeUsuario, cpfUsuario,senhaUsuario,nivelAcesso, telefoneUsuario, salarioUsuario,
+                        dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, especialidadeTecnico, status);
+
+            } else if (nivelAcesso == 2) {
+                int anosSupervisor = resultSet.getInt("experiencia_anos_supervisor");
+
+                usuario = new MODEL_Supervisor(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario,nivelAcesso, telefoneUsuario, salarioUsuario,
+                        dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, anosSupervisor);
+
+            } else if (nivelAcesso == 3) {
+                int anosGerente = resultSet.getInt("tempo_na_funcao_anos_gerente");
+
+                usuario = new MODEL_Gerente(idUsuario, nomeUsuario, cpfUsuario, senhaUsuario, nivelAcesso, telefoneUsuario, salarioUsuario,
+                        dataNascimento, emailUsuario, cargaHoraria, formacaoUsuario, idSetor, anosGerente);
+
+            }
+        }catch (SQLException e)
+        {
+            System.err.println("Não foi possível buscar todos os usuários: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
+
+        return usuario;
+    }
+
+    public MODEL_Administrador buscarAdm(String cpf, String senha){
+
+        Model.MODEL_Administrador adm = null;
+
+        String querySql = "select u.id_usuario, u.nome_usuario, u.cpf_usuario, u.senha_usuario, u.nivel_acesso_usuario,  \n" +
+                "u.telefone_usuario, u.salario_usuario,u.data_nasc_usuario,u.email_usuario,  \n" +
+                "u.carga_horaria_minutos_usuario,u.formacao_usuario,  \n" +
+                "u.Setor_id_setor\n" +
+                "from Usuario u\n" +
+                "where u.nome_usuario = 'ADMIN';";
+
+        try(Connection conexao = ConnectionFactory.getConn();
+        PreparedStatement stmt = conexao.prepareStatement(querySql);
+        ResultSet resultSet = stmt.getResultSet()){
+
+            int idUsuario = resultSet.getInt("id_usuario");
+            String nomeUsuario = resultSet.getString("nome_usuario");
+            String cpfUsuario = resultSet.getString("cpf_usuario");
+            String senhaUsuario = resultSet.getString("senha_usuario");
+            int nivelAcesso = resultSet.getInt("nivel_acesso_usuario");
+            String telefoneUsuario = resultSet.getString("telefone_usuario");
+            double salarioUsuario = resultSet.getDouble("salario_usuario");
+            Date dataNasciment = resultSet.getDate("data_nasc_usuario");
+            String emailUsuario = resultSet.getString("email_usuario");
+            int cargaHoraria = resultSet.getInt("carga_horaria_minutos_usuario");
+            String formacaoUsuario = resultSet.getString("formacao_usuario");
+            int idSetor = resultSet.getInt("Setor_id_setor");
+
+
+            adm = new MODEL_Administrador(cpf,senha);
+
+            return adm;
+
+        }catch (SQLException e)
+        {
+            System.err.println("Não foi possível buscar todos os usuários: " + e.getMessage());
+
+            throw new RuntimeException("Erro ao consultar o banco de dados.", e);
+        }
+    }
+
     // Update
 
-    public void update_Telefone(MODEL_Usuario usuario, String telefone){
+    public void update_Telefone(int usuario, String telefone){
 
         String querySql = "update Usuario set telefone_usuario = ? where id_usuario = ?";
 
@@ -108,17 +220,16 @@ public class DAO_Usuario
         PreparedStatement stmt = conexao.prepareStatement(querySql)){
 
             stmt.setString(1,telefone);
-            stmt.setInt(2,usuario.getId());
+            stmt.setInt(2,usuario);
             stmt.executeUpdate();
 
-            usuario.setTelefone(telefone);
         }catch (SQLException e){
             System.err.println("Erro ao atualizar o telefone "+ e.getMessage());
             throw new RuntimeException("Erro ao atualizar telefone no banco de dados. "+e);
         }
     }
 
-    public void update_Email(MODEL_Usuario usuario, String email){
+    public void update_Email(int usuario, String email){
 
         String querySql = "update Usuario set email_usuario = ? where id_usuario = ?";
 
@@ -126,17 +237,16 @@ public class DAO_Usuario
             PreparedStatement stmt = conexao.prepareStatement(querySql)){
 
                 stmt.setString(1,email);
-                stmt.setInt(2,usuario.getId());
+                stmt.setInt(2,usuario);
                 stmt.executeUpdate();
 
-                usuario.setEmail(email);
         }catch (SQLException e){
             System.err.println("Erro ao atualizar o email "+e.getMessage());
             throw new RuntimeException("Erro ao atualizar email no banco de dados. "+e);
         }
     }
 
-    public void update_Carga_Horaria(MODEL_Usuario usuario, int carga){
+    public void update_Carga_Horaria(int usuario, int carga){
 
         String querySql = "update Usuario set carga_horaria_minutos_usuario = ? where id_usuario = ?";
 
@@ -144,17 +254,16 @@ public class DAO_Usuario
             PreparedStatement stmt = conexao.prepareStatement(querySql)){
 
             stmt.setInt(1,carga);
-            stmt.setInt(2,usuario.getId());
+            stmt.setInt(2,usuario);
             stmt.executeUpdate();
 
-            usuario.setCargahoraria(carga);
         }catch (SQLException e){
             System.err.println("Erro ao atualizar a carga horaria "+e.getMessage());
             throw new RuntimeException("Erro ao atualizar a carga horaria no banco de dados. "+e);
         }
     }
 
-    public void update_Formacao(MODEL_Usuario usuario, String formacao){
+    public void update_Formacao(int usuario, String formacao){
 
         String querySql = "update Usuario set formacao_usuario = ? where id_usuario = ?";
 
@@ -162,17 +271,16 @@ public class DAO_Usuario
             PreparedStatement stmt = conexao.prepareStatement(querySql)){
 
             stmt.setString(1,formacao);
-            stmt.setInt(2,usuario.getId());
+            stmt.setInt(2,usuario);
             stmt.executeUpdate();
 
-            usuario.setFormacao(formacao);
         }catch (SQLException e){
             System.err.println("Erro ao atualizar a formação "+e.getMessage());
             throw new RuntimeException("Erro ao atualizar a formação no banco de dados. "+e);
         }
     }
 
-    public void update_Setor(MODEL_Usuario usuario, int setor){
+    public void update_Setor(int usuario, int setor){
 
         String querySql = "update Usuario set Setor_id_setor = ? where id_usuario = ?";
 
@@ -180,17 +288,16 @@ public class DAO_Usuario
             PreparedStatement stmt = conexao.prepareStatement(querySql)){
 
             stmt.setInt(1,setor);
-            stmt.setInt(2,usuario.getId());
+            stmt.setInt(2,usuario);
             stmt.executeUpdate();
 
-            usuario.setSetor(setor);
         }catch (SQLException e){
             System.err.println("Erro ao atualizar o setor "+e.getMessage());
             throw new RuntimeException("Erro ao atualizar o setor no banco de dados. "+e);
         }
     }
 
-    public void update_Senha(MODEL_Usuario usuario, String senha){
+    public void update_Senha(int usuario, String senha){
 
         String querySql = "update Usuario set senha_usuario = ? where id_usuario = ?";
 
@@ -198,10 +305,9 @@ public class DAO_Usuario
             PreparedStatement stmt = conexao.prepareStatement(querySql)){
 
             stmt.setString(1,senha);
-            stmt.setInt(2,usuario.getId());
+            stmt.setInt(2,usuario);
             stmt.executeUpdate();
 
-            usuario.setSenha(senha);
         }catch (SQLException e){
             System.err.println("Erro ao atualizar a senha "+e.getMessage());
             throw new RuntimeException("Erro ao atualizar a senha no banco de dados. "+e);

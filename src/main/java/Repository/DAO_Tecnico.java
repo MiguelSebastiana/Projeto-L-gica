@@ -169,7 +169,7 @@ public class DAO_Tecnico {
 
     // Update
 
-    public void update_Especialidade(MODEL_Tecnico tecnico, String especialidade){
+    public void update_Especialidade(int tecnico, String especialidade){
         String querySql = "update Usuario as u " +
                 "inner join Tecnico t on u.id_usuario = t.Usuario_id_usuario " +
                 "set especialidade_tecnico = ? " +
@@ -179,7 +179,7 @@ public class DAO_Tecnico {
                 PreparedStatement stmt = conexao.prepareStatement(querySql))
         {
             stmt.setString(1, especialidade);
-            stmt.setInt(2, tecnico.getId());
+            stmt.setInt(2, tecnico);
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -190,7 +190,7 @@ public class DAO_Tecnico {
         }
     }
 
-    public void update_Disponibilidade(MODEL_Tecnico tecnico, boolean disponibilidade) {
+    public void update_Disponibilidade(int tecnico, boolean disponibilidade) {
         String status;
 
         String querySql = "update Usuario as u " +
@@ -208,7 +208,7 @@ public class DAO_Tecnico {
             }
 
             stmt.setString(1, status);
-            stmt.setInt(2, tecnico.getId());
+            stmt.setInt(2, tecnico);
             stmt.executeUpdate();
 
 
@@ -223,7 +223,7 @@ public class DAO_Tecnico {
 
     // Delete
 
-    public void delete_Tecnico(MODEL_Tecnico tecnico){
+    public void delete_Tecnico(int tecnico){
         String querySql = "delete from Usuario as u " + "where u.id_usuario = ?";
 
         String querySql2 = "delete from Tecnico as t " + "where t.id_usuario = ?";
@@ -231,12 +231,12 @@ public class DAO_Tecnico {
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
-            stmt.setInt(1,tecnico.getId());
+            stmt.setInt(1,tecnico);
             stmt.executeUpdate();
 
             try(PreparedStatement stmt2 = conexao.prepareStatement(querySql2)){
 
-                stmt2.setInt(2,tecnico.getId());
+                stmt2.setInt(2,tecnico);
                 stmt2.executeUpdate();
 
             }catch (SQLException e){

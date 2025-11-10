@@ -12,19 +12,26 @@ public class Menu_Inicial {
             do {
 
                 Ferramentas.limpaTerminal();
+            System.out.println("┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+            System.out.println("│                                                    ██╗    ██╗███████╗ ██████╗     ██████╗ ███████╗                                                   │");
+            System.out.println("│                                                    ██║    ██║██╔════╝██╔════╝    ██╔═══██╗██╔════╝                                                   │");
+            System.out.println("│                                                    ██║ █╗ ██║█████╗  ██║  ███╗   ██║   ██║███████╗                                                   │");
+            System.out.println("│                                                    ██║███╗██║██╔══╝  ██║   ██║   ██║   ██║╚════██║                                                   │");
+            System.out.println("│                                                    ╚███╔███╔╝███████╗╚██████╔╝   ╚██████╔╝███████║                                                   │");
+            System.out.println("│                                                     ╚══╝╚══╝ ╚══════╝ ╚═════╝     ╚═════╝ ╚══════╝                                                   │");
+            System.out.println("└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+                Ferramentas.limpaTerminalOpcional(3);
 
-                System.out.println("      +--------------------+");
-                System.out.println("      |       WEG OS       |");
-                System.out.println("      +--------------------+");
+                System.out.println("Este projeto . . .");
 
-                System.out.println("\n\n\n Este projeto . . .");
+                Ferramentas.limpaTerminalOpcional(2);
 
-                System.out.println("      --- Opções ---");
-
-                System.out.println("1-Login");
-                System.out.println("2-Sair");
-                System.out.println("\n ----------------------------------");
-                System.out.print("> Digite a opção desejada: ");
+                System.out.println("┌───────────────────────────────────────┐");
+                System.out.println("│ \uD835\uDCDE\uD835\uDCDF\uD835\uDCD2\uD835\uDCDE\uD835\uDCD4\uD835\uDCE2                               │");
+                System.out.println("│ 1 ➔ Login:                            │");
+                System.out.println("│ 2 ➔ Sair:                             │");
+                System.out.println("└───────────────────────────────────────┘");
+                System.out.print("➤ Digite a opção desejada: ");
 
                 int escolha = 0;
 
