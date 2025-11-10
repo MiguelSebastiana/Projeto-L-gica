@@ -5,7 +5,7 @@ import View.Menu_Administrador;
 import View.Menu_Inicial;
 
 public class Main {
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         MODEL_Administrador adm = new MODEL_Administrador("2","2");
 

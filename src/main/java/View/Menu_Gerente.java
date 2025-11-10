@@ -16,25 +16,20 @@ public class Menu_Gerente {
 
         do{
             Ferramentas.limpaTerminal();
-            System.out.println("┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
-            System.out.println("│        ███╗   ███╗███████╗███╗   ██╗██╗   ██╗     ██████╗ ███████╗██████╗ ███████╗███╗   ██╗████████╗███████╗        │");
-            System.out.println("│        ████╗ ████║██╔════╝████╗  ██║██║   ██║    ██╔════╝ ██╔════╝██╔══██╗██╔════╝████╗  ██║╚══██╔══╝██╔════╝        │");
-            System.out.println("│        ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║    ██║  ███╗█████╗  ██████╔╝█████╗  ██╔██╗ ██║   ██║   █████╗          │");
-            System.out.println("│        ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║    ██║   ██║██╔══╝  ██╔══██╗██╔══╝  ██║╚██╗██║   ██║   ██╔══╝          │");
-            System.out.println("│        ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝    ╚██████╔╝███████╗██║  ██║███████╗██║ ╚████║   ██║   ███████╗        │");
-            System.out.println("│        ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝        │");
-            System.out.println("└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+
+            System.out.println("      +--------------------------+");
+            System.out.println("      |       Menu Gerente       |");
+            System.out.println("      +--------------------------+");
 
             Ferramentas.limpaTerminalOpcional(2);
 
-            System.out.println("┌──────────────────────────────────────┐");
-            System.out.println("│                \uD835\uDCDE\uD835\uDCDF\uD835\uDCD2\uD835\uDCDE\uD835\uDCD4\uD835\uDCE2:               │");
-            System.out.println("│     (1) ➔ Cadastrar Funcionário      │");
-            System.out.println("│  (2) ➔ Visualizar relatórios gerais  │");
-            System.out.println("│    (3) ➔ Criar ordens de serviço     │");
-            System.out.println("│            (4) ➔ Sair                │");
-            System.out.println("└──────────────────────────────────────┘");
-            System.out.print("➤ Digite a opção desejada: ");
+            System.out.println("--- Opções ---");
+            System.out.println("\n1 - Cadastrar Funcionário");
+            System.out.println("2 - Visualizar relatórios gerais");
+            System.out.println("3 - Criar ordens de serviço");
+            System.out.println("4 - Sair");
+            System.out.println("\n ----------------------------------");
+            System.out.print("> Digite a opção desejada: ");
 
             int escolha = 0;
 
@@ -88,14 +83,14 @@ public class Menu_Gerente {
             System.out.println("Nenhuma Ordem de Serviço cadastrada.");
         }
         for (MODEL_Servico ordem : ordensServico) {
-            System.out.println("-------------- Relatório --------------");
+            System.out.println("\n-------------- Relatório --------------");
             System.out.println("| ID da Ordem: " + ordem.getId_Ordem_servico());
             System.out.println("| Técnico:     " + ordem.getTecnico());
             System.out.println("| Máquina:     " + ordem.getMaquina());
             System.out.println("| Descrição:   " + ordem.getDescricao_ordem_servico());
             System.out.println("| Status:      " + ordem.getStatus_aberto_ordem_servico());
             System.out.println("----------------------------------------");
-            System.out.println("");
+            System.out.println("\n");
         }
 
         System.out.println("+--------------------------------------+");

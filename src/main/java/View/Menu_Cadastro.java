@@ -19,24 +19,15 @@ public class Menu_Cadastro {
 
         while (true){
             Ferramentas.limpaTerminal();
-
-            System.out.println("┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
-            System.out.println("│        ███╗   ███╗███████╗███╗   ██╗██╗   ██╗     ██████╗ █████╗ ██████╗  █████╗ ███████╗████████╗██████╗  ██████╗         │");
-            System.out.println("│        ████╗ ████║██╔════╝████╗  ██║██║   ██║    ██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗        │");
-            System.out.println("│        ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║    ██║     ███████║██║  ██║███████║███████╗   ██║   ██████╔╝██║   ██║        │");
-            System.out.println("│        ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║    ██║     ██╔══██║██║  ██║██╔══██║╚════██║   ██║   ██╔══██╗██║   ██║        │");
-            System.out.println("│        ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝    ╚██████╗██║  ██║██████╔╝██║  ██║███████║   ██║   ██║  ██║╚██████╔╝        │");
-            System.out.println("│        ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝      ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝         │");
-            System.out.println("└────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
-            Ferramentas.limpaTerminalOpcional(3);
-
-            System.out.println("┌───────────────────────────────┐");
-            System.out.println("│            \uD835\uDCDE\uD835\uDCDF\uD835\uDCD2\uD835\uDCDE\uD835\uDCD4\uD835\uDCE2:            │");
-            System.out.println("│        (1) ➔ Técnico          │");
-            System.out.println("│      (2) ➔ Super Visor        │");
-            System.out.println("│        (3) ➔ Sair             │");
-            System.out.println("└───────────────────────────────┘");
-            System.out.print("➤ Digite a opção desejada: ");
+            System.out.println("      ==================");
+            System.out.println("      ==   Cadastro   ==");
+            System.out.println("      ==================");
+            System.out.println("\n\n\n");
+            System.out.println("--- Adicione um novo funcinario ---");
+            System.out.println("\n\n");
+            System.out.println("1 - Técnico");
+            System.out.println("2 - Super Visor");
+            System.out.println("3 - Sair");
 
 
             try
@@ -75,7 +66,7 @@ public class Menu_Cadastro {
 
         do {
             System.out.println("-------------------------------------------");
-            System.out.print("> Digite os anos de experiência do supervisor: ");
+            System.out.print("Digite os anos de experiência do supervisor: ");
             try {
                 experiencia = Ferramentas.lInteiro();
                 Validator_Supervisor.validarAnosExperiencia(experiencia);
@@ -111,7 +102,7 @@ public class Menu_Cadastro {
 
         do {
             System.out.println("-------------------------------------------");
-            System.out.print("> Digite a especialidade do técnico: ");
+            System.out.print("Digite a especialidade do técnico: ");
             try {
                 especialidade = Ferramentas.lString();
                 Validator_Tecnico.validarEspecialidade(especialidade);
@@ -150,7 +141,7 @@ public class Menu_Cadastro {
 
         do {
             System.out.println("-------------------------------------------");
-            System.out.print("> Digite os anos na função: ");
+            System.out.print("Digite os anos na função: ");
             try {
                 anosFuncao = Ferramentas.lInteiro();
                 Validator_Gerente.validarTempoFuncao(anosFuncao);
@@ -194,7 +185,7 @@ public class Menu_Cadastro {
         do {
             Ferramentas.limpaTerminal();
             System.out.println("-------------------------------------------");
-            System.out.print("> Digite o cpf: ");
+            System.out.print("-Digite o cpf: ");
             try {
 
                 cpf = Ferramentas.lString();
@@ -214,7 +205,7 @@ public class Menu_Cadastro {
         do {
             Ferramentas.limpaTerminal();
             System.out.println("-------------------------------------------");
-            System.out.print("> Digite o email: ");
+            System.out.print("Digite o email: ");
             try {
 
                 email = Ferramentas.lString();
@@ -252,7 +243,7 @@ public class Menu_Cadastro {
         do {
             Ferramentas.limpaTerminal();
             System.out.println("-------------------------------------------");
-            System.out.print("> Digite o nome: ");
+            System.out.print("Digite o nome: ");
             try {
 
                 nome = Ferramentas.lString();
@@ -272,7 +263,7 @@ public class Menu_Cadastro {
         do {
             Ferramentas.limpaTerminal();
             System.out.println("-------------------------------------------");
-            System.out.print("> Digite o telefone: ");
+            System.out.print("Digite o telefone: ");
             try {
 
                 telefone = Ferramentas.lString();
@@ -291,7 +282,7 @@ public class Menu_Cadastro {
         do {
             Ferramentas.limpaTerminal();
             System.out.println("-------------------------------------------");
-            System.out.print("> Digite o salário: ");
+            System.out.print("Digite o salário: ");
             try {
 
                 salario = Ferramentas.lDouble();
@@ -310,13 +301,10 @@ public class Menu_Cadastro {
         do {
             do {
                 System.out.println("-------------------------------------------");
-
-                System.out.println("      +----------------------------+");
-                System.out.println("      |       Data Nascimento      |");
-                System.out.println("      +----------------------------+");
+                System.out.println("--- Data de nascimento ---");
 
                 System.out.println("\n\n");
-                System.out.print("> Digite o ano: ");
+                System.out.print("Digite o ano: ");
                 try {
                     ano = Ferramentas.lInteiro();
                     verifica = true;
@@ -332,7 +320,7 @@ public class Menu_Cadastro {
 
             do {
                 System.out.println("-------------------------------------------");
-                System.out.print("> Digite o mês: ");
+                System.out.print("Digite o mês: ");
                 try {
                     mes = Ferramentas.lInteiro();
                     verifica = true;
@@ -348,7 +336,7 @@ public class Menu_Cadastro {
 
             do {
                 System.out.println("-------------------------------------------");
-                System.out.print("> Digite o dia: ");
+                System.out.print("Digite o dia: ");
                 try {
                     dia = Ferramentas.lInteiro();
                     verifica = true;
@@ -381,7 +369,7 @@ public class Menu_Cadastro {
         do {
             Ferramentas.limpaTerminal();
             System.out.println("-------------------------------------------");
-            System.out.print("> Digite a carga horario(Em minutos): ");
+            System.out.print("Digite a carga horario(Em minutos): ");
             try {
 
                 cargaHoraria = Ferramentas.lInteiro();
@@ -402,7 +390,7 @@ public class Menu_Cadastro {
         do {
             Ferramentas.limpaTerminal();
             System.out.println("-------------------------------------------");
-            System.out.print("> Digite a formação: ");
+            System.out.print("Digite a formação: ");
             try {
                 formacao = Ferramentas.lString();
                 Validator_Geral.validarString(formacao);
@@ -423,7 +411,7 @@ public class Menu_Cadastro {
             System.out.println("\n\n             SETOR  ");
             System.out.println("1- P&D(Pesquisa e desenvolvimento)  2-Motores Elétricos   3-Tintas e vernizes   4-Geração solar");
             System.out.println("5-Automação Industrial  6-Qualidade  7-Fundição   8-Manutenção 9-Administração");
-            System.out.print("> Digite o setor: ");
+            System.out.print("Digite o setor: ");
             try {
                 setor = Ferramentas.lInteiro();
 

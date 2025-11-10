@@ -1,6 +1,5 @@
 package Util;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ferramentas {
@@ -23,16 +22,11 @@ public class Ferramentas {
 
     // ------ FAZ INPUT DE DOUBLE E RETORNA ------ //
     public static double lDouble() {
-        while (true) {
-            try {
-                double num = ler.nextDouble();
-                ler.nextLine();
-                return num;
-            } catch (InputMismatchException e) {
-                System.err.print("Entrada inválida. Digite um número decimal: ");
-                ler.nextLine();
-            }
-        }
+        double num = ler.nextDouble();
+
+        ler.nextLine(); // Esvazia o buffer
+
+        return num;
     }
 
     // ------ FAZ INPUT DE STRING E RETORNA ------ //
@@ -42,16 +36,11 @@ public class Ferramentas {
 
     // ------ FAZ INPUT DE INTEIRO E RETORNA ------ //
     public static int lInteiro() {
-        while (true) {
-            try {
-                int num = ler.nextInt();
-                ler.nextLine(); // limpa o buffer
-                return num;
-            } catch (InputMismatchException e) {
-                System.err.print("Entrada inválida. Digite um número inteiro: ");
-                ler.nextLine(); // limpa o buffer de novo
-            }
-        }
+        int num = ler.nextInt();
+
+        ler.nextLine(); // Esvazia o buffer
+
+        return num;
     }
 
     // ------ PULA MUITAS LINHAS DO TERMINAL ------ //

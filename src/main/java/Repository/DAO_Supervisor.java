@@ -175,7 +175,7 @@ public class DAO_Supervisor {
 
     // Update
 
-    public void update_Experiencia(int supervisor, int experiencia) {
+    public void update_Experiencia(MODEL_Supervisor supervisor, int experiencia) {
 
 
         String querySql = "update Usuario as u " +
@@ -188,7 +188,7 @@ public class DAO_Supervisor {
                 PreparedStatement stmt = conexao.prepareStatement(querySql))
         {
             stmt.setInt(1, experiencia);
-            stmt.setInt(2, supervisor);
+            stmt.setInt(2, supervisor.getId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -201,7 +201,7 @@ public class DAO_Supervisor {
 
     // Delete
 
-    public void delete_Supervisor(int supervisor){
+    public void delete_Supervisor(MODEL_Supervisor supervisor){
 
         String querySql = "delete from Usuario as u " + "where u.id_usuario = ?";
 
@@ -210,12 +210,12 @@ public class DAO_Supervisor {
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
-            stmt.setInt(1,supervisor);
+            stmt.setInt(1,supervisor.getId());
             stmt.executeUpdate();
 
             try(PreparedStatement stmt2 = conexao.prepareStatement(querySql2)){
 
-                stmt2.setInt(2,supervisor);
+                stmt2.setInt(2,supervisor.getId());
                 stmt2.executeUpdate();
 
             }catch (SQLException e){

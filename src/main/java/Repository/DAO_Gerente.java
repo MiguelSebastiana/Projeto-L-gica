@@ -178,7 +178,7 @@ public class DAO_Gerente {
 
     // Update
 
-    public void update_Tempo_Funcao(int gerente, int tempo){
+    public void update_Tempo_Funcao(MODEL_Gerente gerente, int tempo){
 
         String querySql = "update Usuario as u " +
                 "inner join Gerente g on u.id_usuario = g.id_usuarios " +
@@ -189,7 +189,7 @@ public class DAO_Gerente {
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
             stmt.setInt(1,tempo);
-            stmt.setInt(2,gerente);
+            stmt.setInt(2,gerente.getId());
             stmt.executeQuery();
 
         }
@@ -203,7 +203,7 @@ public class DAO_Gerente {
 
     // Delete
 
-    public void delete_User_Gerente(int gerente){
+    public void delete_User_Gerente(MODEL_Gerente gerente){
 
         String querySql = "delete from Usuario as u " + "where u.id_usuario = ?";
 
@@ -212,12 +212,12 @@ public class DAO_Gerente {
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
 
-            stmt.setInt(1,gerente);
+            stmt.setInt(1,gerente.getId());
             stmt.executeUpdate();
 
             try(PreparedStatement stmt2 = conexao.prepareStatement(querySql2)){
 
-                stmt2.setInt(2,gerente);
+                stmt2.setInt(2,gerente.getId());
                 stmt2.executeUpdate();
 
             }catch (SQLException e){

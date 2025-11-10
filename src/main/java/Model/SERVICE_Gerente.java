@@ -8,9 +8,10 @@ import java.util.ArrayList;
 
 public class SERVICE_Gerente {
 
+    static DAO_Gerente daoGerente;
     //--Atributos--//
 
-    static DAO_Gerente daoGerente;
+
 
     //--Métodos--//
 
@@ -28,7 +29,6 @@ public class SERVICE_Gerente {
         }
 
     }
-
     //Read
 
     public ArrayList<MODEL_Gerente> All_Gerentes(){
@@ -36,42 +36,30 @@ public class SERVICE_Gerente {
     }
 
     public MODEL_Gerente Find_By_Id(int id){
-        try {
-            Validator_Usuario.verificarID(id);
-            return daoGerente.find_By_Id(id);
-        }catch(RuntimeException re)
-        {
-            throw new RuntimeException(re.getMessage());
-        }
+        Validator_Usuario.verificarID(id);
+        return daoGerente.find_By_Id(id);
     }
 
     //Update
 
-    public void Update_TempoFuncao(int id, int tempoFuncao) {
-        try {
-            Validator_Usuario.verificarID(id);
-            Validator_Gerente.validarTempoFuncao(tempoFuncao);
-            MODEL_Gerente modelGerente = SERVICE_Gerente.daoGerente.find_By_Id(id);
-            modelGerente.setTempo_na_funcao_anos_gerente(tempoFuncao);
-            daoGerente.update_Tempo_Funcao(id, tempoFuncao);
-        }catch(RuntimeException rte)
+    public void Update_TempoFuncao(MODEL_Gerente gerente, int tempoFuncao) {
+        if (gerente != null)
         {
-            throw new RuntimeException(rte.getMessage());
+            daoGerente.update_Tempo_Funcao(gerente, Validator_Gerente.validarTempoFuncao(tempoFuncao));
         }
     }
 
     //Delete
 
-    public void Delete_Gerente(int id)
+    public void Delete_Gerente(MODEL_Gerente gerente )
     {
-        try
+        try {
+            if (gerente != null) {
+                daoGerente.delete_User_Gerente(gerente);
+            }
+        }catch(RuntimeException re)
         {
-            Validator_Usuario.verificarID(id);
-            daoGerente.delete_User_Gerente(id);
-        }
-        catch(RuntimeException re)
-        {
-            throw new RuntimeException(re.getMessage());
+            System.out.println(re.getMessage());
         }
     }
 
