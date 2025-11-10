@@ -57,7 +57,7 @@ public class Validator_Geral
     public static String ValidarEmail(String email){
         // Verifica se o e-mail não é nulo e se contém exatamente um "@" e um "."
         if (email == null || !email.contains("@") || !email.contains(".")) {
-            throw new IllegalArgumentException("ERRO - EMAIL INCORRETO!");
+            throw new IllegalArgumentException("ERRO - FORMATO DO EMAIL INCORRETO - PRECISA CONTER CACRACTERES ESPECIAIS!");
         }
 
         // Verifica se o "@" vem antes de algum "."

@@ -1,17 +1,13 @@
 package Util;
 
 import Exception.*;
-import Model.MODEL_Setor;
 import Model.MODEL_Usuario;
 import Repository.DAO_Usuario;
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.YearMonth;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 public class Validator_Usuario {

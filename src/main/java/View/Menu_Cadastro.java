@@ -16,9 +16,8 @@ public class Menu_Cadastro {
     public static void Menu() {
 
         int escolha = 0;
-        boolean continuar = true;
 
-        do {
+        while (true){
             Ferramentas.limpaTerminal();
 
             System.out.println("┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
@@ -59,11 +58,10 @@ public class Menu_Cadastro {
                     break;
                 }
                 case 3: {
-                    continuar = false;
-                    break;
+                    return;
                 }
             }
-        } while (!continuar);
+        }
     }
 
     public static void adicionarSuperVisor() {
@@ -90,10 +88,15 @@ public class Menu_Cadastro {
                 Ferramentas.Delay(1500);
             }
 
-        }while (verifica);
+        }while (!verifica);
         System.out.println("-------------------------------------------");
 
-        serviceSupervisor.Insert_Supervisor(supervisor);
+        try {
+            serviceSupervisor.Insert_Supervisor(supervisor);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+
         //criar
     }
 
@@ -115,17 +118,22 @@ public class Menu_Cadastro {
                 tecnico.setEspecialidade_tecnico(especialidade);
                 verifica = true;
 
-            } catch (IllegalArgumentException iae) {
+            } catch (Exception iae) {
                 Ferramentas.limpaTerminal();
                 System.err.println(iae.getMessage());
                 Ferramentas.Delay(1500);
             }
 
-        }while (verifica);
+        }while (!verifica);
         System.out.println("-------------------------------------------");
 
-
-        serviceTecnico.Inserir_Tecnico(tecnico);
+        try {
+            serviceTecnico.Inserir_Tecnico(tecnico);
+        }catch (Exception e){
+            Ferramentas.limpaTerminal();
+            System.err.println(e.getMessage());
+            Ferramentas.Delay(1500);
+        }
         //Criar
 
     }
@@ -149,13 +157,13 @@ public class Menu_Cadastro {
                 gerente.setTempo_na_funcao_anos_gerente(anosFuncao);
                 verifica = true;
 
-            } catch (InputMismatchException e) {
+            } catch (Exception e) {
                 Ferramentas.limpaTerminal();
-                System.err.println("ERRO - VALOR DIGITADO INCORRETO!");
+                System.err.println(e.getMessage());
                 Ferramentas.Delay(1500);
             }
 
-        }while (verifica);
+        }while (!verifica);
         System.out.println("-------------------------------------------");
 
         serviceGerente.Inserir_Gerente(gerente);
@@ -194,9 +202,11 @@ public class Menu_Cadastro {
                 verifica = true;
 
             } catch (Exception e) {
-                Menu_Default.Default();
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
-        } while (verifica);
+        } while (!verifica);
         System.out.println("-------------------------------------------");
 
         verifica = false;
@@ -211,9 +221,11 @@ public class Menu_Cadastro {
                 Validator_Geral.ValidarEmail(email);
                 verifica = true;
             } catch (Exception e) {
-                Menu_Default.Default();
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
-        } while (verifica);
+        } while (!verifica);
         System.out.println("-------------------------------------------");
 
         verifica = false;
@@ -228,9 +240,11 @@ public class Menu_Cadastro {
                 Validator_Usuario.senha(senha);
                 verifica = true;
             } catch (Exception e) {
-                Menu_Default.Default();
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
-        } while (verifica);
+        } while (!verifica);
         System.out.println("-------------------------------------------");
 
         verifica = false;
@@ -245,9 +259,11 @@ public class Menu_Cadastro {
                 Validator_Geral.validarString(nome);
                 verifica = true;
             } catch (Exception e) {
-                Menu_Default.Default();
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
-        } while (verifica);
+        } while (!verifica);
         System.out.println("-------------------------------------------");
 
         verifica = false;
@@ -260,12 +276,14 @@ public class Menu_Cadastro {
             try {
 
                 telefone = Ferramentas.lString();
-                Validator_Geral.validarString(telefone);
+                Validator_Usuario.ValidarTelefone(telefone);
                 verifica = true;
             } catch (Exception e) {
-                Menu_Default.Default();
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
-        } while (verifica);
+        } while (!verifica);
         System.out.println("-------------------------------------------");
 
         verifica = false;
@@ -280,9 +298,11 @@ public class Menu_Cadastro {
                 Validator_Usuario.validarSalario(salario);
                 verifica = true;
             } catch (Exception e) {
-                Menu_Default.Default();
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
-        } while (verifica);
+        } while (!verifica);
         System.out.println("-------------------------------------------");
 
         verifica = false;
@@ -302,10 +322,10 @@ public class Menu_Cadastro {
                     verifica = true;
                 } catch (InputMismatchException e) {
                     Ferramentas.limpaTerminal();
-                    System.err.println("ERRO - VALOR DIGITADO INCORRETO!");
+                    System.err.println(e.getMessage());
                     Ferramentas.Delay(1500);
                 }
-            } while (verifica);
+            } while (!verifica);
             System.out.println("-------------------------------------------");
 
             verifica = false;
@@ -318,10 +338,10 @@ public class Menu_Cadastro {
                     verifica = true;
                 } catch (InputMismatchException e) {
                     Ferramentas.limpaTerminal();
-                    System.err.println("ERRO - VALOR DIGITADO INCORRETO!");
+                    System.err.println(e.getMessage());
                     Ferramentas.Delay(1500);
                 }
-            } while (verifica);
+            } while (!verifica);
             System.out.println("-------------------------------------------");
 
             verifica = false;
@@ -334,20 +354,25 @@ public class Menu_Cadastro {
                     verifica = true;
                 } catch (InputMismatchException e) {
                     Ferramentas.limpaTerminal();
-                    System.err.println("ERRO - VALOR DIGITADO INCORRETO!");
+                    System.err.println(e.getMessage());
                     Ferramentas.Delay(1500);
                 }
             }
-            while (verifica);
-            try {
+            while (!verifica);
+
+            verifica = false;
+
+            try{
                 Validator_Usuario.validarData(dia, mes, ano);
                 verifica = true;
                 dataNascimento = LocalDate.of(ano,mes,dia);
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
+                Ferramentas.limpaTerminal();
                 System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
 
-        } while (verifica);
+        } while (!verifica);
         System.out.println("-------------------------------------------");
 
         verifica = false;
@@ -362,10 +387,12 @@ public class Menu_Cadastro {
                 cargaHoraria = Ferramentas.lInteiro();
                 Validator_Usuario.validarCargaHoraria(cargaHoraria);
                 verifica = true;
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
+                Ferramentas.limpaTerminal();
                 System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
-        } while (verifica);
+        } while (!verifica);
         System.out.println("-------------------------------------------");
 
         verifica = false;
@@ -380,10 +407,12 @@ public class Menu_Cadastro {
                 formacao = Ferramentas.lString();
                 Validator_Geral.validarString(formacao);
                 verifica = true;
-            } catch (IllegalArgumentException e) {
-                Menu_Default.Default();
+            } catch (Exception e) {
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
-        } while (verifica);
+        } while (!verifica);
         System.out.println("-------------------------------------------");
 
         verifica = false;
@@ -396,16 +425,26 @@ public class Menu_Cadastro {
             System.out.println("5-Automação Industrial  6-Qualidade  7-Fundição   8-Manutenção 9-Administração");
             System.out.print("> Digite o setor: ");
             try {
-                 setor = Ferramentas.lInteiro();
-                verifica = true;
-            } catch (IllegalArgumentException e) {
-                Menu_Default.Default();
+                setor = Ferramentas.lInteiro();
+
+                if(setor < 1 || setor > 9){
+                    Menu_Default.Default();
+                }
+                else {
+                    verifica = true;
+                }
+
+            } catch (Exception e) {
+                Ferramentas.limpaTerminal();
+                System.err.println(e.getMessage());
+                Ferramentas.Delay(1500);
             }
-        } while (verifica);
+        } while (!verifica);
         System.out.println("-------------------------------------------");
 
         //Criar
 
+        try {
         if (nivelAcesso == 1)
         {
             MODEL_Tecnico tecnico = new MODEL_Tecnico(nome,cpf, senha, nivelAcesso, telefone, salario, dataNascimento, email, cargaHoraria, formacao, setor,null, true   );
@@ -417,6 +456,11 @@ public class Menu_Cadastro {
         else if (nivelAcesso == 3)
         {
             MODEL_Gerente gerente = new MODEL_Gerente(nome,cpf,senha,nivelAcesso,telefone,salario,dataNascimento,email,cargaHoraria,formacao,setor,0);
+        }
+        }catch (Exception e){
+            Ferramentas.limpaTerminal();
+            System.err.println(e.getMessage());
+            Ferramentas.Delay(1500);
         }
 
         return null;
