@@ -2,6 +2,8 @@ package Model;
 
 import Util.Validator_Geral;
 
+import java.time.LocalDate;
+
 public class MODEL_Ordem_Preditiva {
 
     //Atributos ordens de Serviço//
@@ -11,11 +13,11 @@ public class MODEL_Ordem_Preditiva {
     private int tecnico;
     private int maquina;
     private double preco;
-    private String horario;
+    private LocalDate data;
     private int gerente;
 
     //Construtor ordens de Serviço//
-    public MODEL_Ordem_Preditiva(int id_ordem_preditiva, String status_aberto_ordem_preditiva, String descricao_ordem_preditiva, int tecnico, int maquina, int gerente, double preco, String horario) {
+    public MODEL_Ordem_Preditiva(int id_ordem_preditiva, String status_aberto_ordem_preditiva, String descricao_ordem_preditiva, int tecnico, int maquina, int gerente, double preco, LocalDate data) {
 
         setId_ordem_preditiva(id_ordem_preditiva);
         setStatus_aberto_ordem_preditiva(status_aberto_ordem_preditiva);
@@ -23,19 +25,19 @@ public class MODEL_Ordem_Preditiva {
         setTecnico(tecnico);
         setMaquina(maquina);
         setPreco(preco);
-        setHorario(horario);
+        setData(data);
         setGerente(gerente);
     }
 
     // Construtor sem Id //
-    public MODEL_Ordem_Preditiva(String status_aberto_ordem_preditiva, String descricao_ordem_preditiva, int tecnico, int maquina,int gerente, double preco, String horario) {
+    public MODEL_Ordem_Preditiva(String status_aberto_ordem_preditiva, String descricao_ordem_preditiva, int tecnico, int maquina,int gerente, double preco, LocalDate data) {
 
         setStatus_aberto_ordem_preditiva(status_aberto_ordem_preditiva);
         setDescricao_ordem_preditiva(descricao_ordem_preditiva);
         setTecnico(tecnico);
         setMaquina(maquina);
         setPreco(preco);
-        setHorario(horario);
+        setData(data);
         setGerente(gerente);
     }
 
@@ -91,12 +93,12 @@ public class MODEL_Ordem_Preditiva {
         this.preco = preco;
     }
 
-    public String getHorario() {
-        return horario;
+    public LocalDate getData() {
+        return this.data;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
     public int getGerente() {
