@@ -5,8 +5,10 @@ import Model.MODEL_Ordem_Preditiva;
 
 import java.sql.*;
 import java.util.ArrayList;
+// ADICIONAR GERENTE EM CONSULTAS
 
-public class DAO_Servico
+
+public class DAO_Ordem_preditiva
 {
 
     // Create
@@ -14,18 +16,19 @@ public class DAO_Servico
     public void insert_Servico(MODEL_Ordem_Preditiva op){
 
         String querySql = "insert into Ordem_Preditiva(status_aberto_ordem_preditiva,descricao_ordem_preditiva, horario_ordem_preditiva" +
-                "Tecnico_id_tecnico, Maquina_id_maquina, Custo) values(?,?,?,?,?, ?) ";
+                "Tecnico_id_tecnico, Maquina_id_maquina, Custo, Gerente_id_gerente) values(?,?,?,?,?,?,?) ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql);
             ResultSet resultSet = stmt.executeQuery())
         {
 
-            stmt.setString(1,op.getStatus_aberto_ordem_servico());
-            stmt.setString(2,op.getDescricao_ordem_servico());
+            stmt.setString(1,op.getStatus_aberto_ordem_preditiva());
+            stmt.setString(2,op.getDescricao_ordem_preditiva());
             stmt.setInt(3,op.getTecnico());
             stmt.setInt(4,op.getMaquina());
             stmt.setDouble(5,op.getPreco());
+            stmt.setInt(4,op.getGerente());
             stmt.executeQuery();
 
             String querySql2 = "select os.id_ordem_preditiva " +
@@ -38,12 +41,12 @@ public class DAO_Servico
 
                 stmt.executeQuery(querySql2);
 
-                stmt.setString(1,op.getDescricao_ordem_servico());
+                stmt.setString(1,op.getDescricao_ordem_preditiva());
 
                 int id = resultSet.getInt("id_ordem_servico");
 
 
-                MODEL_Ordem_Preditiva op1 = new MODEL_Ordem_Preditiva(id,op.getStatus_aberto_ordem_servico(),op.getDescricao_ordem_servico(),op.getTecnico(),op.getMaquina(),op.getPreco(), op.getHorario());
+                MODEL_Ordem_Preditiva op1 = new MODEL_Ordem_Preditiva(id,op.getStatus_aberto_ordem_preditiva(),op.getDescricao_ordem_preditiva(),op.getTecnico(),op.getMaquina(), op.getGerente(),op.getPreco(), op.getHorario());
 
             }catch (Exception e){
 
@@ -108,6 +111,7 @@ public class DAO_Servico
              ResultSet resultSet = stmt.executeQuery())
         {
 
+            // ADICIONAR GERENTE EM CONSULTAS
             while (resultSet.next())
             {
                 int id_ordem_preditiva = resultSet.getInt("id_ordem_preditiva");
@@ -142,7 +146,7 @@ public class DAO_Servico
                 boolean status_disponibilidade_tecnico = resultSet.getBoolean("status_disponibilade_tecnico");
 
 
-                MODEL_Ordem_Preditiva ordemPreditiva = new MODEL_Ordem_Preditiva(id_ordem_preditiva, status_aberto_ordem_preditiva, descricao_ordem_preditiva, id_tecnico, id_maquina,custo, horario_ordem_preditiva);
+                MODEL_Ordem_Preditiva ordemPreditiva = new MODEL_Ordem_Preditiva(id_ordem_preditiva, status_aberto_ordem_preditiva, descricao_ordem_preditiva, id_tecnico, id_maquina, id_gerente,custo, horario_ordem_preditiva);
 
                 listaOrdens.add(ordemPreditiva);
             }
@@ -180,7 +184,7 @@ public class DAO_Servico
             String horario = resultSet.getString("horario_ordem_preditiva");
             double custo = resultSet.getDouble("Custo");
 
-            MODEL_Ordem_Preditiva op1 = new MODEL_Ordem_Preditiva(id,status,descricao,tecnico_id,maquina_id,custo, horario);
+            MODEL_Ordem_Preditiva op1 = new MODEL_Ordem_Preditiva(id,status,descricao,tecnico_id,maquina_id, id_gerente,custo, horario);
 
         }catch (SQLException e){
 
@@ -215,7 +219,7 @@ public class DAO_Servico
                 double custo = resultSet.getDouble("Custo");
                 String horario = resultSet.getString("horario_ordem_preditiva");
 
-                MODEL_Ordem_Preditiva op = new MODEL_Ordem_Preditiva(id,status,descricao,id_tecnico,id_maquina,custo, horario);
+                MODEL_Ordem_Preditiva op = new MODEL_Ordem_Preditiva(id,status,descricao,id_tecnico,id_maquina, id_gerente,custo, horario);
 
                 ordemPreditivas.add(op);
             }
