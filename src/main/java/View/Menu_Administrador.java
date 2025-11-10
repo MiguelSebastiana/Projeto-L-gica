@@ -9,37 +9,48 @@ public class Menu_Administrador {
 
 
     static SERVICE_Gerente gerente = new SERVICE_Gerente();
-    static SERVICE_Usuario usuario = new SERVICE_Usuario();
 
 
     public static void Menu(MODEL_Administrador adm) {
 
-        boolean continuar = false;
 
-        do {
+        while (true){
 
             Ferramentas.limpaTerminal();
 
-            System.out.println("      +--------------------------------+");
-            System.out.println("      |       Menu Administrador       |");
-            System.out.println("      +--------------------------------+");
+            System.out.println("┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+            System.out.println("│                                  ███╗   ███╗███████╗███╗   ██╗ ██╗   ██╗    █████╗ ██████╗  ███╗ ███╗ ██╗███╗   ██╗                                  │");
+            System.out.println("│                                  ████╗ ████║██╔════╝████╗  ██║ ██║   ██║   ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║                                  │");
+            System.out.println("│                                  ██╔████╔██║█████╗  ██╔██╗ ██║ ██║   ██║   ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║                                  │");
+            System.out.println("│                                  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║ ██║   ██║   ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║                                  │");
+            System.out.println("│                                  ██║ ╚═╝ ██║███████╗██║ ╚████║ ╚██████╔╝   ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║                                  │");
+            System.out.println("│                                  ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═════╝    ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝                                  │");
+            System.out.println("└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
             Ferramentas.Delay(1500);
 
+            Ferramentas.limpaTerminalOpcional(2);
 
-            System.out.println("1 - Cadastrar Gerente");
-            System.out.println("2 - Atualizar Gerente");
-            System.out.println("3 - Excluir Gerente");
-            System.out.println("4 - Sair");
-            System.out.println("\n ----------------------------------");
-            System.out.print("> Digite a opção desejada: ");
+            System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+            System.out.println("│ OPÇÕES                                                                                                                                              │");
+            System.out.println("├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
+            System.out.println("│ (1) ➔ Cadastrar Gerente                                                                                                                             │");
+            System.out.println("│ (2) ➔ Atualizar Gerente                                                                                                                             │");
+            System.out.println("│ (3) ➔ Excluir Gerente                                                                                                                               │");
+            System.out.println("│ (4) ➔ Sair                                                                                                                                          │");
+            System.out.println("└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+            System.out.print("│ ➤ Digite a opção desejada: ");
 
             int escolha = 0;
 
             try {
                 escolha = Ferramentas.lInteiro();
+                System.out.println("└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+
             } catch (InputMismatchException e) {
+                System.out.println("└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
                 System.err.println("VALOR DIGITADO  INVALIDO!");
             }
+
 
             switch (escolha) {
 
@@ -57,8 +68,7 @@ public class Menu_Administrador {
                     break;
                 }
                 case 4: {
-                    continuar = true;
-                    break;
+                    return;
                 }
                 default: {
                     Menu_Default.Default();
@@ -66,18 +76,17 @@ public class Menu_Administrador {
                 }
             }
 
-        } while (continuar);
+        }
 
-        Menu_Inicial.Menu();
     }
 
     public static void CadastrarGerente(MODEL_Administrador adm){
 
         Ferramentas.limpaTerminal();
 
-        System.out.println("     --------------------");
-        System.out.println("     - CADASTRO GERENTE -");
-        System.out.println("     --------------------");
+        System.out.println("      +-------------------------------+");
+        System.out.println("      |       Cadastrar Gerente       |");
+        System.out.println("      +-------------------------------+");
 
         Ferramentas.Delay(1500);
 
@@ -90,13 +99,13 @@ public class Menu_Administrador {
         Ferramentas.limpaTerminal();
         int id = 0;
 
-        System.out.println("     ---------------------");
-        System.out.println("     - ATUALIZAR GERENTE -");
-        System.out.println("     ---------------------");
+        System.out.println("      +-------------------------------+");
+        System.out.println("      |       Atualizar Gerente       |");
+        System.out.println("      +-------------------------------+");
 
-        System.out.println("\n\n");
+        Ferramentas.limpaTerminalOpcional(2);
 
-        System.out.print("Digite o ID do gerente que deseja atualizar: ");
+        System.out.print("> Digite o ID do gerente que deseja atualizar: ");
 
         try {
             id = Ferramentas.lInteiro();
@@ -115,13 +124,13 @@ public class Menu_Administrador {
         Ferramentas.limpaTerminal();
         int id = 0;
 
-        System.out.println("     -------------------");
-        System.out.println("     - EXCLUIR GERENTE -");
-        System.out.println("     -------------------");
+        System.out.println("      +---------------------------+");
+        System.out.println("      |       Excluir gerente       |");
+        System.out.println("      +---------------------------+");
 
-        System.out.println("\n\n");
+        Ferramentas.limpaTerminalOpcional(2);
 
-        System.out.print("Digite o ID do gerente que deseja excluir: ");
+        System.out.print("> Digite o ID do gerente que deseja excluir: ");
 
         try {
             id = Ferramentas.lInteiro();

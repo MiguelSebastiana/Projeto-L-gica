@@ -21,14 +21,25 @@ public class Menu_Tecnico {
         SERVICE_Tecnico serviceTecnico = new SERVICE_Tecnico();
 
         do{
-            System.out.println("      ====================");
-            System.out.println("      ==  Menu Técnico  ==");
-            System.out.println("      ====================");
+            System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+            System.out.println("│                          ███╗   ███╗███████╗███╗   ██╗██╗   ██╗    ████████╗███████╗ ██████╗███╗   ██╗██╗ ██████╗ ██████╗                           │");
+            System.out.println("│                          ████╗ ████║██╔════╝████╗  ██║██║   ██║    ╚══██╔══╝██╔════╝██╔════╝████╗  ██║██║██╔════╝██╔═══██╗                          │");
+            System.out.println("│                          ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║       ██║   █████╗  ██║     ██╔██╗ ██║██║██║     ██║   ██║                          │");
+            System.out.println("│                          ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║       ██║   ██╔══╝  ██║     ██║╚██╗██║██║██║     ██║   ██║                          │");
+            System.out.println("│                          ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝       ██║   ███████╗╚██████╗██║ ╚████║██║╚██████╗╚██████╔╝                          │");
+            System.out.println("│                          ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝        ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═════╝                           │");
+            System.out.println("└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+            Ferramentas.limpaTerminalOpcional(2);
 
-            System.out.println("1 - Ver as ordens atribuidas");
-            System.out.println("2 - Alterar os Status das ordens");
-            System.out.println("3 - Alterar Status de Disponibilidade: ");
-            System.out.println("4 - Sair");
+            System.out.println("┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+            System.out.println("│ OPÇÕES                                                                                                                                              │");
+            System.out.println("├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
+            System.out.println("│ (1) ➔ Ver as ordens atribuidas                                                                                                                      │");
+            System.out.println("│ (2) ➔ Alterar os Status das ordens                                                                                                                  │");
+            System.out.println("│ (3) ➔ Alterar Status de Disponibilidade                                                                                                             │");
+            System.out.println("│ (4) ➔ Sair                                                                                                                                          │");
+            System.out.println("└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+            System.out.print("│ ➤ Digite a opção desejada: ");
 
             int escolha = 0;
 
