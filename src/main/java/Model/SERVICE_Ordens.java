@@ -13,18 +13,10 @@ public interface SERVICE_Ordens {
 
     //Create
 
-    public void Insert_Servico();
+
 
 
     //Read
-
-    public ArrayList All_Servicos();
-
-
-    public void Find_by_Id (int id);
-
-
-    public ArrayList Find_by_Pendente();
 
 
     //Update
