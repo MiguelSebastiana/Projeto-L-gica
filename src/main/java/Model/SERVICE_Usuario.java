@@ -1,8 +1,6 @@
 package Model;
 
 import Repository.DAO_Usuario;
-import Util.Validator_Administrador;
-import Util.Validator_Geral;
 import Util.Validator_Usuario;
 import Exception.EMAILException;
 import Exception.CARGAHORARIAException;
@@ -12,15 +10,13 @@ import Exception.SENHAException;
 import Exception.CPFException;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class SERVICE_Usuario {
 
-
+    static DAO_Usuario daoUsuario;
     //--Atributos--//
 
-    static DAO_Usuario daoUsuario;
-    static SERVICE_Usuario serviceUsuario;
+
 
     //--Métodos--//
 
@@ -28,99 +24,69 @@ public class SERVICE_Usuario {
 
     public ArrayList<MODEL_Usuario> All_Users()
     {
-        try {
-            return daoUsuario.find_All_Users();
-        }catch (RuntimeException re){
-            throw new RuntimeException(re.getMessage());
-        }
-    }
 
-    public MODEL_Usuario Find_By_ID(int id){
-        try {
-            Validator_Usuario.verificarID(id);
-            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
-            return usuario;
-        }catch (RuntimeException ru){
-            throw new RuntimeException(ru.getMessage());
-        }
+        return daoUsuario.find_All_Users();
     }
 
     //Update
 
-    public void Update_Telefone(String telefone, int id)
+    public void Update_Telefone(String telefone, MODEL_Usuario usuario)
     {
         try {
-            Validator_Usuario.verificarID(id);
-            Validator_Geral.ValidarTelefone(telefone);
-            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
-            daoUsuario.update_Telefone(id,telefone);
+            Validator_Usuario.ValidarTelefone(telefone);
             usuario.setTelefone(telefone);
         }
-        catch(RuntimeException ru)
+        catch(IllegalArgumentException iae)
         {
-            throw new RuntimeException(ru.getMessage());
+            System.out.println(iae.getMessage());
         }
     }
 
-    public void Update_Email(int id, String email)
+    public void Update_Email(MODEL_Usuario usuario, String email)
     {
         try
         {
-            Validator_Usuario.verificarID(id);
-            Validator_Geral.ValidarEmail(email);
-            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
-            daoUsuario.update_Email(id,email);
-            usuario.setEmail(email);
+            if(usuario != null) {
+                daoUsuario.update_Email(usuario, Validator_Usuario.ValidarEmail(email));
+            }
         }
-        catch(RuntimeException ru)
+        catch(EMAILException ee)
         {
-            throw new RuntimeException(ru.getMessage());
+            System.out.println(ee.getMessage());
         }
     }
 
-    public void Update_CargaHoraria(int id, int cargaHoraria)
+    public void Update_CargaHoraria(MODEL_Usuario usuario, int cargaHoraria)
     {
         try
         {
-            Validator_Usuario.verificarID(id);
-            Validator_Usuario.validarCargaHoraria(cargaHoraria);
-            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
-            daoUsuario.update_Carga_Horaria(id,cargaHoraria);
-            usuario.setCargahoraria(cargaHoraria);
+            daoUsuario.update_Carga_Horaria(usuario, Validator_Usuario.validarCargaHoraria(cargaHoraria));
         }
-        catch(RuntimeException ru)
+        catch(CARGAHORARIAException che)
         {
-            throw new RuntimeException(ru.getMessage());
+            System.out.println(che.getMessage());
         }
     }
 
-    public void Update_Formacao(int id, String formacao) {
+    public void Update_Formacao(MODEL_Usuario usuario, String formacao) {
         try
         {
-            Validator_Usuario.verificarID(id);
-            Validator_Usuario.formacao(formacao);
-            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
-            daoUsuario.update_Formacao(id,formacao);
-            usuario.setFormacao(formacao);
+            daoUsuario.update_Formacao(usuario, Validator_Usuario.formacao(formacao));
         }
-        catch(RuntimeException ru)
+        catch(FORMACAOException fe)
         {
-            throw new RuntimeException(ru.getMessage());
+            System.out.println(fe.getMessage());
         }
     }
-    public void Update_Setor(int id, int setor)
+    public void Update_Setor(MODEL_Usuario usuario, int setor)
     {
         try
         {
-            Validator_Usuario.verificarID(id);
-            Validator_Usuario.validarSetor(setor);
-            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
-            daoUsuario.update_Setor(id,setor);
-            usuario.setSetor(setor);
+            daoUsuario.update_Setor(usuario, Validator_Usuario.validarSetor(setor));
         }
-        catch(RuntimeException ru)
+        catch(SETORException se)
         {
-            throw new RuntimeException(ru.getMessage());
+            System.out.println(se.getMessage());
         }
     }
 
@@ -130,7 +96,6 @@ public class SERVICE_Usuario {
     {
         try
         {
-            Validator_Administrador.validarAdm(cpf,senha);
             for (MODEL_Usuario u : daoUsuario.find_All_Users())
             {
                 if (Validator_Usuario.validarCpf(cpf).equals(cpf) && Validator_Usuario.senha(senha).equals(senha))
@@ -140,26 +105,20 @@ public class SERVICE_Usuario {
             }
         }catch(CPFException ce)
         {
-            throw new CPFException(ce.getMessage());
+            System.out.println(ce.getMessage());
         }
         catch(SENHAException se)
         {
-            throw new SENHAException(se.getMessage());
+            System.out.println(se.getMessage());
         }
-        catch (RuntimeException ru){
-            throw new RuntimeException(ru.getMessage());
-        }
+
         return null;
     }
 
-    public int verificarIdFuncao(int id)
+    public int verificarIdFuncao(MODEL_Usuario usuario)
     {
-        try {
-            Validator_Usuario.verificarID(id);
-            MODEL_Usuario usuario = daoUsuario.find_by_id(id);
-            return usuario.getNivelacesso();
-        }catch (RuntimeException re){
-            throw new RuntimeException(re.getMessage());
-        }
+        return usuario.getNivelacesso();
     }
+
+
 }

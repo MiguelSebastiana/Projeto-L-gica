@@ -48,7 +48,6 @@ public class SERVICE_Supervisor {
     {
         try
         {
-            Validator_Usuario.verificarID(id);
             return daoSupervisor.find_By_Id(id);
         }
         catch(RuntimeException re)
@@ -61,34 +60,30 @@ public class SERVICE_Supervisor {
 
     //Update
 
-    public void Update_Experiencia(int id, int experiencia)
+    public void Update_Experiencia(MODEL_Supervisor supervisor, int experiencia)
     {
-        try {
-            Validator_Usuario.verificarID(id);
-            Validator_Supervisor.validarAnosExperiencia(experiencia);
-            MODEL_Supervisor modelSupervisor = daoSupervisor.find_By_Id(id);
-            modelSupervisor.setExperiencia_anos_supervisor(modelSupervisor.getExperiencia_anos_supervisor());
-            daoSupervisor.update_Experiencia(id,experiencia);
-        }catch (RuntimeException re){
-            throw new RuntimeException(re.getMessage());
+        try
+        {
+            daoSupervisor.update_Experiencia(supervisor, experiencia);
+        }catch(ANOSEXPERIENCIAException aee)
+        {
+            System.out.println(aee.getMessage());
         }
-
     }
-
-
 
     //Delete
 
-    public void Delete_Supervisor(int id)
+    public void Delete_Supervisor(MODEL_Supervisor supervisor)
     {
-        try {
-
-            Validator_Usuario.verificarID(id);
-            daoSupervisor.delete_Supervisor(id);
-        }
-        catch (RuntimeException re)
+        try
         {
-            throw new RuntimeException(re.getMessage());
+            if(supervisor != null)
+            {
+                daoSupervisor.delete_Supervisor(supervisor);
+            }
+        }catch(RuntimeException re)
+        {
+            System.out.println(re.getMessage());
         }
     }
 

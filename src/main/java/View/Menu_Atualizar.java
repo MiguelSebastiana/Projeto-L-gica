@@ -52,7 +52,7 @@ public class Menu_Atualizar {
                         String email = Ferramentas.lString();
                         Validator_Geral.ValidarEmail(email);
                         gerente.setEmail(email);
-                        daoUsuario.update_Email(gerente.getId(),email);
+                        daoUsuario.update_Email(gerente,email);
 
                     }catch (IllegalArgumentException e)
                     {
@@ -69,7 +69,7 @@ public class Menu_Atualizar {
                         String telefone = Ferramentas.lString();
                         Validator_Geral.ValidarTelefone(telefone);
                         gerente.setTelefone(telefone);
-                        daoUsuario.update_Telefone(gerente.getId(),telefone);
+                        daoUsuario.update_Telefone(gerente,telefone);
 
                     }catch (IllegalArgumentException e)
                     {
@@ -86,7 +86,7 @@ public class Menu_Atualizar {
                         String senha = Ferramentas.lString();
                         Validator_Geral.validarString(senha);
                         gerente.setSenha(senha);
-                        daoUsuario.update_Senha(gerente.getId(),senha);
+                        daoUsuario.update_Senha(gerente,senha);
 
                     }catch (IllegalArgumentException e)
                     {
@@ -103,7 +103,7 @@ public class Menu_Atualizar {
                         int anos = Ferramentas.lInteiro();
                         Validator_Gerente.validarTempoFuncao(anos);
                         gerente.setTempo_na_funcao_anos_gerente(anos);
-                        daoGerente.update_Tempo_Funcao(gerente.getId(),anos);
+                        daoGerente.update_Tempo_Funcao(gerente,anos);
 
                     }catch (IllegalArgumentException e)
                     {
@@ -120,7 +120,7 @@ public class Menu_Atualizar {
                         String formacao = Ferramentas.lString();
                         Validator_Geral.validarString(formacao);
                         gerente.setFormacao(formacao);
-                        daoUsuario.update_Formacao(gerente.getId(),formacao);
+                        daoUsuario.update_Formacao(gerente,formacao);
 
                     }catch (IllegalArgumentException e)
                     {

@@ -1,7 +1,7 @@
 package Repository;
 
 import DataBase.ConnectionFactory;
-import Model.MODEL_Servico;
+import Model.MODEL_Ordem_Preditiva;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,26 +11,26 @@ public class DAO_Servico
 
     // Create
 
-    public void insert_Servico(MODEL_Servico servico){
+    public void insert_Servico(MODEL_Ordem_Preditiva op){
 
-        String querySql = "insert into Ordem_servico(status_aberto_ordem_servico,descricao_ordem_servico," +
-                "Tecnico_id_tecnico, Maquina_id_maquina, Custo) values(?,?,?,?,?) ";
+        String querySql = "insert into Ordem_Preditiva(status_aberto_ordem_preditiva,descricao_ordem_preditiva, horario_ordem_preditiva" +
+                "Tecnico_id_tecnico, Maquina_id_maquina, Custo) values(?,?,?,?,?, ?) ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql);
             ResultSet resultSet = stmt.executeQuery())
         {
 
-            stmt.setString(1,servico.getStatus_aberto_ordem_servico());
-            stmt.setString(2,servico.getDescricao_ordem_servico());
-            stmt.setInt(3,servico.getTecnico());
-            stmt.setInt(4,servico.getMaquina());
-            stmt.setDouble(5,servico.getPreco());
+            stmt.setString(1,op.getStatus_aberto_ordem_servico());
+            stmt.setString(2,op.getDescricao_ordem_servico());
+            stmt.setInt(3,op.getTecnico());
+            stmt.setInt(4,op.getMaquina());
+            stmt.setDouble(5,op.getPreco());
             stmt.executeQuery();
 
-            String querySql2 = "select os.id_ordem_servico " +
-                    "from Ordem_servico os" +
-                    "where os.descricao_ordem_servico = ?";
+            String querySql2 = "select os.id_ordem_preditiva " +
+                    "from Ordem_preditiva op" +
+                    "where op.descricao_ordem_preditiva = ?";
 
             try
             {
@@ -38,23 +38,23 @@ public class DAO_Servico
 
                 stmt.executeQuery(querySql2);
 
-                stmt.setString(1,servico.getDescricao_ordem_servico());
+                stmt.setString(1,op.getDescricao_ordem_servico());
 
                 int id = resultSet.getInt("id_ordem_servico");
 
 
-                MODEL_Servico servico1 = new MODEL_Servico(id,servico.getStatus_aberto_ordem_servico(),servico.getDescricao_ordem_servico(),servico.getTecnico(),servico.getMaquina(),servico.getPreco());
+                MODEL_Ordem_Preditiva op1 = new MODEL_Ordem_Preditiva(id,op.getStatus_aberto_ordem_servico(),op.getDescricao_ordem_servico(),op.getTecnico(),op.getMaquina(),op.getPreco(), op.getHorario());
 
             }catch (Exception e){
 
-                System.err.println("Não foi possível buscar a orden de serviço: " + e.getMessage());
+                System.err.println("Não foi possível buscar a ordem preditiva: " + e.getMessage());
 
                 throw new RuntimeException("Erro ao consultar o banco de dados.", e);
             }
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível inserir a ordem de serviço: " + e.getMessage());
+            System.err.println("Não foi possível inserir a ordem de preditiva: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -62,15 +62,16 @@ public class DAO_Servico
 
     // Read
 
-    public ArrayList<MODEL_Servico> find_All_Ordens_Servico()
+    public ArrayList<MODEL_Ordem_Preditiva> find_All_Ordens_Preditiva()
     {
-        ArrayList<MODEL_Servico> listaOrdens = new ArrayList<>();
+        ArrayList<MODEL_Ordem_Preditiva> listaOrdens = new ArrayList<>();
 
         String querySql = "SELECT " +
-                "    os.id_ordem_servico, " +
-                "    os.status_aberto_ordem_servico, " +
-                "    os.descricao_ordem_servico," +
-                "    os.Custo " +
+                "    op.id_ordem_preditiva, " +
+                "    op.status_aberto_ordem_preditiva, " +
+                "    op.descricao_ordem_preditiva," +
+                "    op.Custo," +
+                "    op.horario_ordem_preditiva " +
 
                 "    m.id_maquina, " +
                 "    m.descricao_maquina, " +
@@ -93,11 +94,11 @@ public class DAO_Servico
                 "    u.Setor_id_setor " +
 
                 "FROM " +
-                "    Ordem_servico os " +
+                "    Ordem_preditiva op " +
                 "JOIN " +
-                "    Tecnico t ON os.Tecnico_id_tecnico = t.id_tecnico " +
+                "    Tecnico t ON op.Tecnico_id_tecnico = t.id_tecnico " +
                 "JOIN " +
-                "    Maquina m ON os.Maquina_id_maquina = m.id_maquina " +
+                "    Maquina m ON op.Maquina_id_maquina = m.id_maquina " +
                 "JOIN " +
 
                 "    Usuario u ON t.id_tecnico = u.id_usuario ";
@@ -109,9 +110,10 @@ public class DAO_Servico
 
             while (resultSet.next())
             {
-                int id_ordem_servico = resultSet.getInt("id_ordem_servico");
-                String status_aberto_ordem_servico = resultSet.getString("status_aberto_ordem_servico");
-                String descricao_ordem_servico = resultSet.getString("descricao_ordem_servico");
+                int id_ordem_preditiva = resultSet.getInt("id_ordem_preditiva");
+                String status_aberto_ordem_preditiva = resultSet.getString("status_aberto_ordem_preditiva");
+                String descricao_ordem_preditiva = resultSet.getString("descricao_ordem_preditiva");
+                String horario_ordem_preditiva = resultSet.getString("horario_ordem_preditiva");
                 double custo = resultSet.getDouble("Custo");
 
                 int id_usuario = resultSet.getInt("id_usuario");
@@ -140,15 +142,15 @@ public class DAO_Servico
                 boolean status_disponibilidade_tecnico = resultSet.getBoolean("status_disponibilade_tecnico");
 
 
-                MODEL_Servico ordemServico = new MODEL_Servico(id_ordem_servico, status_aberto_ordem_servico, descricao_ordem_servico, id_tecnico, id_maquina,custo);
+                MODEL_Ordem_Preditiva ordemPreditiva = new MODEL_Ordem_Preditiva(id_ordem_preditiva, status_aberto_ordem_preditiva, descricao_ordem_preditiva, id_tecnico, id_maquina,custo, horario_ordem_preditiva);
 
-                listaOrdens.add(ordemServico);
+                listaOrdens.add(ordemPreditiva);
             }
 
 
         } catch (SQLException e) {
 
-            System.err.println("Não foi possível buscar todas as ordens de serviço: " + e.getMessage());
+            System.err.println("Não foi possível buscar todas as ordens preditivas: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -156,13 +158,13 @@ public class DAO_Servico
         return listaOrdens;
     }
 
-    public MODEL_Servico find_By_Id(int id){
+    public MODEL_Ordem_Preditiva find_By_Id(int id){
 
-        MODEL_Servico servico = null;
+        MODEL_Ordem_Preditiva op = null;
 
-        String querySql = "select os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina, os.Custo" +
-                "from Ordem_servico os " +
-                "where os.id_ordem_servico = ? ";
+        String querySql = "select op.status_aberto_ordem_Preditiva, op.descricao_ordem_preditiva, op.Tecnico_id_tecnico, op.Maquina_id_maquina, op.Custo, op.horario_ordem_preditiva" +
+                "from Ordem_preditiva op " +
+                "where op.id_ordem_servico = ? ";
 
         try(Connection conexao = ConnectionFactory.getConn();
         PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -171,31 +173,32 @@ public class DAO_Servico
 
             stmt.setInt(1,id);
 
-            String status = resultSet.getString("status_aberto_ordem_servico");
-            String descricao = resultSet.getString("descricao_ordem_servico");
+            String status = resultSet.getString("status_aberto_ordem_preditiva");
+            String descricao = resultSet.getString("descricao_ordem_preditiva");
             int tecnico_id = resultSet.getInt("Tecnico_id_tecnico");
             int maquina_id = resultSet.getInt("Maquina_id_maquina");
+            String horario = resultSet.getString("horario_ordem_preditiva");
             double custo = resultSet.getDouble("Custo");
 
-            MODEL_Servico servico1 = new MODEL_Servico(id,status,descricao,tecnico_id,maquina_id,custo);
+            MODEL_Ordem_Preditiva op1 = new MODEL_Ordem_Preditiva(id,status,descricao,tecnico_id,maquina_id,custo, horario);
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível buscar a ordem de serviço: " + e.getMessage());
+            System.err.println("Não foi possível buscar a ordem preditiva: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
 
-        return servico;
+        return op;
     }
 
-    public ArrayList<MODEL_Servico> find_By_Aberta(){
+    public ArrayList<MODEL_Ordem_Preditiva> find_By_Aberta(){
 
-        ArrayList<MODEL_Servico> servicos = new ArrayList<>();
+        ArrayList<MODEL_Ordem_Preditiva> ordemPreditivas = new ArrayList<>();
 
-        String querySql = "select os.id_ordem_servico,os.status_aberto_ordem_servico, os.descricao_ordem_servico, os.Tecnico_id_tecnico, os.Maquina_id_maquina, os.Custo " +
-                "from Ordem_servico os " +
-                "where  os.status_aberto_ordem_servico = 'Aberta' ";
+        String querySql = "select op.id_ordem_preditiva,op.status_aberto_ordem_preditiva, op.descricao_ordem_preditiva, op.Tecnico_id_tecnico, op.Maquina_id_maquina, op.Custo, op.horario_ordem_preditiva " +
+                "from Ordem_preditiva op " +
+                "where  op.status_aberto_ordem_servico = 'Aberta' ";
 
         try(Connection conexao = ConnectionFactory.getConn();
         PreparedStatement stmt = conexao.prepareStatement(querySql);
@@ -204,35 +207,36 @@ public class DAO_Servico
 
             while (resultSet.next()) {
 
-                int id = resultSet.getInt("id_ordem_servico");
-                String status = resultSet.getString("status_aberto_ordem_servico");
-                String descricao = resultSet.getString("descricao_ordem_servico");
+                int id = resultSet.getInt("id_ordem_preditiva");
+                String status = resultSet.getString("status_aberto_ordem_preditiva");
+                String descricao = resultSet.getString("descricao_ordem_preditiva");
                 int id_tecnico = resultSet.getInt("Tecnico_id_tecnico");
                 int id_maquina = resultSet.getInt("Maquina_id_maquina");
                 double custo = resultSet.getDouble("Custo");
+                String horario = resultSet.getString("horario_ordem_preditiva");
 
-                MODEL_Servico servico = new MODEL_Servico(id,status,descricao,id_tecnico,id_maquina,custo);
+                MODEL_Ordem_Preditiva op = new MODEL_Ordem_Preditiva(id,status,descricao,id_tecnico,id_maquina,custo, horario);
 
-                servicos.add(servico);
+                ordemPreditivas.add(op);
             }
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível buscar a ordem de serviço: " + e.getMessage());
+            System.err.println("Não foi possível buscar a ordem preditiva: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
 
-        return servicos;
+        return ordemPreditivas;
     }
 
     // Update
 
     public void update_Status(int id, String status){
 
-        String querySql = "update Ordem_servico os " +
-                "set os.status_ordem_servico = ? " +
-                "where os.id_ordem_servico = ?";
+        String querySql = "update Ordem_preditiva op " +
+                "set op.status_ordem_preditiva = ? " +
+                "where op.id_ordem_preditiva = ?";
 
         try(Connection conexao = ConnectionFactory.getConn();
         PreparedStatement stmt = conexao.prepareStatement(querySql))
@@ -243,7 +247,7 @@ public class DAO_Servico
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível modificar a ordem de serviço: " + e.getMessage());
+            System.err.println("Não foi possível modificar a ordem preditiva: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -251,9 +255,9 @@ public class DAO_Servico
 
     public void update_Descricao(int id, String descricao){
 
-        String querySql = "update Ordem_servico os " +
-                "set os.descricao_ordem_servico = ?" +
-                "where os.id_ordem_servico = ? ";
+        String querySql = "update Ordem_preditiva op " +
+                "set op.descricao_ordem_preditiva = ?" +
+                "where op.id_ordem_preditiva = ? ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql))
@@ -264,7 +268,7 @@ public class DAO_Servico
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível modificar a ordem de serviço: " + e.getMessage());
+            System.err.println("Não foi possível modificar a ordem preditiva: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -273,9 +277,9 @@ public class DAO_Servico
 
     public void update_Id_Tecnico(int id, int idT){
 
-        String querySql = "update Ordem_servico os " +
-                "set os.descricao_ordem_servico = ? " +
-                "where os.Tecnico_id_tecnico = ? ";
+        String querySql = "update Ordem_preditiva op " +
+                "set op.descricao_ordem_preditiva = ? " +
+                "where op.Tecnico_id_tecnico = ? ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql))
@@ -286,7 +290,7 @@ public class DAO_Servico
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível modificar a ordem de serviço: " + e.getMessage());
+            System.err.println("Não foi possível modificar a ordem preditiva: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -294,9 +298,9 @@ public class DAO_Servico
 
     public void update_Id_Maquina(int id, int idM){
 
-        String querySql = "update Ordem_servico os " +
-                "set os.descricao_ordem_servico = ? " +
-                "where os.Maquina_id_maquina = ? ";
+        String querySql = "update Ordem_preditiva op " +
+                "set op.descricao_ordem_preditiva = ? " +
+                "where op.Maquina_id_maquina = ? ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql))
@@ -307,7 +311,7 @@ public class DAO_Servico
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível modificar a ordem de serviço: " + e.getMessage());
+            System.err.println("Não foi possível modificar a ordem preditiva: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -315,9 +319,9 @@ public class DAO_Servico
 
     public void update_Custo(int id, double custo){
 
-        String querySql = "update Ordem_servico os " +
-                "set os.Custo = ? " +
-                "where os.Maquina_id_maquina = ? ";
+        String querySql = "update Ordem_preditiva op " +
+                "set op.Custo = ? " +
+                "where op.Maquina_id_maquina = ? ";
 
         try(Connection conexao = ConnectionFactory.getConn();
             PreparedStatement stmt = conexao.prepareStatement(querySql))
@@ -328,7 +332,7 @@ public class DAO_Servico
 
         }catch (SQLException e){
 
-            System.err.println("Não foi possível modificar a ordem de serviço: " + e.getMessage());
+            System.err.println("Não foi possível modificar a ordem preditiva: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }
@@ -337,8 +341,8 @@ public class DAO_Servico
 
     // Delete
 
-    public void delete_Servico(int id){
-        String querySql = "delete from Ordem_servico as o " + "where o.id_ordem_servico = ?";
+    public void delete_Ordem_Preditiva(int id){
+        String querySql = "delete from Ordem_preditiva as op " + "where op.id_ordem_preditiva = ?";
 
         try (Connection conexao = ConnectionFactory.getConn();
              PreparedStatement stmt = conexao.prepareStatement(querySql)) {
@@ -348,7 +352,7 @@ public class DAO_Servico
 
         }
         catch (SQLException e){
-            System.err.println("Não foi possível excluir o Serviço: " + e.getMessage());
+            System.err.println("Não foi possível excluir a ordem_preditiva: " + e.getMessage());
 
             throw new RuntimeException("Erro ao consultar o banco de dados.", e);
         }

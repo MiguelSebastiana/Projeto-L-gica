@@ -1,46 +1,37 @@
 package View;
-
 import Model.MODEL_Servico;
 import Model.MODEL_Tecnico;
 import Model.SERVICE_Servico;
 import Model.SERVICE_Tecnico;
 import Repository.DAO_Servico;
-import Repository.DAO_Tecnico;
 import Util.Ferramentas;
 import Util.Validator_Usuario;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-
 public class Menu_Tecnico {
+
     static DAO_Servico Dservicos = new DAO_Servico();
-    static DAO_Tecnico Dtecnicos = new DAO_Tecnico();
 
     public static void Menu(MODEL_Tecnico tecnico){
+
         boolean continuar = true;
+
         SERVICE_Servico serviceServico = new SERVICE_Servico();
         SERVICE_Tecnico serviceTecnico = new SERVICE_Tecnico();
 
         do{
-            System.out.println("┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
-            System.out.println("│        ███╗   ███╗███████╗███╗   ██╗██╗   ██╗    ████████╗███████╗ ██████╗███╗   ██╗██╗ ██████╗ ██████╗        │");
-            System.out.println("│        ████╗ ████║██╔════╝████╗  ██║██║   ██║    ╚══██╔══╝██╔════╝██╔════╝████╗  ██║██║██╔════╝██╔═══██╗       │");
-            System.out.println("│        ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║       ██║   █████╗  ██║     ██╔██╗ ██║██║██║     ██║   ██║       │");
-            System.out.println("│        ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║       ██║   ██╔══╝  ██║     ██║╚██╗██║██║██║     ██║   ██║       │");
-            System.out.println("│        ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝       ██║   ███████╗╚██████╗██║ ╚████║██║╚██████╗╚██████╔╝       │");
-            System.out.println("│        ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝        ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═════╝        │");
-            System.out.println("└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
-            Ferramentas.limpaTerminalOpcional(2);
+            System.out.println("      ====================");
+            System.out.println("      ==  Menu Técnico  ==");
+            System.out.println("      ====================");
 
-            System.out.println("┌──────────────────────────────────────────┐");
-            System.out.println("│                  \uD835\uDCDE\uD835\uDCDF\uD835\uDCD2\uD835\uDCDE\uD835\uDCD4\uD835\uDCE2:                 │");
-            System.out.println("│       1 ➔ Ver as ordens atribuidas       │");
-            System.out.println("│     2 ➔ Alterar os Status das ordens     │");
-            System.out.println("│  3 ➔ Alterar Status de Disponibilidade:  │");
-            System.out.println("│                 4 ➔ Sair                 │");
-            System.out.println("└──────────────────────────────────────────┘");
-            System.out.print("➤ Digite a opção desejada: ");
+            System.out.println("1 - Ver as ordens atribuidas");
+            System.out.println("2 - Alterar os Status das ordens");
+            System.out.println("3 - Alterar Status de Disponibilidade: ");
+            System.out.println("4 - Sair");
 
             int escolha = 0;
+
             try {
                 escolha = Ferramentas.lInteiro();
             } catch (InputMismatchException e) {
@@ -53,7 +44,7 @@ public class Menu_Tecnico {
                     break;
                 }
                 case 2:{
-                    alterarStatusOrdem(serviceServico,tecnico.getId());
+                    alterarStatusOrdem(serviceServico,tecnico);
                     break;
                 }
                 case 3:{
@@ -76,87 +67,85 @@ public class Menu_Tecnico {
     public static void verOrdensAtribuidas(int id_tecnico){
 
         Ferramentas.limpaTerminal();
+
+        SERVICE_Servico servico = new SERVICE_Servico();
         ArrayList<MODEL_Servico> servicos = Dservicos.find_All_Ordens_Servico();
         boolean existe = false;
 
-        System.out.println("      +---------------------------+");
-        System.out.println("      |       Minhas Ordens       |");
-        System.out.println("      +---------------------------+");
+        System.out.println("----| Minhas Ordens De Serviço |----\n");
 
         for (MODEL_Servico s : servicos){
             if (s.getTecnico() == id_tecnico){
                 existe = true;
-                System.out.println("----| Ordem De Serviço |----\n");
-                System.out.println("| ID Ordem:  "+s.getId_Ordem_servico());
-                System.out.println("| Técnico:   "+s.getTecnico());
-                System.out.println("| Custo:     "+s.getPreco());
-                System.out.println("| Máquina:   "+s.getMaquina());
-                System.out.println("| Descrição: "+s.getDescricao_ordem_servico());
-                System.out.println("| Status:    "+s.getStatus_aberto_ordem_servico());
-                System.out.println("----------------------------------------");
-                System.out.println("");
+
+                System.out.println("\n----------------------------------------");
+                System.out.println("ID Ordem: "+s.getId_Ordem_servico());
+                System.out.println("Técnico: "+s.getTecnico());
+                System.out.println("Custo: "+s.getPreco());
+                System.out.println("Máquina: "+s.getMaquina());
+                System.out.println("Descrição: "+s.getDescricao_ordem_servico());
+                System.out.println("Status: "+s.getStatus_aberto_ordem_servico());
             }
         }
 
-        if (!existe){
+        if (existe){
             System.err.println("ERRO - NENHUMA ORDEM DE SERVIÇO ATRELADA AO TÉCNICO!");
-            Menu_Voltar.voltar();
-            Ferramentas.Delay(1500);
             return;
         }
 
-        System.out.println("+------------------------------------+");
-        System.out.println("|           Fim das Ordens.          |");
-        System.out.println("+------------------------------------+");
-
+        System.out.println("--------------------------------------");
+        System.out.println("           Fim das Ordens.            ");
+        System.out.println("--------------------------------------");
         Menu_Voltar.voltar();
         Ferramentas.Delay(1500);
+
+
     }
 
-    public static void alterarStatusOrdem(SERVICE_Servico serviceServico , int id_tecnico){
+    public static void alterarStatusOrdem(int id_tecnico){
 
         Ferramentas.limpaTerminal();
 
+        SERVICE_Servico servico = new SERVICE_Servico();
         ArrayList<MODEL_Servico> servicos = Dservicos.find_All_Ordens_Servico();
         boolean existe = false;
 
-        System.out.println("      +---------------------------+");
-        System.out.println("      |       Minhas Ordens       |");
-        System.out.println("      +---------------------------+");
+        System.out.println("----| Minhas Ordens De Serviço |----\n");
 
         for (MODEL_Servico s : servicos){
             if (s.getTecnico() == id_tecnico){
                 existe = true;
-                System.out.println("----| Ordem De Serviço |----\n");
-                System.out.println("| ID Ordem:  "+s.getId_Ordem_servico());
-                System.out.println("| Técnico:   "+s.getTecnico());
-                System.out.println("| Custo:     "+s.getPreco());
-                System.out.println("| Máquina:   "+s.getMaquina());
-                System.out.println("| Descrição: "+s.getDescricao_ordem_servico());
-                System.out.println("| Status:    "+s.getStatus_aberto_ordem_servico());
-                System.out.println("----------------------------------------");
-                System.out.println("");
+
+                System.out.println("\n----------------------------------------");
+                System.out.println("ID Ordem: "+s.getId_Ordem_servico());
+                System.out.println("Técnico: "+s.getTecnico());
+                System.out.println("Custo: "+s.getPreco());
+                System.out.println("Máquina: "+s.getMaquina());
+                System.out.println("Descrição: "+s.getDescricao_ordem_servico());
+                System.out.println("Status: "+s.getStatus_aberto_ordem_servico());
             }
         }
 
-        if (!existe){
+        if (existe){
             System.err.println("ERRO - NENHUMA ORDEM DE SERVIÇO ATRELADA AO TÉCNICO!");
-            Menu_Voltar.voltar();
-            Ferramentas.Delay(1500);
             return;
         }
 
-        System.out.println("+------------------------------------+");
-        System.out.println("|           Fim das Ordens.          |");
-        System.out.println("+------------------------------------+");
+        System.out.println("--------------------------------------");
+        System.out.println("           Fim das Ordens.            ");
+        System.out.println("--------------------------------------");
 
         boolean continuar = false;
         int id_ordem = 0;
+
         do {
-            System.out.print("> Digite o Id da Ordem que deseja alterar status: ");
+            System.out.println("Digite o Id da Ordem que deseja alterar status: ");
             try {
+
                 id_ordem = Ferramentas.lInteiro();
+
                 continuar = true;
+
             } catch (InputMismatchException erro) {
                 System.err.println("ERRO - DIGITE UM NÚMERO!");
             }
@@ -172,30 +161,11 @@ public class Menu_Tecnico {
                 }
             }
         }
+
     }
 
-    public static void alterarStatusDisponibilidade(SERVICE_Tecnico serviceTecnico, MODEL_Tecnico tecnico){
+    public static void alterarStatusDisponibilidade(SERVICE_Tecnico serviceTecnico ,MODEL_Tecnico tecnico){
+
         Ferramentas.limpaTerminal();
-        System.out.println("+---------------------------------------------+");
-        System.out.println("|           Alterar Disponibilidade.          |");
-        System.out.println("+---------------------------------------------+");
-
-        boolean statusAtual = tecnico.isStatus_disponibilidade_tecnico();
-        System.out.println("Status Atual :"+(statusAtual ? "Disponivel ":"Indisponivel"));
-        boolean statusNovo = !statusAtual;
-        tecnico.setStatus_disponibilidade_tecnico(statusNovo);
-
-        try{
-            serviceTecnico.Update_Disponibilidade(tecnico.getId(),statusNovo);
-            System.out.println("Seu status foi alterado com sucesso!");
-        }catch (Exception e){
-            System.err.println("ERRO - NÃO FOI POSSIVEL SALVAR NO BANCO DE DADOS!");
-            System.out.println(e.getMessage());
-            tecnico.setStatus_disponibilidade_tecnico(statusAtual);
-        }
-
-        System.out.println("-------------------------------------------------------------------");
-        Menu_Voltar.voltar();
-        Ferramentas.Delay(1500);
     }
 }

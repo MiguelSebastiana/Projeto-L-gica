@@ -55,44 +55,41 @@ public class SERVICE_Tecnico {
 
     //Update
 
-    public void Update_Especialidade(int id_tecnico, String especialidade)
+    public void Update_Especialidade(MODEL_Tecnico tecnico, String especialidade)
     {
-       try{
-           Validator_Usuario.verificarID(id_tecnico);
-           Validator_Geral.validarString(especialidade);
-           MODEL_Tecnico modelTecnico = daoTecnico.find_By_Id(id_tecnico);
-           daoTecnico.update_Especialidade(id_tecnico,especialidade);
-           modelTecnico.setEspecialidade_tecnico(especialidade);
-       }catch (RuntimeException rte){
-           throw new RuntimeException(rte.getMessage());
-       }
+        try {
+            daoTecnico.update_Especialidade(tecnico, Validator_Tecnico.validarEspecialidade(especialidade));
+        }catch(ESPECIALIDADEException ee)
+        {
+            System.out.println(ee.getMessage());
+        }
     }
 
-    public void Update_Disponibilidade(int id_tecnico, boolean disponibilidade)
+    public void Update_Disponibilidade(MODEL_Tecnico tecnico, boolean disponibilidade)
     {
         try{
-            Validator_Usuario.verificarID(id_tecnico);
-            MODEL_Tecnico modelTecnico = daoTecnico.find_By_Id(id_tecnico);
-            daoTecnico.update_Disponibilidade(id_tecnico,disponibilidade);
-            modelTecnico.setStatus_disponibilidade_tecnico(disponibilidade);
-        }catch (RuntimeException rte){
-            throw new RuntimeException(rte.getMessage());
+            daoTecnico.update_Disponibilidade(tecnico, disponibilidade);
+        }catch(RuntimeException re)
+        {
+            System.out.println(re.getMessage());
         }
     }
 
     //Delete
 
-    public void Delete_Tecnico(int id_tecnico)
+    public void Delete_Tecnico(MODEL_Tecnico tecnico)
     {
         try
         {
-            Validator_Usuario.verificarID(id_tecnico);
-            MODEL_Tecnico modelTecnico = daoTecnico.find_By_Id(id_tecnico);
-            daoTecnico.delete_Tecnico(id_tecnico);
+            if (tecnico != null)
+            {
+                daoTecnico.delete_Tecnico(tecnico);
+            }
+
         }
         catch(RuntimeException re)
         {
-            throw new RuntimeException(re.getMessage());
+            System.out.println(re.getMessage());
         }
     }
 
