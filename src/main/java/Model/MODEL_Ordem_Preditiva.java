@@ -21,7 +21,7 @@ public class MODEL_Ordem_Preditiva {
         setStatus_aberto_ordem_preditiva(status_aberto_ordem_preditiva);
         setDescricao_ordem_preditiva(descricao_ordem_preditiva);
         setTecnico(tecnico);
-        setMquina(maquina);
+        setMaquina(maquina);
         setPreco(preco);
         setHorario(horario);
         setGerente(gerente);
@@ -107,4 +107,4 @@ public class MODEL_Ordem_Preditiva {
         this.gerente = gerente;
     }
 }
-}
+
